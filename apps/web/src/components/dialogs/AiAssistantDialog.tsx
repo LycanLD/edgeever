@@ -651,7 +651,7 @@ export const AiAssistantDialog = ({
         <section
           ref={assignPanelRef}
           aria-label={t("aiAssistant.title")}
-          className="fixed z-[70] flex max-h-[70dvh] w-[min(36rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-3xl border border-outline-variant bg-card p-5 shadow-elev-3"
+          className="fixed z-[70] flex max-h-[70dvh] w-[min(36rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-[28px] bg-card p-5 shadow-elev-3"
           role="dialog"
           style={panelStyle}
           onKeyDown={(event) => {
@@ -664,18 +664,16 @@ export const AiAssistantDialog = ({
         >
           <div
             className={cn(
-              "-mx-5 -mt-3 mb-4 flex h-12 shrink-0 touch-none select-none items-center justify-between gap-3 pl-1 pr-0 cursor-grab",
+              "-mx-5 -mt-3 mb-4 flex h-14 shrink-0 touch-none select-none items-center justify-between gap-3 pl-1 pr-0 cursor-grab",
               isDragging && "cursor-grabbing",
             )}
             data-ai-assistant-drag-handle="true"
             onPointerDown={handleDragStart}
           >
-            <div className="flex min-w-0 flex-1 items-center gap-2">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300">
-                <Sparkles aria-hidden="true" className="h-5 w-5" strokeWidth={1.75} />
-              </span>
-              <span className="truncate text-title-large font-semibold text-slate-950 dark:text-slate-50">{t("aiAssistant.title")}</span>
-              <span className="shrink-0 rounded-full bg-emerald-100 px-2.5 py-1 text-label-small font-medium text-emerald-800 dark:bg-emerald-500/15 dark:text-emerald-200">
+            <div className="flex min-w-0 flex-1 items-center gap-2.5">
+              <Sparkles aria-hidden="true" className="h-6 w-6 shrink-0 text-emerald-600 dark:text-emerald-400" strokeWidth={1.75} />
+              <span className="truncate text-headline-small font-normal text-on-surface">{t("aiAssistant.title")}</span>
+              <span className="inline-flex h-6 shrink-0 items-center rounded-full bg-emerald-100 px-2.5 text-label-medium font-medium text-emerald-900 dark:bg-emerald-500/20 dark:text-emerald-100">
                 {t(chatting
                   ? "aiAssistant.workspaceScope"
                   : usesComposerAsSource
@@ -688,7 +686,7 @@ export const AiAssistantDialog = ({
               <X className="h-4 w-4" />
             </Button>
           </div>
-          <div className="mb-4 flex shrink-0 gap-1 rounded-full bg-slate-100 p-1 dark:bg-slate-800" role="tablist" aria-label={t("aiAssistant.title")}>
+          <div className="mb-4 flex shrink-0 rounded-full border border-outline-variant p-0.5" role="tablist" aria-label={t("aiAssistant.title")}>
             {(["instruction", "ask"] as const).map((item) => (
               <button
                 key={item}
@@ -698,8 +696,8 @@ export const AiAssistantDialog = ({
                 className={cn(
                   "m3-state h-9 flex-1 rounded-full px-3 text-label-large font-medium",
                   mode === item
-                    ? "bg-card font-semibold text-slate-900 shadow-elev-1 dark:bg-slate-700 dark:text-slate-50"
-                    : "text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100",
+                    ? "bg-emerald-100 text-emerald-950 dark:bg-emerald-500/20 dark:text-emerald-100"
+                    : "text-on-surface-variant hover:text-on-surface",
                 )}
                 onClick={() => selectMode(item)}
               >
@@ -741,13 +739,13 @@ export const AiAssistantDialog = ({
             ) : null}
             {showInstructionComposer || showSourceComposer ? (
             <div className="grid gap-2">
-              <label className="grid gap-1.5 text-label-large font-medium text-slate-700 dark:text-slate-300">
+              <label className="grid gap-1.5 text-label-large font-medium text-on-surface-variant">
                 {t(showInstructionComposer
                   ? (hasSelection ? "aiAssistant.customInstructionSelected" : "aiAssistant.customInstruction")
                   : "aiAssistant.inputContent")}
                 <textarea
                   ref={instructionRef}
-                  className="min-h-24 resize-y rounded-2xl border border-transparent bg-slate-100/70 px-4 py-3 text-body-medium font-normal text-slate-900 outline-none transition focus:border-emerald-500 focus:bg-card focus:ring-4 focus:ring-emerald-500/15 dark:bg-slate-800/60 dark:text-slate-100"
+                  className="min-h-24 resize-y rounded-2xl border border-transparent bg-surface-container px-4 py-3 text-body-medium font-normal text-on-surface outline-none transition focus:border-emerald-500 focus:bg-card focus:ring-4 focus:ring-emerald-500/15"
                   value={customInstruction}
                   onChange={(event) => {
                     handleComposerChange(event.target.value);
@@ -990,7 +988,7 @@ export const AiAssistantDialog = ({
                   "max-h-56 overflow-y-auto whitespace-pre-wrap rounded-2xl border p-4 text-body-medium leading-6",
                   error
                     ? "border-rose-200 bg-rose-50 text-rose-700"
-                    : "min-h-28 border-outline-variant bg-slate-100/60 text-slate-800 dark:bg-slate-800/50 dark:text-slate-100",
+                    : "min-h-28 border-outline-variant bg-surface-container text-on-surface",
                 )}
                 aria-busy={isGenerating}
                 aria-live="polite"
@@ -1005,7 +1003,7 @@ export const AiAssistantDialog = ({
               </div>
             </div>
             {output && !isGenerating ? (
-              <div className="grid gap-1.5 rounded-2xl bg-slate-100/70 p-3 dark:bg-slate-800/50">
+              <div className="grid gap-1.5 rounded-2xl bg-surface-container p-3">
                 <span className="text-sm font-medium text-slate-700">{t("aiAssistant.refine")}</span>
                 <div className="flex flex-col gap-2 sm:flex-row">
                   <input
@@ -1029,7 +1027,7 @@ export const AiAssistantDialog = ({
             </div>
           </div>
           {output ? (
-            <div className="mt-4 flex shrink-0 flex-wrap justify-between gap-2 border-t border-outline-variant pt-4" data-ai-assistant-actions>
+            <div className="mt-4 flex shrink-0 flex-wrap justify-between gap-2" data-ai-assistant-actions>
               <div className="flex flex-wrap gap-2">
                 <Button type="button" variant="outline" disabled={isGenerating} onClick={() => void copy()}>{copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}{t(copied ? "aiAssistant.copied" : "aiAssistant.copy")}</Button>
                 <Button type="button" variant="outline" disabled={isGenerating} onClick={() => { setOutput(""); setError(null); }}><Trash2 className="h-4 w-4" />{t("aiAssistant.discard")}</Button>
@@ -1074,7 +1072,7 @@ export const AiAssistantDialog = ({
               <DialogTitle>{t("aiAssistant.saveAsPromptTitle")}</DialogTitle>
               <DialogDescription>{t("aiPrompts.description")}</DialogDescription>
             </DialogHeader>
-            <label className="grid gap-1.5 text-label-large font-medium text-slate-700 dark:text-slate-300">
+            <label className="grid gap-1.5 text-label-large font-medium text-on-surface-variant">
               {t("aiAssistant.promptName")}
               <Input
                 value={saveName}
@@ -1085,7 +1083,7 @@ export const AiAssistantDialog = ({
                 autoFocus
               />
             </label>
-            <label className="grid gap-1.5 text-label-large font-medium text-slate-700 dark:text-slate-300">
+            <label className="grid gap-1.5 text-label-large font-medium text-on-surface-variant">
               {t("aiAssistant.promptDescription")}
               <Input
                 value={saveDescription}

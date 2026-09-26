@@ -207,18 +207,16 @@ export const EditorTagPicker = ({ contentMarkdown, disabled, loadTags, title, va
       </div>
 
       <Dialog open={open} onOpenChange={handleOpenChange}>
-        <DialogContent className="flex max-h-[min(42rem,calc(100dvh-2rem))] max-w-lg flex-col gap-4 overflow-hidden p-0">
-          <DialogHeader className="flex-row items-start gap-3 border-b border-outline-variant px-6 py-5 pr-14">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300">
-              <Tags aria-hidden="true" className="h-5 w-5" strokeWidth={1.75} />
-            </span>
-            <div className="min-w-0 space-y-1">
+        <DialogContent className="max-h-[min(42rem,calc(100dvh-2rem))] max-w-lg overflow-hidden">
+          <DialogHeader className="flex-row items-start gap-3 pr-14">
+            <Tags aria-hidden="true" className="mt-1 h-6 w-6 shrink-0 text-emerald-600 dark:text-emerald-400" strokeWidth={1.75} />
+            <div className="min-w-0 space-y-1.5">
               <DialogTitle>{t("editor.tagPicker.title")}</DialogTitle>
               <DialogDescription>{t("editor.tagPicker.description")}</DialogDescription>
             </div>
           </DialogHeader>
 
-          <div className="flex min-h-0 flex-1 flex-col gap-4 px-6 pb-6">
+          <div className="flex min-h-0 flex-1 flex-col gap-4">
             {selectedTags.length > 0 && (
               <div className="flex flex-wrap gap-2" aria-label={t("editor.tagPicker.selected")}>
                 {selectedTags.map((tag) => (
@@ -243,14 +241,14 @@ export const EditorTagPicker = ({ contentMarkdown, disabled, loadTags, title, va
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder={t("editor.tagPicker.searchPlaceholder")}
                 aria-label={t("editor.tagPicker.searchPlaceholder")}
-                className="h-11 flex-1 rounded-xl text-body-medium"
+                className="h-11 min-w-0 flex-1 rounded-xl border-transparent bg-surface-container text-body-medium"
               />
-              <Button type="submit" variant="solid" size="lg" className="h-11 shrink-0" disabled={!normalizedQuery || exactMatch || selectedTags.length >= 24}>
+              <Button type="submit" variant="solid" size="lg" className="shrink-0" disabled={!normalizedQuery || exactMatch || selectedTags.length >= 24}>
                 {t("editor.tagPicker.create")}
               </Button>
             </form>
 
-            <div className="min-h-0 flex-1 overflow-y-auto rounded-2xl bg-slate-100/60 p-1.5 dark:bg-slate-800/50">
+            <div className="min-h-0 flex-1 overflow-y-auto rounded-2xl bg-surface-container p-1.5">
               {tagsQuery.isLoading ? (
                 <p className="px-4 py-10 text-center text-body-medium text-slate-500">{t("editor.tagPicker.loading")}</p>
               ) : visibleTags.length === 0 ? (
@@ -263,10 +261,10 @@ export const EditorTagPicker = ({ contentMarkdown, disabled, loadTags, title, va
                       key={tag.name}
                       type="button"
                       className={cn(
-                        "m3-state flex min-h-11 w-full items-center gap-3 rounded-xl px-3 text-left text-body-medium outline-none",
+                        "m3-state flex min-h-12 w-full items-center gap-3 rounded-xl px-3 text-left text-body-medium text-on-surface outline-none",
                         selected
-                          ? "bg-emerald-100 text-emerald-900 dark:bg-emerald-500/15 dark:text-emerald-100"
-                          : "hover:bg-slate-200/70 focus-visible:bg-slate-200/70 dark:hover:bg-slate-700/60"
+                          ? "bg-emerald-100 font-medium text-emerald-950 dark:bg-emerald-500/20 dark:text-emerald-100"
+                          : "hover:bg-slate-200/70 focus-visible:bg-slate-200/70"
                       )}
                       onClick={() => toggleTag(tag.name)}
                       aria-pressed={selected}
@@ -279,8 +277,8 @@ export const EditorTagPicker = ({ contentMarkdown, disabled, loadTags, title, va
                       )}>
                         {selected && <Check aria-hidden="true" className="h-3.5 w-3.5" />}
                       </span>
-                      <span className="min-w-0 flex-1 truncate font-medium">#{tag.name}</span>
-                      <span className="text-body-small text-slate-400">{t("editor.tagPicker.memoCount", { count: tag.memoCount })}</span>
+                      <span className="min-w-0 flex-1 truncate">#{tag.name}</span>
+                      <span className="text-body-small text-on-surface-variant">{t("editor.tagPicker.memoCount", { count: tag.memoCount })}</span>
                     </button>
                   );
                 })

@@ -82,21 +82,19 @@ export const RevisionHistoryDialog = ({
 
   return (
     <Dialog open={true} onOpenChange={(open) => { if (!open && !restoreRevisionConfirmationId) onClose(); }}>
-      <DialogContent className="grid max-h-[88dvh] max-w-[1120px] grid-rows-[auto_minmax(0,1fr)] gap-0 overflow-hidden p-0">
-        <DialogHeader className="flex-row items-start gap-3 border-b border-outline-variant px-6 py-5 pr-14">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300">
-            <History aria-hidden="true" className="h-5 w-5" strokeWidth={1.75} />
-          </span>
-          <div className="min-w-0 space-y-1">
+      <DialogContent className="max-h-[88dvh] max-w-[1120px] overflow-hidden">
+        <DialogHeader className="flex-row items-start gap-3 pr-14">
+          <History aria-hidden="true" className="mt-1 h-6 w-6 shrink-0 text-emerald-600 dark:text-emerald-400" strokeWidth={1.75} />
+          <div className="min-w-0 space-y-1.5">
             <DialogTitle>{t("revisions.title")}</DialogTitle>
             <DialogDescription className="truncate">{getMemoTitle(memo.title)}</DialogDescription>
           </div>
         </DialogHeader>
 
-        <div className="flex min-h-0 flex-col bg-card">
-          <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-outline-variant bg-card px-6 py-3">
-            <div className="min-w-0 flex flex-wrap items-center gap-2">
-              <div className="text-title-medium text-slate-900 dark:text-slate-100">
+        <div className="flex min-h-0 flex-1 flex-col gap-3">
+          <div className="flex shrink-0 flex-wrap items-center justify-between gap-3">
+            <div className="flex min-w-0 flex flex-wrap items-center gap-2">
+              <div className="text-title-medium text-on-surface">
                 {selectedRevision ? t("revisions.compareTitle", { revision: selectedRevision.revision }) : t("revisions.noRevisionSelected")}
               </div>
               {selectedRevision && (
@@ -125,15 +123,15 @@ export const RevisionHistoryDialog = ({
             </Button>
           </div>
 
-          <div className="grid min-h-0 flex-1 grid-rows-[auto_minmax(0,1fr)] lg:grid-cols-[300px_minmax(0,1fr)] lg:grid-rows-1">
-            <aside className="min-h-0 max-h-[220px] overflow-y-auto border-b border-outline-variant bg-slate-50/60 p-4 lg:max-h-[calc(88dvh-73px)] lg:border-b-0 lg:border-r dark:bg-slate-900/40">
-              <div className="mb-3 px-1 text-label-large font-semibold text-slate-500 dark:text-slate-400">
+          <div className="grid min-h-0 flex-1 grid-rows-[auto_minmax(0,1fr)] overflow-hidden rounded-2xl border border-outline-variant lg:grid-cols-[300px_minmax(0,1fr)] lg:grid-rows-1">
+            <aside className="min-h-0 max-h-[220px] overflow-y-auto bg-surface-container p-3 lg:max-h-none lg:border-r lg:border-outline-variant">
+              <div className="mb-2 px-2 text-label-large font-medium text-on-surface-variant">
                 {t("revisions.timeline")}
               </div>
               {revisionsQuery.isLoading ? (
                 <div className="px-2 py-8 text-center text-body-medium text-slate-500">{t("revisions.loading")}</div>
               ) : revisions.length === 0 ? (
-                <div className="rounded-2xl border border-dashed border-slate-300 px-4 py-8 text-center text-body-medium text-slate-500 dark:border-slate-700">
+                <div className="rounded-xl border border-dashed border-outline-variant px-4 py-8 text-center text-body-medium text-on-surface-variant">
                   {t("revisions.empty")}
                 </div>
               ) : (
@@ -142,24 +140,24 @@ export const RevisionHistoryDialog = ({
                     <button
                       key={revision.id}
                       className={cn(
-                        "m3-state group flex w-full flex-col rounded-2xl p-3 text-left transition-colors",
+                        "m3-state group flex w-full flex-col rounded-xl p-3 text-left transition-colors",
                         selectedRevision?.id === revision.id
-                          ? "bg-emerald-100 text-emerald-950 dark:bg-emerald-500/15 dark:text-emerald-100"
-                          : "bg-transparent hover:bg-slate-200/60 dark:hover:bg-slate-800/70"
+                          ? "bg-emerald-100 text-emerald-950 dark:bg-emerald-500/20 dark:text-emerald-100"
+                          : "bg-transparent hover:bg-slate-200/60"
                       )}
                       onClick={() => setSelectedRevisionId(revision.id)}
                     >
                       <span className={cn(
                         "block text-title-small transition-colors",
-                        selectedRevision?.id === revision.id ? "font-semibold" : "font-medium text-slate-800 dark:text-slate-100"
+                        selectedRevision?.id === revision.id ? "font-semibold" : "font-medium text-on-surface"
                       )}>
                         {t("revisions.revisionName", { revision: revision.revision })}
                       </span>
-                      <span className="mt-1.5 flex items-center gap-1.5 truncate text-body-small text-slate-500 dark:text-slate-400">
+                      <span className="mt-1.5 flex items-center gap-1.5 truncate text-body-small text-on-surface-variant">
                         <Clock3 aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-slate-400" />
                         <span className="truncate">{formatDateTime(revision.createdAt)}</span>
                       </span>
-                      <span className="mt-1 flex items-center gap-1.5 truncate text-body-small text-slate-400">
+                      <span className="mt-1 flex items-center gap-1.5 truncate text-body-small text-on-surface-variant opacity-80">
                         <UserRound aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-slate-400" />
                         <span className="truncate">{revision.createdBy === "table-form" ? t("revisions.formActor") : formatRevisionActor(revision.createdBy)}</span>
                       </span>
@@ -171,13 +169,13 @@ export const RevisionHistoryDialog = ({
 
             <div className="flex min-h-0 flex-col">
               {/* Sticky Header Row */}
-              <div className="sticky top-0 z-10 grid shrink-0 grid-cols-2 divide-x divide-outline-variant border-b border-outline-variant">
-                <div className="flex h-12 items-center justify-between bg-slate-100/80 px-4 backdrop-blur-sm dark:bg-slate-800/60">
-                  <div className="text-label-large font-semibold text-slate-600 dark:text-slate-300">{t("revisions.historyVersion")}</div>
+              <div className="sticky top-0 z-10 grid shrink-0 grid-cols-2 divide-x divide-outline-variant border-b border-outline-variant bg-surface-container">
+                <div className="flex h-11 items-center justify-between bg-surface-container px-4">
+                  <div className="text-label-large font-medium text-on-surface-variant">{t("revisions.historyVersion")}</div>
                   <div className="h-2 w-2 rounded-full bg-rose-500" />
                 </div>
-                <div className="flex h-12 items-center justify-between bg-slate-100/80 px-4 backdrop-blur-sm dark:bg-slate-800/60">
-                  <div className="text-label-large font-semibold text-slate-600 dark:text-slate-300">{t("revisions.currentContent")}</div>
+                <div className="flex h-11 items-center justify-between bg-surface-container px-4">
+                  <div className="text-label-large font-medium text-on-surface-variant">{t("revisions.currentContent")}</div>
                   <div className="h-2 w-2 rounded-full bg-emerald-500" />
                 </div>
               </div>

@@ -15,7 +15,7 @@ const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      "fixed inset-0 z-50 bg-slate-900/45 backdrop-blur-[2px] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:ease-standard data-[state=closed]:ease-standard",
+      "fixed inset-0 z-50 bg-black/40 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:ease-standard data-[state=closed]:ease-standard",
       className
     )}
     {...props}
@@ -35,7 +35,7 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed z-50 grid w-full max-w-lg gap-4 rounded-3xl border border-outline-variant bg-card p-6 text-card-foreground shadow-elev-3",
+        "fixed z-50 flex w-full max-w-lg flex-col gap-4 rounded-[28px] bg-card p-6 text-card-foreground shadow-elev-3",
         !unstyledPosition && "left-[50%] top-[50%] max-h-[calc(100dvh-3rem)] translate-x-[-50%] translate-y-[-50%] duration-200 data-[state=closed]:duration-150 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-1/2 data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-1/2 data-[state=open]:ease-decelerate data-[state=closed]:ease-accelerate",
         className
       )}
@@ -59,7 +59,7 @@ const DialogHeader = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col gap-1 text-left",
+      "flex flex-col gap-2 text-left",
       className
     )}
     {...props}
@@ -79,7 +79,7 @@ const DialogTitle = React.forwardRef<
   <DialogPrimitive.Title
     ref={ref}
     className={cn(
-      "text-headline-small font-semibold tracking-tight text-slate-950 dark:text-slate-50",
+      "text-headline-small font-normal tracking-normal text-on-surface",
       className
     )}
     {...props}
@@ -93,7 +93,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("text-body-medium text-slate-500 dark:text-slate-400", className)}
+    className={cn("text-body-medium text-on-surface-variant", className)}
     {...props}
   />
 ));
@@ -111,7 +111,7 @@ DialogBody.displayName = "DialogBody";
  */
 const DialogSection = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn("rounded-2xl bg-slate-100/70 p-4 dark:bg-slate-800/50", className)}
+    className={cn("rounded-2xl bg-surface-container p-4", className)}
     {...props}
   />
 );
@@ -120,7 +120,7 @@ DialogSection.displayName = "DialogSection";
 const DialogSectionLabel = ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
   <p
     className={cn(
-      "text-label-large font-semibold text-slate-500 dark:text-slate-400",
+      "text-label-large font-medium text-on-surface-variant",
       className
     )}
     {...props}
@@ -147,10 +147,10 @@ const DialogEmptyState = ({
     )}
     {...props}
   >
-    {icon ? <div className="mb-1 text-slate-300 dark:text-slate-600">{icon}</div> : null}
-    <p className="text-title-small text-slate-600 dark:text-slate-300">{title}</p>
+    {icon ? <div className="mb-1 text-outline-variant">{icon}</div> : null}
+    <p className="text-title-small text-on-surface">{title}</p>
     {description ? (
-      <p className="max-w-[38ch] text-body-small text-slate-500 dark:text-slate-400">{description}</p>
+      <p className="max-w-[38ch] text-body-small text-on-surface-variant">{description}</p>
     ) : null}
   </div>
 );
