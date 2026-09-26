@@ -9,6 +9,7 @@ import {
   type MemoSummary,
 } from "@edgeever/shared";
 import { parseJsonArray } from "./entity-utils";
+import { redactLockedSummary, resolveMemoLockStates } from "./content-lock-service";
 import type { DatabaseAdapter } from "./storage-contract";
 
 export type MemoSummaryRow = {
@@ -43,6 +44,8 @@ type MemoListCursor = {
 
 export type ListMemosInput = {
   workspaceId: string;
+  /** Reader identity, used to resolve which PIN gates are already unlocked. */
+  userId?: string | null;
   notebookId?: string;
   includeNotebookDescendants?: boolean;
   query?: string;
@@ -235,10 +238,22 @@ export const listMemos = async (
   }
 
   const pageLimit = limit + 1;
-  const finish = (rows: MemoSummaryRow[], totalCount: number | undefined): ListMemosResult => {
+  const finish = async (rows: MemoSummaryRow[], totalCount: number | undefined): Promise<ListMemosResult> => {
     const page = rows.slice(0, limit);
+    const memos = page.map(mapMemoSummary);
+    const lockStates = await resolveMemoLockStates(
+      database,
+      input.workspaceId,
+      input.userId ?? null,
+      memos.map((memo) => memo.id),
+    );
     return {
-      memos: page.map(mapMemoSummary),
+      memos: memos.map((memo) => {
+        const lock = lockStates.get(memo.id);
+        if (!lock) return memo;
+        if (lock.isUnlocked) return { ...memo, isLocked: true };
+        return { ...redactLockedSummary(memo), isLocked: true };
+      }),
       totalCount: totalCount ?? page.length,
       nextCursor: rows.length > limit
         ? encodeMemoListCursor(page[page.length - 1], sort, includeTrash)
@@ -308,7 +323,7 @@ export const listMemos = async (
            WHERE ${baseConditions.join(" AND ")}`,
         ).bind(...searchPrefix, ...baseBinds).first<{ count: number }>(),
       ]);
-      return finish(rows.results, totalRow?.count);
+      return await finish(rows.results, totalRow?.count);
     }
 
     const searchClause = "(m.title LIKE ? ESCAPE '\\' OR mc.content_text LIKE ? ESCAPE '\\' OR m.tags_json LIKE ? ESCAPE '\\')";
@@ -334,7 +349,7 @@ export const listMemos = async (
          WHERE ${searchConditions.join(" AND ")}`,
       ).bind(...searchBinds).first<{ count: number }>(),
     ]);
-    return finish(rows.results, totalRow?.count);
+    return await finish(rows.results, totalRow?.count);
   }
 
   const [rows, totalRow] = await Promise.all([
@@ -354,5 +369,5 @@ export const listMemos = async (
        WHERE ${baseConditions.join(" AND ")}`,
     ).bind(...baseBinds).first<{ count: number }>(),
   ]);
-  return finish(rows.results, totalRow?.count);
+  return await finish(rows.results, totalRow?.count);
 };

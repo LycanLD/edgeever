@@ -30,6 +30,16 @@ export const getActorLabel = (c: AppContext) => {
 
 export const getWorkspaceId = (c: AppContext) => c.get("auth").workspaceId;
 
+/**
+ * Identity that owns PIN unlock grants. Only an interactive user session can
+ * hold a grant; API tokens deliberately resolve to null so a shared token can
+ * never inherit someone else's unlocked state.
+ */
+export const getGrantUserId = (c: AppContext): string | null => {
+  const auth = c.get("auth");
+  return auth?.kind === "user" ? auth.actorId : null;
+};
+
 export const requireOwner = (c: AppContext) => {
   const auth = c.get("auth");
   return auth?.kind === "user" && auth.role === "owner"

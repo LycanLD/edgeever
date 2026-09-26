@@ -17,6 +17,8 @@ export type Notebook = {
   lastMemoUpdatedAt: string | null;
   createdAt: string;
   updatedAt: string;
+  /** True when a PIN gate hides this notebook and everything inside it. */
+  isLocked?: boolean;
 };
 
 export type MemoSummary = {
@@ -37,6 +39,21 @@ export type MemoSummary = {
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;
+  /** True when a PIN gate hides this note. Clients render a padlock, never the body. */
+  isLocked?: boolean;
+};
+
+export type ContentLockStatus = {
+  isLocked: boolean;
+  isUnlocked: boolean;
+  blockedUntil: string | null;
+  unlockExpiresAt: string | null;
+};
+
+export type MemoLockState = {
+  isLocked: boolean;
+  isUnlocked: boolean;
+  unlockExpiresAt: string | null;
 };
 
 export type MemoDetail = MemoSummary & {

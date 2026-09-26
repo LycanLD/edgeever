@@ -102,6 +102,7 @@ import {
   emptyTrashMemosRecord,
   getCurrentWorkspaceIdentity,
   getMemoDetail,
+  getMemoDetailForRead,
   getMemoDetailRow,
   getMemosForBulkAction,
   importMemosRecord,
@@ -123,6 +124,7 @@ import {
 } from "./user-routes";
 import { registerNotebookRoutes } from "./notebook-routes";
 import { registerMemoShareRoutes, registerPublicShareRoutes } from "./share-routes";
+import { registerContentLockRoutes } from "./content-lock-routes";
 import { registerPublicTableFormRoutes, registerTableFormRoutes } from "./table-form-routes";
 import {
   deleteStoredObjects,
@@ -333,6 +335,7 @@ registerPluginDistributionRoutes(app);
 registerScheduledTaskRoutes(app);
 registerWorkspaceExtensionRoutes(app, { isDemoMode: (...args) => isDemoMode(...args) });
 registerMemoShareRoutes(app);
+registerContentLockRoutes(app);
 registerTableFormRoutes(app);
 registerTemplateRoutes(app, {
   createMemoRecord: (...args) => createMemoRecord(...args),
@@ -347,6 +350,7 @@ registerMemoRoutes(app, {
   deleteMemos: (...args) => deleteMemosRecord(...args),
   emptyTrash: (...args) => emptyTrashMemosRecord(...args),
   getMemoDetail: (...args) => getMemoDetail(...args),
+  getMemoDetailForRead: (...args) => getMemoDetailForRead(...args),
   listMemos: (...args) => listMemos(...args),
   listMemoRevisions: (...args) => listMemoRevisionsService(...args, getMemoDetail, false),
   mergeMemos: (...args) => mergeMemosRecord(...args),

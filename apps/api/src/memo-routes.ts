@@ -15,7 +15,7 @@ import type { AppContext, AppEnv, AuditActor, Bindings } from "./api-context";
 import { AppError } from "./app-error";
 import { apiError, notFound } from "./http-errors";
 import type { ListMemosInput, ListMemosResult } from "./memo-list-service";
-import { getActorLabel, getAuditActor, getWorkspaceId, requireScopes } from "./request-auth";
+import { getActorLabel, getAuditActor, getGrantUserId, getWorkspaceId, requireScopes } from "./request-auth";
 import { deleteReleasedResourceObjects } from "./resource-service";
 import type { DatabaseAdapter } from "./storage-contract";
 
@@ -55,6 +55,13 @@ type MemoRouteDependencies = {
     database: DatabaseAdapter,
     workspaceId: string,
     memoId: string,
+    includeDeleted?: boolean,
+  ) => Promise<MemoDetail | null>;
+  getMemoDetailForRead: (
+    database: DatabaseAdapter,
+    workspaceId: string,
+    memoId: string,
+    readerId: string | null,
     includeDeleted?: boolean,
   ) => Promise<MemoDetail | null>;
   listMemoRevisions: (
@@ -124,6 +131,7 @@ export const registerMemoRoutes = (
 
     return context.json(await dependencies.listMemos(context.env.storage.db, {
       workspaceId: getWorkspaceId(context),
+      userId: getGrantUserId(context),
       notebookId: context.req.query("notebookId"),
       includeNotebookDescendants: context.req.query("includeDescendants") === "1",
       query: context.req.query("q"),
@@ -158,10 +166,11 @@ export const registerMemoRoutes = (
     const denied = requireScopes(context, "read:memos");
     if (denied) return denied;
 
-    const memo = await dependencies.getMemoDetail(
+    const memo = await dependencies.getMemoDetailForRead(
       context.env.storage.db,
       getWorkspaceId(context),
       context.req.param("id"),
+      getGrantUserId(context),
       context.req.query("includeDeleted") === "1",
     );
     return memo ? context.json({ memo }) : notFound(context, "Memo not found");

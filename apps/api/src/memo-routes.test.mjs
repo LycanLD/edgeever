@@ -29,6 +29,7 @@ const createDependencies = (overrides = {}) => ({
   deleteMemos: async () => 0,
   emptyTrash: async () => 0,
   getMemoDetail: async () => null,
+  getMemoDetailForRead: async () => null,
   listMemos: async () => ({ memos: [], totalCount: 0, nextCursor: null }),
   listMemoRevisions: async () => [],
   mergeMemos: async () => ({ id: "memo_merged" }),
@@ -76,6 +77,8 @@ describe("memo route contracts", () => {
       filter: "pinned",
       limit: 25,
       cursor: "opaque",
+      // API-token readers never hold PIN unlock grants.
+      userId: null,
     });
   });
 
@@ -125,7 +128,7 @@ describe("memo route contracts", () => {
   test("forwards workspace and deleted visibility to memo lookup", async () => {
     let received;
     const dependencies = createDependencies({
-      getMemoDetail: async (...args) => {
+      getMemoDetailForRead: async (...args) => {
         received = args;
         return { id: "memo_1", title: "Archived" };
       },
@@ -137,7 +140,7 @@ describe("memo route contracts", () => {
     );
 
     expect(response.status).toBe(200);
-    expect(received.slice(1)).toEqual(["ws_1", "memo_1", true]);
+    expect(received.slice(1)).toEqual(["ws_1", "memo_1", null, true]);
     expect(await response.json()).toMatchObject({ memo: { id: "memo_1" } });
   });
 

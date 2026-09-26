@@ -22,6 +22,7 @@ import {
 import { auditStatement } from "./audit";
 import type { AppContext, AuditActor, AuthContext, Bindings } from "./api-context";
 import { AppError } from "./app-error";
+import { redactLockedDetail, resolveMemoLockStates } from "./content-lock-service";
 import { createId, isoNow, parseJsonArray } from "./entity-utils";
 import { workspaceInboxId } from "./notebook-service";
 import { sha256 } from "./hash-utils";
@@ -171,6 +172,8 @@ export const searchMemoSummaries = async (
     isPinned?: boolean | null;
     hasResources?: boolean | null;
     limit: number;
+    /** Reader identity; locked notes are omitted because a hit would leak the match. */
+    readerId?: string | null;
   }
 ): Promise<MemoSummary[]> => {
   const q = options.query?.trim();
@@ -266,7 +269,7 @@ export const searchMemoSummaries = async (
         .bind(ftsQuery, likeQuery, likeQuery, likeQuery, ...binds, limit)
         .all<MemoSummaryRow>();
 
-      return rows.results.map(mapMemoSummary);
+      return withoutLockedMemos(db, options.workspaceId, options.readerId ?? null, rows.results.map(mapMemoSummary));
     }
   }
 
@@ -284,7 +287,27 @@ export const searchMemoSummaries = async (
     .bind(...binds, limit)
     .all<MemoSummaryRow>();
 
-  return rows.results.map(mapMemoSummary);
+  return withoutLockedMemos(db, options.workspaceId, options.readerId ?? null, rows.results.map(mapMemoSummary));
+};
+
+/** Drop notes that are still behind a PIN gate from a result set. */
+const withoutLockedMemos = async (
+  db: DatabaseAdapter,
+  workspaceId: string,
+  readerId: string | null,
+  summaries: MemoSummary[],
+) => {
+  if (summaries.length === 0) return summaries;
+  const states = await resolveMemoLockStates(
+    db,
+    workspaceId,
+    readerId,
+    summaries.map((summary) => summary.id),
+  );
+  return summaries.filter((summary) => {
+    const lock = states.get(summary.id);
+    return !lock || lock.isUnlocked;
+  });
 };
 
 export const listMemosForMcp = async (
@@ -371,6 +394,43 @@ export const getMemoDetailRow = async (
 export const getMemoDetail = async (db: DatabaseAdapter, workspaceId: string, id: string, includeDeleted = false): Promise<MemoDetail | null> => {
   const row = await getMemoDetailRow(db, workspaceId, id, includeDeleted);
   return row ? mapMemoDetail(row) : null;
+};
+
+/**
+ * Read-for-display variant that honours PIN gates. Mutation paths must keep using
+ * getMemoDetail so a redacted body is never written back over real content.
+ */
+export const getMemoDetailForRead = async (
+  db: DatabaseAdapter,
+  workspaceId: string,
+  id: string,
+  readerId: string | null,
+  includeDeleted = false,
+): Promise<MemoDetail | null> => {
+  const memo = await getMemoDetail(db, workspaceId, id, includeDeleted);
+  if (!memo) return null;
+
+  const lockStates = await resolveMemoLockStates(db, workspaceId, readerId, [id]);
+  const lock = lockStates.get(id);
+  if (!lock) return memo;
+  if (lock.isUnlocked) return { ...memo, isLocked: true };
+  // A locked note still resolves, but every content-bearing field is emptied so
+  // clients can render the padlock screen without ever receiving the body.
+  return { ...redactLockedDetail(memo), isLocked: true };
+};
+
+/** Throw when a write targets a note the caller has not unlocked. */
+export const assertMemoUnlocked = async (
+  db: DatabaseAdapter,
+  workspaceId: string,
+  id: string,
+  readerId: string | null,
+) => {
+  const lockStates = await resolveMemoLockStates(db, workspaceId, readerId, [id]);
+  const lock = lockStates.get(id);
+  if (lock && !lock.isUnlocked) {
+    throw new AppError("memo_locked", "This note is locked", 423);
+  }
 };
 
 export const createMemoEditSession = async (c: AppContext, memoId: string): Promise<MemoEditSession | null> => {
