@@ -35,6 +35,19 @@
   --spacing-mobile-control: 36px;
   --spacing-mobile-fab: 52px;
   --spacing-mobile-touch: 44px;
+  /* M3 type scale. Declared with the paired line height so `text-*` emits both. */
+  --text-headline-large: 2rem/2.5rem;
+  --text-headline-medium: 1.75rem/2.25rem;
+  --text-headline-small: 1.5rem/2rem;
+  --text-title-large: 1.375rem/1.75rem;
+  --text-title-medium: 1rem/1.5rem;
+  --text-title-small: 0.875rem/1.25rem;
+  --text-body-large: 1rem/1.5rem;
+  --text-body-medium: 0.875rem/1.25rem;
+  --text-body-small: 0.75rem/1rem;
+  --text-label-large: 0.875rem/1.25rem;
+  --text-label-medium: 0.75rem/1rem;
+  --text-label-small: 0.6875rem/1rem;
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
   --color-card: hsl(var(--card));

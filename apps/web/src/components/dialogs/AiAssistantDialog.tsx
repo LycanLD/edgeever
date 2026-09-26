@@ -651,7 +651,7 @@ export const AiAssistantDialog = ({
         <section
           ref={assignPanelRef}
           aria-label={t("aiAssistant.title")}
-          className="fixed z-[70] flex max-h-[70dvh] w-[min(36rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-xl border border-slate-200 bg-card p-4 shadow-2xl ring-1 ring-slate-950/5"
+          className="fixed z-[70] flex max-h-[70dvh] w-[min(36rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-3xl border border-outline-variant bg-card p-5 shadow-elev-3"
           role="dialog"
           style={panelStyle}
           onKeyDown={(event) => {
@@ -664,16 +664,18 @@ export const AiAssistantDialog = ({
         >
           <div
             className={cn(
-              "-mx-4 -mt-4 mb-3 flex h-16 shrink-0 touch-none select-none items-center justify-between gap-3 px-4 cursor-grab",
+              "-mx-5 -mt-3 mb-4 flex h-12 shrink-0 touch-none select-none items-center justify-between gap-3 pl-1 pr-0 cursor-grab",
               isDragging && "cursor-grabbing",
             )}
             data-ai-assistant-drag-handle="true"
             onPointerDown={handleDragStart}
           >
             <div className="flex min-w-0 flex-1 items-center gap-2">
-              <Sparkles className="h-5 w-5 shrink-0 text-emerald-600" />
-              <span className="truncate text-sm font-semibold text-slate-950">{t("aiAssistant.title")}</span>
-              <span className="shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300">
+                <Sparkles aria-hidden="true" className="h-5 w-5" strokeWidth={1.75} />
+              </span>
+              <span className="truncate text-title-large font-semibold text-slate-950 dark:text-slate-50">{t("aiAssistant.title")}</span>
+              <span className="shrink-0 rounded-full bg-emerald-100 px-2.5 py-1 text-label-small font-medium text-emerald-800 dark:bg-emerald-500/15 dark:text-emerald-200">
                 {t(chatting
                   ? "aiAssistant.workspaceScope"
                   : usesComposerAsSource
@@ -686,7 +688,7 @@ export const AiAssistantDialog = ({
               <X className="h-4 w-4" />
             </Button>
           </div>
-          <div className="mb-3 flex shrink-0 gap-1 rounded-lg bg-slate-100 p-1" role="tablist" aria-label={t("aiAssistant.title")}>
+          <div className="mb-4 flex shrink-0 gap-1 rounded-full bg-slate-100 p-1 dark:bg-slate-800" role="tablist" aria-label={t("aiAssistant.title")}>
             {(["instruction", "ask"] as const).map((item) => (
               <button
                 key={item}
@@ -694,8 +696,10 @@ export const AiAssistantDialog = ({
                 role="tab"
                 aria-selected={mode === item}
                 className={cn(
-                  "h-8 flex-1 rounded-md px-2 text-xs font-medium",
-                  mode === item ? "bg-card text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-800",
+                  "m3-state h-9 flex-1 rounded-full px-3 text-label-large font-medium",
+                  mode === item
+                    ? "bg-card font-semibold text-slate-900 shadow-elev-1 dark:bg-slate-700 dark:text-slate-50"
+                    : "text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100",
                 )}
                 onClick={() => selectMode(item)}
               >
@@ -731,19 +735,19 @@ export const AiAssistantDialog = ({
           <div className="min-h-0 flex-1 overflow-y-auto pr-1">
             <div className="grid gap-4">
             {hasSelection ? (
-              <p className="max-h-12 overflow-hidden whitespace-pre-wrap border-l-2 border-emerald-200 pl-3 text-xs leading-5 text-slate-500">
+              <p className="max-h-12 overflow-hidden whitespace-pre-wrap border-l-2 border-emerald-300 pl-3 text-body-small leading-5 text-slate-500 dark:border-emerald-500/40">
                 {selectionMarkdown}
               </p>
             ) : null}
             {showInstructionComposer || showSourceComposer ? (
             <div className="grid gap-2">
-              <label className="grid gap-1.5 text-sm font-medium text-slate-700">
+              <label className="grid gap-1.5 text-label-large font-medium text-slate-700 dark:text-slate-300">
                 {t(showInstructionComposer
                   ? (hasSelection ? "aiAssistant.customInstructionSelected" : "aiAssistant.customInstruction")
                   : "aiAssistant.inputContent")}
                 <textarea
                   ref={instructionRef}
-                  className="min-h-24 resize-y rounded-md border border-slate-200 bg-card px-3 py-2 text-sm font-normal text-slate-900 outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/15"
+                  className="min-h-24 resize-y rounded-2xl border border-transparent bg-slate-100/70 px-4 py-3 text-body-medium font-normal text-slate-900 outline-none transition focus:border-emerald-500 focus:bg-card focus:ring-4 focus:ring-emerald-500/15 dark:bg-slate-800/60 dark:text-slate-100"
                   value={customInstruction}
                   onChange={(event) => {
                     handleComposerChange(event.target.value);
@@ -780,7 +784,7 @@ export const AiAssistantDialog = ({
                 {onOpenPromptLibrary ? (
                   <button
                     type="button"
-                    className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700 hover:text-emerald-800"
+                    className="m3-state inline-flex h-8 items-center gap-1 rounded-full px-2 text-label-medium font-medium text-emerald-700 hover:bg-emerald-50 dark:text-emerald-300 dark:hover:bg-emerald-500/10"
                     onClick={() => {
                       onOpenChange(false);
                       onOpenPromptLibrary();
@@ -947,7 +951,7 @@ export const AiAssistantDialog = ({
               {attachments.length ? (
                 <ul className="flex flex-wrap gap-2" aria-label={t("aiAssistant.attachments")}>
                   {attachments.map((attachment, index) => (
-                    <li key={`${attachment.filename}-${index}`} className="flex min-w-0 max-w-full items-center gap-1.5 rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-700">
+                    <li key={`${attachment.filename}-${index}`} className="flex min-w-0 max-w-full items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-1 text-body-small text-slate-700 dark:bg-slate-800 dark:text-slate-200">
                       <FileText className="h-3.5 w-3.5 shrink-0 text-slate-500" />
                       <span className="max-w-48 truncate">{attachment.filename}</span>
                       <span className="shrink-0 text-slate-400">{formatAiAttachmentSize(attachment.byteLength)}</span>
@@ -967,26 +971,26 @@ export const AiAssistantDialog = ({
                   ))}
                 </ul>
               ) : null}
-              <p className="text-xs text-slate-400">{t("aiAssistant.attachmentHint")}</p>
-              {attachmentError ? <p className="text-xs font-medium text-rose-600" role="alert">{attachmentError}</p> : null}
-              {promptFeedback ? <p className="text-xs font-medium text-emerald-700">{promptFeedback}</p> : null}
-              {promptErrorMessage ? <p className="text-xs font-medium text-rose-600" role="alert">{promptErrorMessage}</p> : null}
+              <p className="text-body-small text-slate-400">{t("aiAssistant.attachmentHint")}</p>
+              {attachmentError ? <p className="text-body-small font-medium text-rose-600 dark:text-rose-400" role="alert">{attachmentError}</p> : null}
+              {promptFeedback ? <p className="text-body-small font-medium text-emerald-700 dark:text-emerald-400">{promptFeedback}</p> : null}
+              {promptErrorMessage ? <p className="text-body-small font-medium text-rose-600 dark:text-rose-400" role="alert">{promptErrorMessage}</p> : null}
             </div>
             <div className="grid gap-1.5">
               <div className="flex items-center justify-between gap-3">
                 <span className="text-sm font-medium text-slate-700">{t("aiAssistant.result")}</span>
                 {isGenerating ? (
-                  <span className="flex items-center gap-1.5 text-xs font-medium text-emerald-700">
+                  <span className="flex items-center gap-1.5 text-label-medium font-medium text-emerald-700 dark:text-emerald-300">
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />{t("aiAssistant.generating")}
                   </span>
                 ) : null}
               </div>
               <div
                 className={cn(
-                  "max-h-56 overflow-y-auto whitespace-pre-wrap rounded-lg border p-4 text-sm leading-6",
+                  "max-h-56 overflow-y-auto whitespace-pre-wrap rounded-2xl border p-4 text-body-medium leading-6",
                   error
                     ? "border-rose-200 bg-rose-50 text-rose-700"
-                    : "min-h-28 border-slate-200 bg-slate-50 text-slate-800",
+                    : "min-h-28 border-outline-variant bg-slate-100/60 text-slate-800 dark:bg-slate-800/50 dark:text-slate-100",
                 )}
                 aria-busy={isGenerating}
                 aria-live="polite"
@@ -1001,11 +1005,11 @@ export const AiAssistantDialog = ({
               </div>
             </div>
             {output && !isGenerating ? (
-              <div className="grid gap-1.5 rounded-lg border border-slate-200 bg-card p-3">
+              <div className="grid gap-1.5 rounded-2xl bg-slate-100/70 p-3 dark:bg-slate-800/50">
                 <span className="text-sm font-medium text-slate-700">{t("aiAssistant.refine")}</span>
                 <div className="flex flex-col gap-2 sm:flex-row">
                   <input
-                    className="h-10 min-w-0 flex-1 rounded-md border border-slate-200 bg-card px-3 text-sm outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/15"
+                    className="h-10 min-w-0 flex-1 rounded-xl border border-transparent bg-card px-3 text-body-medium outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/15"
                     value={refinement}
                     onChange={(event) => setRefinement(event.target.value)}
                     aria-label={t("aiAssistant.refine")}
@@ -1025,7 +1029,7 @@ export const AiAssistantDialog = ({
             </div>
           </div>
           {output ? (
-            <div className="mt-3 flex shrink-0 flex-wrap justify-between gap-2 border-t border-slate-200 pt-3" data-ai-assistant-actions>
+            <div className="mt-4 flex shrink-0 flex-wrap justify-between gap-2 border-t border-outline-variant pt-4" data-ai-assistant-actions>
               <div className="flex flex-wrap gap-2">
                 <Button type="button" variant="outline" disabled={isGenerating} onClick={() => void copy()}>{copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}{t(copied ? "aiAssistant.copied" : "aiAssistant.copy")}</Button>
                 <Button type="button" variant="outline" disabled={isGenerating} onClick={() => { setOutput(""); setError(null); }}><Trash2 className="h-4 w-4" />{t("aiAssistant.discard")}</Button>
@@ -1070,7 +1074,7 @@ export const AiAssistantDialog = ({
               <DialogTitle>{t("aiAssistant.saveAsPromptTitle")}</DialogTitle>
               <DialogDescription>{t("aiPrompts.description")}</DialogDescription>
             </DialogHeader>
-            <label className="grid gap-1.5 text-sm font-medium text-slate-700">
+            <label className="grid gap-1.5 text-label-large font-medium text-slate-700 dark:text-slate-300">
               {t("aiAssistant.promptName")}
               <Input
                 value={saveName}
@@ -1081,7 +1085,7 @@ export const AiAssistantDialog = ({
                 autoFocus
               />
             </label>
-            <label className="grid gap-1.5 text-sm font-medium text-slate-700">
+            <label className="grid gap-1.5 text-label-large font-medium text-slate-700 dark:text-slate-300">
               {t("aiAssistant.promptDescription")}
               <Input
                 value={saveDescription}
@@ -1091,7 +1095,7 @@ export const AiAssistantDialog = ({
               />
             </label>
             {createPromptMutation.error ? (
-              <p className="text-xs font-medium text-rose-600" role="alert">
+              <p className="text-body-small font-medium text-rose-600 dark:text-rose-400" role="alert">
                 {createPromptMutation.error instanceof Error
                   ? createPromptMutation.error.message
                   : t("aiAssistant.promptSaveFailed")}

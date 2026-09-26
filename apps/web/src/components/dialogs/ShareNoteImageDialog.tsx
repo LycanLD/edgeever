@@ -208,16 +208,18 @@ export const ShareNoteImageDialog = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-h-[94vh] max-w-5xl gap-0 overflow-hidden p-0">
-        <DialogHeader className="border-b border-slate-200 px-5 py-3.5 pr-12 text-left">
-          <DialogTitle className="flex items-center gap-2 text-base font-semibold">
-            <Share2 className="h-4.5 w-4.5 text-emerald-600" />
+        <DialogHeader className="flex-row items-center gap-3 border-b border-outline-variant px-6 py-4 pr-14">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300">
+            <Share2 aria-hidden="true" className="h-5 w-5" strokeWidth={1.75} />
+          </span>
+          <DialogTitle className="min-w-0">
             {t("editor.imageShare.title")}
           </DialogTitle>
           <DialogDescription className="sr-only">{t("editor.imageShare.description")}</DialogDescription>
         </DialogHeader>
 
         <div className="grid min-h-0 flex-1 gap-0 md:grid-cols-[minmax(0,1fr)_20rem]">
-          <div className="flex min-h-72 items-center justify-center overflow-auto bg-slate-100/90 p-4 sm:p-6 md:max-h-[72vh]">
+          <div className="flex min-h-72 items-center justify-center overflow-auto bg-slate-100/70 p-4 sm:p-6 md:max-h-[72vh] dark:bg-slate-900/60">
             {previewUrl && prepared ? (
               <img
                 alt={t("editor.imageShare.previewAlt")}
@@ -237,10 +239,10 @@ export const ShareNoteImageDialog = ({
             )}
           </div>
 
-          <div className="space-y-5 overflow-y-auto border-t border-slate-200 p-5 md:max-h-[72vh] md:border-l md:border-t-0">
+          <div className="space-y-4 overflow-y-auto border-t border-outline-variant p-5 md:max-h-[72vh] md:border-l md:border-t-0">
             {/* Theme Selector */}
             <fieldset className="space-y-2.5">
-              <legend className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <legend className="flex items-center gap-1.5 text-label-large font-semibold text-slate-500 dark:text-slate-400">
                 <Palette className="h-3.5 w-3.5" />
                 {t("editor.imageShare.theme")}
               </legend>
@@ -253,16 +255,16 @@ export const ShareNoteImageDialog = ({
                       key={item.id}
                       aria-pressed={isSelected}
                       className={cn(
-                        "group relative flex items-center gap-2.5 rounded-lg border p-2 text-left text-xs font-medium transition-all outline-none focus-visible:ring-2 focus-visible:ring-emerald-500",
+                        "m3-state group relative flex items-center gap-2.5 rounded-2xl p-2.5 text-left text-body-medium font-medium outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/70",
                         isSelected
-                          ? "border-emerald-500 bg-emerald-50/40 text-emerald-950 ring-1 ring-emerald-500"
-                          : "border-slate-200 bg-card text-slate-700 hover:border-slate-300 hover:bg-slate-50/70",
+                          ? "bg-emerald-100 text-emerald-950 dark:bg-emerald-500/15 dark:text-emerald-100"
+                          : "bg-slate-100/70 text-slate-700 hover:bg-slate-200/70 dark:bg-slate-800/50 dark:text-slate-200 dark:hover:bg-slate-700/60",
                       )}
                       type="button"
                       onClick={() => setTheme(item.id)}
                     >
                       <span
-                        className="h-6 w-6 shrink-0 rounded-md border border-black/10 shadow-sm"
+                        className="h-6 w-6 shrink-0 rounded-lg border border-black/10 shadow-sm"
                         style={{ background: item.previewBg }}
                       />
                       <span className="truncate">{label}</span>
@@ -274,7 +276,7 @@ export const ShareNoteImageDialog = ({
 
             {/* Typography and Layout */}
             <fieldset className="space-y-3">
-              <legend className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <legend className="flex items-center gap-1.5 text-label-large font-semibold text-slate-500 dark:text-slate-400">
                 <Type className="h-3.5 w-3.5" />
                 {t("editor.imageShare.fontStyle")}
               </legend>
@@ -284,10 +286,10 @@ export const ShareNoteImageDialog = ({
                     key={item.id}
                     aria-pressed={fontStyle === item.id}
                     className={cn(
-                      "h-8 rounded-md border text-xs font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-emerald-500",
+                      "m3-state h-9 rounded-xl text-label-large outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/70",
                       fontStyle === item.id
-                        ? "border-emerald-500 bg-emerald-50 text-emerald-900 font-semibold"
-                        : "border-slate-200 bg-card text-slate-600 hover:bg-slate-50",
+                        ? "bg-emerald-100 font-semibold text-emerald-900 dark:bg-emerald-500/20 dark:text-emerald-100"
+                        : "bg-slate-100/70 text-slate-600 hover:bg-slate-200/70 dark:bg-slate-800/50 dark:text-slate-300 dark:hover:bg-slate-700/60",
                     )}
                     type="button"
                     onClick={() => setFontStyle(item.id)}
@@ -299,17 +301,17 @@ export const ShareNoteImageDialog = ({
 
               {/* Font Size */}
               <div className="space-y-1.5 pt-1">
-                <div className="text-xs font-medium text-slate-600">{t("editor.imageShare.fontSize")}</div>
+                <div className="text-label-large font-medium text-slate-600 dark:text-slate-300">{t("editor.imageShare.fontSize")}</div>
                 <div className="grid grid-cols-3 gap-1.5">
                   {SIZE_OPTIONS.map((item) => (
                     <button
                       key={item.id}
                       aria-pressed={fontSize === item.id}
                       className={cn(
-                        "h-7 rounded border text-xs font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-emerald-500",
+                        "m3-state h-9 rounded-xl text-label-large outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/70",
                         fontSize === item.id
-                          ? "border-emerald-500 bg-emerald-50/80 text-emerald-900 font-semibold"
-                          : "border-slate-200 bg-card text-slate-600 hover:bg-slate-50",
+                          ? "bg-emerald-100 font-semibold text-emerald-900 dark:bg-emerald-500/20 dark:text-emerald-100"
+                          : "bg-slate-100/70 text-slate-600 hover:bg-slate-200/70 dark:bg-slate-800/50 dark:text-slate-300 dark:hover:bg-slate-700/60",
                       )}
                       type="button"
                       onClick={() => setFontSize(item.id)}
@@ -322,17 +324,17 @@ export const ShareNoteImageDialog = ({
 
               {/* Card Width */}
               <div className="space-y-1.5 pt-1">
-                <div className="text-xs font-medium text-slate-600">{t("editor.imageShare.cardWidth")}</div>
+                <div className="text-label-large font-medium text-slate-600 dark:text-slate-300">{t("editor.imageShare.cardWidth")}</div>
                 <div className="grid grid-cols-3 gap-1.5">
                   {WIDTH_OPTIONS.map((item) => (
                     <button
                       key={item.id}
                       aria-pressed={cardWidth === item.id}
                       className={cn(
-                        "h-7 rounded border text-xs font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-emerald-500",
+                        "m3-state h-9 rounded-xl text-label-large outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/70",
                         cardWidth === item.id
-                          ? "border-emerald-500 bg-emerald-50/80 text-emerald-900 font-semibold"
-                          : "border-slate-200 bg-card text-slate-600 hover:bg-slate-50",
+                          ? "bg-emerald-100 font-semibold text-emerald-900 dark:bg-emerald-500/20 dark:text-emerald-100"
+                          : "bg-slate-100/70 text-slate-600 hover:bg-slate-200/70 dark:bg-slate-800/50 dark:text-slate-300 dark:hover:bg-slate-700/60",
                       )}
                       type="button"
                       onClick={() => setCardWidth(item.id)}
@@ -346,7 +348,7 @@ export const ShareNoteImageDialog = ({
 
             {/* Metadata / Content Toggles */}
             <fieldset className="space-y-2.5">
-              <legend className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <legend className="text-label-large font-semibold text-slate-500 dark:text-slate-400">
                 {t("editor.imageShare.metadata")}
               </legend>
               <div className="space-y-2">
@@ -357,7 +359,7 @@ export const ShareNoteImageDialog = ({
                   ["updatedAt", showUpdatedAt, setShowUpdatedAt],
                   ["branding", showBranding, setShowBranding],
                 ] as const).map(([key, checked, setChecked]) => (
-                  <label key={key} className="flex cursor-pointer items-center gap-2 text-xs text-slate-700">
+                  <label key={key} className="m3-state flex min-h-9 cursor-pointer items-center gap-2.5 rounded-xl px-2 text-body-medium text-slate-700 hover:bg-slate-100/70 dark:text-slate-200 dark:hover:bg-slate-800/60">
                     <Checkbox checked={checked} onCheckedChange={(value) => setChecked(value === true)} />
                     {t(`editor.imageShare.fields.${key}`)}
                   </label>
@@ -366,17 +368,17 @@ export const ShareNoteImageDialog = ({
             </fieldset>
 
             {/* Format Selection */}
-            <label className="grid gap-1.5 text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <label className="grid gap-1.5 text-label-large font-semibold text-slate-500 dark:text-slate-400">
               {t("editor.imageShare.format")}
               <Select value={format} onValueChange={(value) => setFormat(value as NoteImageFormat)}>
-                <SelectTrigger className="h-8 text-xs font-normal normal-case tracking-normal text-slate-700">
+                <SelectTrigger className="h-11 w-full rounded-xl text-body-medium font-normal normal-case tracking-normal text-slate-700 dark:text-slate-200">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem className="text-xs" value="png">
+                  <SelectItem className="text-body-medium" value="png">
                     PNG · {t("editor.imageShare.pngHint")}
                   </SelectItem>
-                  <SelectItem className="text-xs" value="jpeg">
+                  <SelectItem className="text-body-medium" value="jpeg">
                     JPEG · {t("editor.imageShare.jpegHint")}
                   </SelectItem>
                 </SelectContent>
@@ -384,7 +386,7 @@ export const ShareNoteImageDialog = ({
             </label>
 
             {noticeKind !== "none" ? (
-              <p className="text-xs leading-5 text-amber-700">
+              <p className="rounded-xl bg-amber-50 px-3 py-2 text-body-small leading-5 text-amber-800 dark:bg-amber-400/10 dark:text-amber-200">
                 {t(
                   noticeKind === "partial"
                     ? "editor.imageExport.imageEmbedPartial"
@@ -394,23 +396,23 @@ export const ShareNoteImageDialog = ({
               </p>
             ) : null}
             {prepared && prepared.height > 12_000 ? (
-              <p className="text-xs leading-5 text-amber-700">{t("editor.imageShare.longImageWarning")}</p>
+              <p className="rounded-xl bg-amber-50 px-3 py-2 text-body-small leading-5 text-amber-800 dark:bg-amber-400/10 dark:text-amber-200">{t("editor.imageShare.longImageWarning")}</p>
             ) : null}
           </div>
         </div>
 
         {copyState === "failed" ? (
-          <p className="border-t border-rose-100 bg-rose-50 px-5 py-2 text-xs text-rose-700" role="alert">
+          <p className="border-t border-rose-100 bg-rose-50 px-6 py-2.5 text-body-small text-rose-700 dark:border-rose-500/25 dark:bg-rose-500/10 dark:text-rose-200" role="alert">
             {t("editor.imageShare.copyFailed")}
           </p>
         ) : null}
-        <DialogFooter className="border-t border-slate-200 px-5 py-3.5">
-          <Button variant="ghost" size="sm" onClick={() => onOpenChange(false)}>
+        <DialogFooter className="border-t border-outline-variant px-6 py-4">
+          <Button variant="ghost" size="lg" onClick={() => onOpenChange(false)}>
             {t("common.cancel")}
           </Button>
           <Button
-            variant="outline"
-            size="sm"
+            variant="soft"
+            size="lg"
             disabled={!prepared || copyState === "copying"}
             onClick={() => void handleCopyImage()}
           >
@@ -427,8 +429,8 @@ export const ShareNoteImageDialog = ({
             )}
           </Button>
           <Button
-            variant={canUseSystemShare ? "outline" : "solid"}
-            size="sm"
+            variant={canUseSystemShare ? "soft" : "solid"}
+            size="lg"
             disabled={!prepared}
             onClick={download}
           >
@@ -436,7 +438,7 @@ export const ShareNoteImageDialog = ({
             {t("editor.imageShare.download")}
           </Button>
           {canUseSystemShare ? (
-            <Button variant="solid" size="sm" disabled={!prepared} onClick={() => void share()}>
+            <Button variant="solid" size="lg" disabled={!prepared} onClick={() => void share()}>
               <Share2 className="h-4 w-4" />
               {t("editor.imageShare.share")}
             </Button>

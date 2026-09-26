@@ -1,9 +1,18 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Check, Copy, ExternalLink, Link2, LoaderCircle, RefreshCw, Share2, Trash2 } from "lucide-react";
+import { Check, Copy, ExternalLink, Info, Link2, LoaderCircle, RefreshCw, Share2, Trash2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogSection,
+  DialogSectionLabel,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { api, getConfiguredDesktopApiBaseUrl } from "@/lib/api";
@@ -141,39 +150,47 @@ export const ShareMemoDialog = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-lg gap-0 overflow-hidden p-0">
-        <DialogHeader className="border-b border-slate-200 px-5 py-5 pr-12 text-left">
-          <DialogTitle className="flex items-center gap-2 text-base">
-            <Share2 className="h-5 w-5 text-emerald-600" />
-            {t("sharing.title")}
-          </DialogTitle>
-          <DialogDescription className="pt-1 leading-5">
-            {t(share?.passwordProtected ? "sharing.descriptionProtected" : "sharing.description")}
-          </DialogDescription>
+        <DialogHeader className="flex-row items-start gap-3 border-b border-outline-variant px-6 py-5 pr-14">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300">
+            <Share2 aria-hidden="true" className="h-5 w-5" strokeWidth={1.75} />
+          </span>
+          <div className="min-w-0 space-y-1">
+            <DialogTitle>{t("sharing.title")}</DialogTitle>
+            <DialogDescription className="leading-5">
+              {t(share?.passwordProtected ? "sharing.descriptionProtected" : "sharing.description")}
+            </DialogDescription>
+          </div>
         </DialogHeader>
 
-        <div className="space-y-4 px-5 py-5">
+        <div className="space-y-5 px-6 py-5">
           {shareQuery.isLoading ? (
-            <div className="flex min-h-20 items-center justify-center text-slate-500" role="status">
-              <LoaderCircle className="h-5 w-5 animate-spin" />
+            <div className="flex min-h-24 items-center justify-center text-slate-400" role="status">
+              <LoaderCircle aria-hidden="true" className="h-6 w-6 animate-spin" />
             </div>
           ) : share ? (
             <>
               <div className="flex gap-2">
-                <Input value={shareUrl} readOnly aria-label={t("sharing.linkLabel")} className="min-w-0 font-mono text-xs" />
+                <Input
+                  value={shareUrl}
+                  readOnly
+                  aria-label={t("sharing.linkLabel")}
+                  className="h-11 min-w-0 flex-1 rounded-xl bg-slate-100/70 font-mono text-xs dark:bg-slate-800/50"
+                />
                 <Button
-                  variant={copyState === "copied" && copyTarget === "link" ? "solid" : copyState === "error" && copyTarget === "link" ? "danger" : "outline"}
+                  variant={copyState === "copied" && copyTarget === "link" ? "solid" : copyState === "error" && copyTarget === "link" ? "danger" : "soft"}
+                  size="lg"
                   className="min-w-28"
                   aria-live="polite"
                   onClick={() => void copyValue("link", shareUrl)}
                 >
-                  {copyState === "copied" && copyTarget === "link" ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                  {copyState === "copied" && copyTarget === "link" ? <Check aria-hidden="true" className="h-4 w-4" /> : <Copy aria-hidden="true" className="h-4 w-4" />}
                   {t(copiedLabel("link", "sharing.copy"))}
                 </Button>
               </div>
 
-              <div className="space-y-3 rounded-lg border border-slate-200 px-3 py-3">
+              <DialogSection className="space-y-3">
                 <div className="flex items-center justify-between gap-3">
-                  <div className="text-sm font-medium text-slate-900">{t("sharing.passwordToggle")}</div>
+                  <DialogSectionLabel>{t("sharing.passwordToggle")}</DialogSectionLabel>
                   <Switch
                     checked={share.passwordProtected}
                     disabled={isWorking}
@@ -189,65 +206,71 @@ export const ShareMemoDialog = ({
                         readOnly
                         placeholder={t("sharing.passwordSet")}
                         aria-label={t("sharing.passwordLabel")}
-                        className="min-w-0 font-mono text-xs tracking-wide"
+                        className="h-11 min-w-0 flex-1 rounded-xl bg-card font-mono text-xs tracking-wide"
                       />
                       <Button
-                        variant={copyState === "copied" && copyTarget === "password" ? "solid" : copyState === "error" && copyTarget === "password" ? "danger" : "outline"}
+                        variant={copyState === "copied" && copyTarget === "password" ? "solid" : copyState === "error" && copyTarget === "password" ? "danger" : "soft"}
+                        size="lg"
                         className="min-w-28"
                         disabled={!revealedPassword}
                         aria-live="polite"
                         onClick={() => void copyValue("password", revealedPassword)}
                       >
-                        {copyState === "copied" && copyTarget === "password" ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                        {copyState === "copied" && copyTarget === "password" ? <Check aria-hidden="true" className="h-4 w-4" /> : <Copy aria-hidden="true" className="h-4 w-4" />}
                         {t(copiedLabel("password", "sharing.passwordCopy"))}
                       </Button>
                       <Button
-                        variant="outline"
+                        variant="soft"
                         size="icon"
+                        className="h-11 w-11"
                         disabled={isWorking}
                         title={t("sharing.regeneratePassword")}
                         aria-label={t("sharing.regeneratePassword")}
                         onClick={() => passwordMutation.mutate(true)}
                       >
-                        {passwordMutation.isPending ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <RefreshCw className="h-4 w-4" />}
+                        {passwordMutation.isPending ? <LoaderCircle aria-hidden="true" className="h-4 w-4 animate-spin" /> : <RefreshCw aria-hidden="true" className="h-4 w-4" />}
                       </Button>
                     </div>
                     {revealedPassword ? (
                       <Button
                         variant="ghost"
-                        className="h-8 px-0 text-xs text-slate-600 hover:bg-transparent hover:text-slate-900"
+                        size="sm"
+                        className="h-8 px-1 text-xs text-slate-600 hover:bg-transparent hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-50"
                         onClick={() => void copyValue("both", `${shareUrl}\n${t("sharing.passwordPrefix")}${revealedPassword}`)}
                       >
-                        {copyState === "copied" && copyTarget === "both" ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                        {copyState === "copied" && copyTarget === "both" ? <Check aria-hidden="true" className="h-3.5 w-3.5" /> : <Copy aria-hidden="true" className="h-3.5 w-3.5" />}
                         {t(copiedLabel("both", "sharing.copyLinkAndPassword"))}
                       </Button>
                     ) : null}
                   </div>
                 ) : null}
-              </div>
+              </DialogSection>
 
-              <p className="text-xs leading-5 text-slate-500">{t("sharing.liveContentHint")}</p>
-              <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-between">
-                <Button variant="danger" disabled={isWorking} onClick={() => revokeMutation.mutate()}>
-                  <Trash2 className="h-4 w-4" />
+              <p className="flex items-start gap-2 text-body-small leading-5 text-slate-500 dark:text-slate-400">
+                <Info aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" strokeWidth={1.75} />
+                {t("sharing.liveContentHint")}
+              </p>
+              <DialogActions className="sm:justify-between">
+                <Button variant="danger" size="lg" disabled={isWorking} onClick={() => revokeMutation.mutate()}>
+                  <Trash2 aria-hidden="true" className="h-4 w-4" />
                   {t("sharing.revoke")}
                 </Button>
-                <Button variant="solid" onClick={() => window.open(shareUrl, "_blank", "noopener,noreferrer")}>
-                  <ExternalLink className="h-4 w-4" />
+                <Button variant="solid" size="lg" onClick={() => window.open(shareUrl, "_blank", "noopener,noreferrer")}>
+                  <ExternalLink aria-hidden="true" className="h-4 w-4" />
                   {t("sharing.open")}
                 </Button>
-              </div>
+              </DialogActions>
             </>
           ) : (
             <div className="space-y-4">
-              <p className="text-sm leading-6 text-slate-600">{t("sharing.inactiveHint")}</p>
-              <Button className="w-full" variant="solid" disabled={isWorking} onClick={() => createMutation.mutate()}>
-                {createMutation.isPending ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <Link2 className="h-4 w-4" />}
+              <p className="text-body-medium leading-6 text-slate-600 dark:text-slate-300">{t("sharing.inactiveHint")}</p>
+              <Button className="h-11 w-full" variant="solid" size="lg" disabled={isWorking} onClick={() => createMutation.mutate()}>
+                {createMutation.isPending ? <LoaderCircle aria-hidden="true" className="h-4 w-4 animate-spin" /> : <Link2 aria-hidden="true" className="h-4 w-4" />}
                 {t("sharing.create")}
               </Button>
             </div>
           )}
-          {error ? <p className="text-sm text-rose-600" role="alert">{t("sharing.error")}</p> : null}
+          {error ? <p className="text-body-small text-rose-600 dark:text-rose-400" role="alert">{t("sharing.error")}</p> : null}
         </div>
       </DialogContent>
     </Dialog>
