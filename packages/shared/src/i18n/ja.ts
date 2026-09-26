@@ -1289,6 +1289,7 @@ export const ja = {
       builtin_r2: "組み込み R2",
       builtin_filesystem: "ローカルファイルシステム",
       builtin_s3: "インスタンス提供の S3 互換ストレージ",
+      builtin_unconfigured: "未構成（外部オブジェクトストレージのみ）",
       external_s3: "サードパーティの S3 互換 OSS",
     },
     existingAttachments: "既存の添付",
