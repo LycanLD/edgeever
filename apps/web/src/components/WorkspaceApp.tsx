@@ -18,6 +18,7 @@ import type { PluginPanelOpenOptions } from "@edgeever/plugin-api";
 import { RefreshCw, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import * as m from "motion/react-m";
+import { AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { MemoListPane, MemoSelectionActionBar } from "./MemoListPane";
 import { MobileBottomNav, MobileNotebookPicker } from "./WorkspaceMobileChrome";
@@ -3308,6 +3309,7 @@ export const WorkspaceApp = ({
           <section className={cn("edgeever-workspace-editor min-h-0 min-w-0 md:block", visibleActivePane === "editor" ? "block" : "hidden", showMobileSettingsNav && "pb-[calc(4rem+env(safe-area-inset-bottom))] md:pb-0")}>
             {shouldRenderRightPane && (
               <Suspense fallback={<PaneLoadingFallback label={rightPaneLoadingLabel} />}>
+                <AnimatePresence mode="wait" initial={false}>
                 <m.div key={rightView} className="h-full min-h-0 min-w-0" {...paneEnterMotion}>
                   {rightView === "settings" ? (
                     <SettingsPane
@@ -3543,6 +3545,7 @@ export const WorkspaceApp = ({
                     </EditorPaneErrorBoundary>
                   )}
                 </m.div>
+                </AnimatePresence>
               </Suspense>
             )}
           </section>

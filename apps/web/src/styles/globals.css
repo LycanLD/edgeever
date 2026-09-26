@@ -664,8 +664,8 @@ html[data-edgeever-extension-theme] kbd {
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 180ms;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-duration: 200ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
 }
 
 /* Keep the three-pane desktop workspace usable on compact laptop screens.
