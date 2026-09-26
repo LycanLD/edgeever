@@ -35,10 +35,10 @@ const THEME_OPTIONS: Array<{
   dotColor: string;
   isDark?: boolean;
 }> = [
-  { id: "slate", previewBg: "linear-gradient(135deg, #f8fafc, #e2e8f0)", dotColor: "#16a06e" },
+  { id: "slate", previewBg: "linear-gradient(135deg, #f8fafc, #e2e8f0)", dotColor: "#0284c7" },
   { id: "aurora", previewBg: "linear-gradient(135deg, #a7f3d0, #67e8f9, #c4b5fd)", dotColor: "#0d9488" },
   { id: "sunset", previewBg: "linear-gradient(135deg, #fde68a, #fbcfe8, #fed7aa)", dotColor: "#ea580c" },
-  { id: "midnight", previewBg: "linear-gradient(135deg, #090d16, #1e1b4b)", dotColor: "#34d399", isDark: true },
+  { id: "midnight", previewBg: "linear-gradient(135deg, #090d16, #1e1b4b)", dotColor: "#38bdf8", isDark: true },
   { id: "mint", previewBg: "linear-gradient(135deg, #ecfdf5, #a7f3d0)", dotColor: "#059669" },
   { id: "lavender", previewBg: "linear-gradient(135deg, #f5f3ff, #ddd6fe, #c4b5fd)", dotColor: "#7c3aed" },
   { id: "notepad", previewBg: "linear-gradient(135deg, #fbf7ee, #f4ede0)", dotColor: "#c2410c" },

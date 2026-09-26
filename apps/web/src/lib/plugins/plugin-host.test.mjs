@@ -164,14 +164,14 @@ describe("EdgeEverPluginHost", () => {
       modes: ["light"],
       light: {
         "color.background": "#010203",
-        "color.accent": "#16a06e",
+        "color.accent": "#0284c7",
       },
     }, "https://example.com/theme/manifest.json");
 
     await host.setEnabled("org.edgeever.test-theme", true);
 
     expect(styles.get("--edgeever-theme-background")).toBe("#010203");
-    expect(styles.get("--edgeever-theme-accent")).toBe("#16a06e");
+    expect(styles.get("--edgeever-theme-accent")).toBe("#0284c7");
     expect(globalThis.document.documentElement.dataset.edgeeverExtensionTheme).toBe("org.edgeever.test-theme");
     await host.dispose();
   });
@@ -298,7 +298,7 @@ describe("EdgeEverPluginHost", () => {
       id: manifest.id,
       name: manifest.name,
       description: "Verified test plugin",
-      author: "EdgeEver",
+      author: "LumiNotes",
       category: "Testing",
       repositoryUrl: "https://github.com/edgeever/marketplace-test",
       distribution: { type: "manifest", manifestUrl: "https://plugins.example/manifest.json" },

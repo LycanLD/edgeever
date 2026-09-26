@@ -149,9 +149,9 @@ export const NATIVE_IMAGE_GALLERY_CSS = `
 [data-edgeever-image-gallery].edgeever-native-image-gallery { display: block; }
 .edgeever-native-gallery-toolbar { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; line-height: 1.2; }
 .edgeever-native-gallery-toolbar[hidden] { display: none; }
-.edgeever-native-gallery-toolbar button { min-height: 44px; padding: 8px 12px; border: 1px solid #16a06e55; border-radius: 8px; background: transparent; color: inherit; font: inherit; font-size: 13px; }
-.edgeever-native-gallery-toolbar button[aria-pressed="true"] { color: #16a06e; background: #16a06e22; }
-.edgeever-native-gallery-toolbar button:focus-visible { outline: 2px solid #16a06e; outline-offset: 2px; }
+.edgeever-native-gallery-toolbar button { min-height: 44px; padding: 8px 12px; border: 1px solid #0284c755; border-radius: 8px; background: transparent; color: inherit; font: inherit; font-size: 13px; }
+.edgeever-native-gallery-toolbar button[aria-pressed="true"] { color: #0284c7; background: #0284c722; }
+.edgeever-native-gallery-toolbar button:focus-visible { outline: 2px solid #0284c7; outline-offset: 2px; }
 .edgeever-native-gallery-content { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 [data-image-gallery-layout="1"] > .edgeever-native-gallery-content { grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 600px) { [data-image-gallery-layout="3"] > .edgeever-native-gallery-content { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

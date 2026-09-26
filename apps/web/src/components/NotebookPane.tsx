@@ -944,7 +944,7 @@ export const NotebookPane = ({
               <button
                 className="flex h-9 w-full items-center gap-3 rounded-md px-3 text-left text-xs font-medium leading-5 text-slate-700 transition-colors duration-200 hover:bg-workspace-hover hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 data-[state=open]:bg-workspace-hover data-[state=open]:text-slate-950"
                 type="button"
-                aria-label={t("pwa.sidebarDownloadsTitle") || "下载 EdgeEver 客户端与浏览器插件"}
+                aria-label={t("pwa.sidebarDownloadsTitle") || "下载 LumiNotes 客户端与浏览器插件"}
               >
                 <span className="flex h-4 w-4 shrink-0 items-center justify-center">
                   <Download className="h-4 w-4" />
@@ -1041,7 +1041,7 @@ export const NotebookPane = ({
                     href={ANDROID_PLAY_URL}
                     target="_blank"
                     rel="noreferrer"
-                    aria-label={t("pwa.sidebarAndroidTitle") || "在 Google Play 下载 EdgeEver 安卓端"}
+                    aria-label={t("pwa.sidebarAndroidTitle") || "在 Google Play 下载 LumiNotes 安卓端"}
                     className="group flex cursor-pointer items-center justify-between gap-2.5 rounded-md px-2 py-1.5 text-sm text-slate-700 outline-none transition-colors hover:bg-slate-100 hover:text-slate-900 focus:bg-slate-100 focus:text-slate-900   "
                   >
                     <div className="flex min-w-0 items-center gap-2.5">
@@ -1080,7 +1080,7 @@ export const NotebookPane = ({
                     href={IOS_DOWNLOAD_URL}
                     target="_blank"
                     rel="noreferrer"
-                    aria-label={t("pwa.sidebarIosTitle") || "在 App Store 下载 EdgeEver iOS 端（仅支持非大陆区 Apple ID）"}
+                    aria-label={t("pwa.sidebarIosTitle") || "在 App Store 下载 LumiNotes iOS 端（仅支持非大陆区 Apple ID）"}
                     className="group flex cursor-pointer items-center justify-between gap-2.5 rounded-md px-2 py-1.5 text-sm text-slate-700 outline-none transition-colors hover:bg-slate-100 hover:text-slate-900 focus:bg-slate-100 focus:text-slate-900   "
                   >
                     <div className="flex min-w-0 items-center gap-2">

@@ -90,7 +90,7 @@ const deriveAiCredentialKey = (value: string | undefined) => value
   : undefined;
 
 /**
- * Authentication is already required by a normal EdgeEver deployment, so its
+ * Authentication is already required by a normal LumiNotes deployment, so its
  * stable deployment secret is the zero-configuration credential-encryption
  * root. A dedicated key is an optional advanced override. The legacy storage
  * key remains in the decryption ring for AI credentials saved before v1.15.

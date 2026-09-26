@@ -65,7 +65,7 @@ export class DesktopRendererErrorBoundary extends React.Component<{ children: Re
       <main className="flex min-h-screen items-center justify-center bg-slate-50 p-6 text-slate-900">
         <section className="w-full max-w-lg rounded-2xl border border-slate-200 bg-card p-6 shadow-sm" role="alert">
           <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-rose-50 text-xl text-rose-700">!</div>
-          <h1 className="text-lg font-semibold">{zh ? "EdgeEver 页面出现异常" : "EdgeEver encountered a page error"}</h1>
+          <h1 className="text-lg font-semibold">{zh ? "LumiNotes 页面出现异常" : "LumiNotes encountered a page error"}</h1>
           <p className="mt-2 text-sm leading-6 text-slate-600">
             {desktop
               ? (zh

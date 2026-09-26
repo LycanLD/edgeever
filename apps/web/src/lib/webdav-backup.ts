@@ -25,7 +25,7 @@ const SCHEDULE_STORAGE_KEY = "edgeever.webdav-backup-schedule";
 export const DEFAULT_WEBDAV_BACKUP_CONFIG: WebDavBackupConfig = {
   url: "",
   username: "",
-  remotePath: "/EdgeEver/backups",
+  remotePath: "/LumiNotes/backups",
 };
 
 export const DEFAULT_WEBDAV_BACKUP_SCHEDULE: WebDavBackupSchedule = {

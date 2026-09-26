@@ -26,7 +26,7 @@ describe("note-image-card shared module", () => {
     }
   });
 
-  test("generates rich card markup with title, date, and official EdgeEver logo badge", () => {
+  test("generates rich card markup with title, date, and official LumiNotes logo badge", () => {
     const markup = buildNoteImageCardMarkup({
       title: "Shared Card Title",
       notebook: "Work",
@@ -45,7 +45,7 @@ describe("note-image-card shared module", () => {
     expect(markup).toContain("Shared Card Title");
     expect(markup).toContain("2026-08-22");
     expect(markup).toContain("edgeever-brand-logo");
-    expect(markup).toContain("EdgeEver");
+    expect(markup).toContain("LumiNotes");
     expect(markup).not.toContain("edgeever-meta-notebook");
     expect(markup).not.toContain("edgeever-meta-tag");
   });

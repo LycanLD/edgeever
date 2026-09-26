@@ -406,7 +406,7 @@ export const DETAILS_EDITOR_CSS = `
   border: 0;
   border-radius: 4px;
   background: transparent;
-  color: #16a06e;
+  color: #0284c7;
   font: inherit;
   line-height: 0;
   cursor: pointer;
@@ -417,7 +417,7 @@ export const DETAILS_EDITOR_CSS = `
 }
 .ProseMirror [data-type="details"] > button:focus-visible,
 .edgeever-editor-content [data-type="details"] > button:focus-visible {
-  outline: 2px solid color-mix(in srgb, #16a06e 55%, transparent);
+  outline: 2px solid color-mix(in srgb, #0284c7 55%, transparent);
   outline-offset: 1px;
 }
 .ProseMirror [data-type="details"] > button::before,

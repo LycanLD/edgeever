@@ -326,7 +326,7 @@ export const registerMcpRoutes = (
     const result = await handleMcpMessage(context, payload, dependencies, validation.era);
     if (!result) return new Response(null, { status: 202 });
     if (result.status === 401) {
-      context.header("WWW-Authenticate", 'Bearer realm="EdgeEver MCP"');
+      context.header("WWW-Authenticate", 'Bearer realm="LumiNotes MCP"');
     }
     return context.json(result.body, result.status as 200);
   });

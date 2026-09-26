@@ -60,7 +60,7 @@ const MCP_TOOL_DEFINITIONS = [
   {
     name: "get_current_user",
     description:
-      "Identify the EdgeEver user and personal workspace authorized by the current session or API token. Use this before imports when the destination account must be confirmed.",
+      "Identify the LumiNotes user and personal workspace authorized by the current session or API token. Use this before imports when the destination account must be confirmed.",
     inputSchema: {
       type: "object",
       additionalProperties: false,
@@ -69,7 +69,7 @@ const MCP_TOOL_DEFINITIONS = [
   },
   {
     name: "search_memos",
-    description: "Search active EdgeEver memos by text, tag, notebook, time range, pin state, or resource presence. query is optional. For recently created or added notes, pass createdAfter and omit query; do not put this week/最近/新增 in query. Time bounds accept YYYY-MM-DD or ISO date-time.",
+    description: "Search active LumiNotes memos by text, tag, notebook, time range, pin state, or resource presence. query is optional. For recently created or added notes, pass createdAfter and omit query; do not put this week/最近/新增 in query. Time bounds accept YYYY-MM-DD or ISO date-time.",
     inputSchema: {
       type: "object",
       additionalProperties: false,
@@ -89,7 +89,7 @@ const MCP_TOOL_DEFINITIONS = [
   },
   {
     name: "list_memos",
-    description: "List EdgeEver memos with pagination. Use includeContent when full Markdown is needed.",
+    description: "List LumiNotes memos with pagination. Use includeContent when full Markdown is needed.",
     inputSchema: {
       type: "object",
       additionalProperties: false,
@@ -135,7 +135,7 @@ const MCP_TOOL_DEFINITIONS = [
   {
     name: "create_diagram_memo",
     description:
-      "Create an editable visual diagram memo from a semantic graph; EdgeEver generates node sizes, coordinates, edge IDs, and a deterministic layout. For mind maps, omit node type and use parentId for hierarchy. Flowchart node types are process, decision, start, or end. Architecture node types are client, frontend, service, database, storage, queue, security, external, or boundary; boundary nodes may contain nodes through parentId but cannot be edge endpoints.",
+      "Create an editable visual diagram memo from a semantic graph; LumiNotes generates node sizes, coordinates, edge IDs, and a deterministic layout. For mind maps, omit node type and use parentId for hierarchy. Flowchart node types are process, decision, start, or end. Architecture node types are client, frontend, service, database, storage, queue, security, external, or boundary; boundary nodes may contain nodes through parentId but cannot be edge endpoints.",
     inputSchema: {
       type: "object",
       required: ["notebookId", "kind", "nodes"],
@@ -524,7 +524,7 @@ const MCP_TOOL_DEFINITIONS = [
       required: ["notebookId", "name"],
       additionalProperties: false,
       properties: {
-        notebookId: { type: "string", description: "The exact EdgeEver notebook ID." },
+        notebookId: { type: "string", description: "The exact LumiNotes notebook ID." },
         name: { type: "string", minLength: 1, maxLength: 80 },
       },
     },
@@ -537,7 +537,7 @@ const MCP_TOOL_DEFINITIONS = [
       required: ["notebookId"],
       additionalProperties: false,
       properties: {
-        notebookId: { type: "string", description: "The exact EdgeEver notebook ID." },
+        notebookId: { type: "string", description: "The exact LumiNotes notebook ID." },
       },
     },
   },
@@ -611,7 +611,7 @@ const MCP_TOOL_DEFINITIONS = [
   },
   {
     name: "get_note_template",
-    description: "Get one reusable note template by its exact EdgeEver template ID.",
+    description: "Get one reusable note template by its exact LumiNotes template ID.",
     inputSchema: {
       type: "object",
       required: ["templateId"],
@@ -693,7 +693,7 @@ const MCP_TOOL_DEFINITIONS = [
   },
   {
     name: "get_ai_instruction",
-    description: "Get one reusable AI instruction by its exact EdgeEver instruction ID.",
+    description: "Get one reusable AI instruction by its exact LumiNotes instruction ID.",
     inputSchema: {
       type: "object",
       required: ["instructionId"],

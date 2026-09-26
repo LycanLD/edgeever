@@ -148,9 +148,9 @@ export default defineConfig({
       includeAssets: [],
       includeManifestIcons: false,
       manifest: {
-        name: "EdgeEver",
-        short_name: "EdgeEver",
-        description: "EdgeEver：基于 Cloudflare 全家桶自托管的开源印象笔记。",
+        name: "LumiNotes",
+        short_name: "LumiNotes",
+        description: "LumiNotes：基于 Cloudflare 全家桶自托管的开源印象笔记。",
         start_url: "/",
         scope: "/",
         display: "standalone",

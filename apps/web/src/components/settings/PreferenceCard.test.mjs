@@ -11,10 +11,10 @@ describe("editor body font preference", () => {
     expect(preferenceCard).toContain('value="wenkai"');
     expect(preferenceCard).toContain('value="source-han-serif"');
     expect(preferenceCard).toContain('value="custom"');
-    expect(fontFaces).toContain('fontFace("EdgeEver Kai"');
-    expect(fontFaces).toContain('fontFace("EdgeEver Fangsong"');
-    expect(fontFaces).toContain('fontFace("EdgeEver Zhi Song"');
-    expect(fontFaces).toContain('fontFace("EdgeEver Song"');
+    expect(fontFaces).toContain('fontFace("LumiNotes Kai"');
+    expect(fontFaces).toContain('fontFace("LumiNotes Fangsong"');
+    expect(fontFaces).toContain('fontFace("LumiNotes Zhi Song"');
+    expect(fontFaces).toContain('fontFace("LumiNotes Song"');
     expect(fontFaces).toContain("kai.woff2?url");
     expect(fontFaces).toContain("fangsong.woff2?url");
     expect(fontFaces).toContain("zhi-song.woff2?url");

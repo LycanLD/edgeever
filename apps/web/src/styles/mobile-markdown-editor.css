@@ -172,8 +172,8 @@ input {
 }
 
 .mobile-editor-fatal-actions button.primary {
-  border-color: #16a06e;
-  background: #16a06e;
+  border-color: #0284c7;
+  background: #0284c7;
   color: #fff;
 }
 
@@ -198,8 +198,8 @@ input {
 }
 
 :root.dark .mobile-editor-fatal-actions button.primary {
-  border-color: #16a06e;
-  background: #16a06e;
+  border-color: #0284c7;
+  background: #0284c7;
 }
 
 .mobile-editor-title,
@@ -512,8 +512,8 @@ input {
 
 .edgeever-mobile-tiptap-content a:active,
 .edgeever-mobile-tiptap-content a:hover {
-  color: #16a06e;
-  text-decoration-color: #16a06e;
+  color: #0284c7;
+  text-decoration-color: #0284c7;
 }
 
 .edgeever-mobile-tiptap-content a.edgeever-attachment-link,

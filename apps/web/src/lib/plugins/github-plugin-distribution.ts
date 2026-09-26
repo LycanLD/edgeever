@@ -7,7 +7,7 @@ const GITHUB_API_TIMEOUT_MS = 12_000;
 const MAX_MAIN_JS_BYTES = 5 * 1024 * 1024;
 const MAX_STYLES_CSS_BYTES = 1024 * 1024;
 const GITHUB_UNREACHABLE_MESSAGE =
-  "Could not read this GitHub plugin from this device or your EdgeEver instance.";
+  "Could not read this GitHub plugin from this device or your LumiNotes instance.";
 
 export interface GithubRepositoryCoordinates {
   owner: string;
@@ -233,7 +233,7 @@ const downloadGithubAssetThroughApi: GithubAssetDownloader = async (coordinates,
     return await download();
   } catch (error) {
     if (isGithubUnreachableError(error)) {
-      throw new Error(`Could not download ${assetName} from your EdgeEver instance.`);
+      throw new Error(`Could not download ${assetName} from your LumiNotes instance.`);
     }
     throw error;
   }
@@ -368,7 +368,7 @@ export const loadGithubInstallableManifest = async (
   throw new Error(
     lastStatus
       ? `Latest GitHub plugin release request failed with HTTP ${lastStatus}.`
-      : "Could not read the latest GitHub plugin release from this device or your EdgeEver instance.",
+      : "Could not read the latest GitHub plugin release from this device or your LumiNotes instance.",
   );
 };
 

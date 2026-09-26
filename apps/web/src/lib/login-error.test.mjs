@@ -47,7 +47,7 @@ describe("login error classification", () => {
     });
   });
 
-  test("distinguishes an edge security block from an EdgeEver forbidden response", () => {
+  test("distinguishes an edge security block from an LumiNotes forbidden response", () => {
     const blocked = new ApiRequestError("Forbidden", 403, undefined, undefined, {
       cloudflareMitigated: false,
       isEdgeEverApiError: false,
@@ -71,7 +71,7 @@ describe("login error classification", () => {
     });
   });
 
-  test("identifies responses that are not EdgeEver JSON", () => {
+  test("identifies responses that are not LumiNotes JSON", () => {
     expect(classifyLoginError(new SyntaxError("Unexpected token"), "login")).toEqual({
       kind: "invalidResponse",
       diagnosticCode: "invalid_instance_response",

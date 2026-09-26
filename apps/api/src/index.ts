@@ -419,7 +419,7 @@ app.post("/api/v1/demo/reset", async (c) => {
 });
 
 /**
- * Executes the platform-neutral EdgeEver application with an injected storage
+ * Executes the platform-neutral LumiNotes application with an injected storage
  * adapter. Runtime entrypoints must remain thin and call this function rather
  * than introducing platform-specific route or service implementations.
  */
@@ -476,11 +476,11 @@ app.onError((error, c) => {
   }
 
   if (isDatabaseNotReadyError(error)) {
-    console.error("EdgeEver database readiness check failed", error);
+    console.error("LumiNotes database readiness check failed", error);
     return databaseNotReady(c);
   }
 
-  console.error("Unhandled EdgeEver API error", error);
+  console.error("Unhandled LumiNotes API error", error);
   return apiError(c, "internal_error", "An unexpected server error occurred.", 500);
 });
 

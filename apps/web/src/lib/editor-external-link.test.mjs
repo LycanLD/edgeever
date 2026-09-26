@@ -87,8 +87,8 @@ describe("link href classifiers", () => {
 
 describe("markdown helpers", () => {
   test("formats a markdown link", () => {
-    expect(formatMarkdownLink("EdgeEver", "https://www.edgeever.org")).toBe(
-      "[EdgeEver](https://www.edgeever.org)"
+    expect(formatMarkdownLink("LumiNotes", "https://www.edgeever.org")).toBe(
+      "[LumiNotes](https://www.edgeever.org)"
     );
   });
 

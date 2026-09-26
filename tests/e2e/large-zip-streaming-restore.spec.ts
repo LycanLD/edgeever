@@ -155,7 +155,7 @@ const createLargeBackup = async () => {
   }
 };
 
-test("imports a 600 MiB attachment from an EdgeEver ZIP through streaming multipart restore", async ({ page }) => {
+test("imports a 600 MiB attachment from an LumiNotes ZIP through streaming multipart restore", async ({ page }) => {
   test.setTimeout(300_000);
   const fixture = await createLargeBackup();
   const restoredPartNumbers: number[] = [];
@@ -176,15 +176,15 @@ test("imports a 600 MiB attachment from an EdgeEver ZIP through streaming multip
     await expect(page.getByText("导入与导出", { exact: true })).toBeVisible();
 
     const chooserPromise = page.waitForEvent("filechooser");
-    await page.getByRole("button", { name: "导入 EdgeEver ZIP", exact: true }).click();
+    await page.getByRole("button", { name: "导入 LumiNotes ZIP", exact: true }).click();
     const chooser = await chooserPromise;
     await chooser.setFiles(fixture.archivePath);
 
-    const confirmation = page.getByRole("dialog", { name: "导入 EdgeEver ZIP" });
+    const confirmation = page.getByRole("dialog", { name: "导入 LumiNotes ZIP" });
     await expect(confirmation).toBeVisible({ timeout: 120_000 });
     await expect(confirmation).toContainText("1 篇笔记和 1 个资源");
     await confirmation.getByRole("button", { name: "确认导入", exact: true }).click();
-    await expect(page.getByText("EdgeEver ZIP 导入完成。", { exact: true })).toBeVisible({ timeout: 180_000 });
+    await expect(page.getByText("LumiNotes ZIP 导入完成。", { exact: true })).toBeVisible({ timeout: 180_000 });
 
     expect(restoredPartNumbers).toHaveLength(76);
     expect(restoredPartNumbers.filter((part) => part === 1)).toHaveLength(1);

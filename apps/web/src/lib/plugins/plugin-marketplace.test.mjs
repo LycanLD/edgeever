@@ -20,10 +20,10 @@ describe("bundled plugin marketplace", () => {
       "/extensions/registry.json",
       request,
       "./",
-      "file:///Applications/EdgeEver.app/Contents/Resources/web/index.html",
+      "file:///Applications/LumiNotes.app/Contents/Resources/web/index.html",
     );
 
-    expect(requestedUrl).toBe("file:///Applications/EdgeEver.app/Contents/Resources/web/extensions/registry.json");
+    expect(requestedUrl).toBe("file:///Applications/LumiNotes.app/Contents/Resources/web/extensions/registry.json");
   });
 
   test("keeps verified checksums aligned with bundled extension files", async () => {
@@ -87,9 +87,9 @@ describe("bundled plugin marketplace", () => {
       updatedAt: "2026-09-08T00:00:00.000Z",
       entries: [{
         id: "org.edgeever.plugins.ai-rss",
-        name: "EdgeEver AI RSS",
+        name: "LumiNotes AI RSS",
         description: "RSS",
-        author: "EdgeEver",
+        author: "LumiNotes",
         publisher: "edgeever",
         category: "News & AI",
         repositoryUrl: "https://github.com/tianma-if/edgeever-ai-rss",
@@ -100,7 +100,7 @@ describe("bundled plugin marketplace", () => {
     const manifest = {
       type: "plugin",
       id: "org.edgeever.plugins.ai-rss",
-      name: "EdgeEver AI RSS",
+      name: "LumiNotes AI RSS",
       version: "0.5.3",
       apiVersion: "2",
       settingsUi: "host",
@@ -163,9 +163,9 @@ describe("bundled plugin marketplace", () => {
       updatedAt: "2026-09-08T00:00:00.000Z",
       entries: [{
         id: "org.edgeever.plugins.ai-rss",
-        name: "EdgeEver AI RSS",
+        name: "LumiNotes AI RSS",
         description: "RSS",
-        author: "EdgeEver",
+        author: "LumiNotes",
         publisher: "edgeever",
         category: "News & AI",
         repositoryUrl: "https://github.com/tianma-if/edgeever-ai-rss",
@@ -180,7 +180,7 @@ describe("bundled plugin marketplace", () => {
         return new Response(JSON.stringify({
           type: "plugin",
           id: "org.edgeever.plugins.ai-rss",
-          name: "EdgeEver AI RSS",
+          name: "LumiNotes AI RSS",
           version: "0.5.5",
           apiVersion: "2",
           settingsUi: "host",
@@ -212,9 +212,9 @@ describe("bundled plugin marketplace", () => {
       updatedAt: "2026-09-08T00:00:00.000Z",
       entries: [{
         id: "org.edgeever.plugins.ai-rss",
-        name: "EdgeEver AI RSS",
+        name: "LumiNotes AI RSS",
         description: "RSS",
-        author: "EdgeEver",
+        author: "LumiNotes",
         publisher: "edgeever",
         category: "News & AI",
         repositoryUrl: "https://github.com/tianma-if/edgeever-ai-rss",

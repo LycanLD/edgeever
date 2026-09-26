@@ -147,7 +147,7 @@ export const useWorkspaceSyncLifecycle = ({
     const refreshVisibleWorkspace = () => {
       if (document.visibilityState === "hidden" || isBrowserOffline()) return;
       // Focus and visibility events remain immediate. Periodic refreshes use
-      // a short cross-tab lease so multiple visible EdgeEver tabs do not all
+      // a short cross-tab lease so multiple visible LumiNotes tabs do not all
       // poll D1 every five minutes.
       void runRefresh().catch(() => {
         // A later focus, visibility, or interval refresh will retry.

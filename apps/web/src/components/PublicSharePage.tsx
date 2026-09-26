@@ -217,7 +217,7 @@ export const PublicSharePage = () => {
     document.head.appendChild(robots);
     if (share) {
       document.title = withEnvironmentTitlePrefix(
-        `${share.title?.trim() || t("common.untitledMemo")} · EdgeEver`,
+        `${share.title?.trim() || t("common.untitledMemo")} · LumiNotes`,
         { development: import.meta.env.DEV, profile: __EDGEEVER_DEVELOPMENT_PROFILE__ },
       );
     } else if (passwordRequired) {
@@ -262,7 +262,7 @@ export const PublicSharePage = () => {
         <header className="border-b border-slate-200 px-5 py-6 sm:px-10 sm:py-8">
           <div className="mb-5 flex items-center justify-between gap-4 text-xs text-slate-500">
             <span className="flex items-center gap-1.5 font-semibold text-emerald-700">
-              <ShieldCheck className="h-4 w-4" /> EdgeEver · {t("sharing.readOnly")}
+              <ShieldCheck className="h-4 w-4" /> LumiNotes · {t("sharing.readOnly")}
             </span>
             <span className="flex items-center gap-1.5">
               <Clock3 className="h-4 w-4" />

@@ -53,7 +53,7 @@ describe("single-note HTML export", () => {
     expect(html).toContain("Product · 2026-08-11 12:00 · #ship · #html");
     expect(html).toContain("<p>Hello <strong>world</strong></p>");
     expect(html).toContain("body { color: #111; }");
-    expect(html).toContain('meta name="generator" content="EdgeEver"');
+    expect(html).toContain('meta name="generator" content="LumiNotes"');
   });
 
   test("omits empty metadata row", () => {

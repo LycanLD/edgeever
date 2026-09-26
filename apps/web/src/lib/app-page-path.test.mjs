@@ -28,8 +28,8 @@ describe("app page paths", () => {
     expect(resolveAppAssetUrl("/extensions/registry.json", "/", "https://notes.example.com/plugins")).toBe(
       "https://notes.example.com/extensions/registry.json",
     );
-    expect(resolveAppAssetUrl("/extensions/registry.json", "./", "file:///Applications/EdgeEver.app/Contents/Resources/web/index.html")).toBe(
-      "file:///Applications/EdgeEver.app/Contents/Resources/web/extensions/registry.json",
+    expect(resolveAppAssetUrl("/extensions/registry.json", "./", "file:///Applications/LumiNotes.app/Contents/Resources/web/index.html")).toBe(
+      "file:///Applications/LumiNotes.app/Contents/Resources/web/extensions/registry.json",
     );
     expect(resolveAppAssetUrl("https://cdn.example.com/registry.json", "./", "file:///app/index.html")).toBe(
       "https://cdn.example.com/registry.json",

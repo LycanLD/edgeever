@@ -217,7 +217,7 @@ describe("MCP HTTP routes", () => {
     );
 
     expect(response.status).toBe(401);
-    expect(response.headers.get("WWW-Authenticate")).toBe('Bearer realm="EdgeEver MCP"');
+    expect(response.headers.get("WWW-Authenticate")).toBe('Bearer realm="LumiNotes MCP"');
     expect(await response.json()).toMatchObject({ error: { code: -32001 } });
   });
 

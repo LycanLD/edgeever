@@ -83,7 +83,7 @@ describe("dark theme contracts", () => {
     expect(css).toContain("html.dark[data-edgeever-environment=\"local\"] body::after");
     expect(css).toContain("--tooltip-bg: #2c3330;");
     expect(css).toContain("--scrollbar-thumb: rgb(137 150 142 / 0.38);");
-    expect(css).toContain("--search-match: rgb(22 160 110 / 0.32);");
+    expect(css).toContain("--search-match: rgb(2 132 199 / 0.32);");
     expect(css).toContain(":root.dark .ProseMirror .edgeever-mermaid-preview");
     expect(css).toContain("background: var(--workspace-editor);");
     expect(css).toContain("border-color: var(--workspace-divider);");

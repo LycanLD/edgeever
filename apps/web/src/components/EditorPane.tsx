@@ -1109,7 +1109,7 @@ const RichEditorPane = ({
         starterKit: {
           codeBlock: false,
           link: false,
-          dropcursor: { color: "#16A06E", width: 2 },
+          dropcursor: { color: "#0284c7", width: 2 },
         },
         image: false,
         gallery: EditableImageGallery,

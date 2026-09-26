@@ -9,12 +9,12 @@ describe("application color system", () => {
     const mobileEditor = readFileSync(new URL("../styles/mobile-markdown-editor.css", import.meta.url), "utf8");
     const button = readFileSync(new URL("../components/ui/button.tsx", import.meta.url), "utf8");
 
-    expect(globals).toContain("--brand-green: #16a06e;");
-    expect(globals).toContain("--brand-green-500-rgb: 22 160 110;");
+    expect(globals).toContain("--brand-green: #0284c7;");
+    expect(globals).toContain("--brand-green-500-rgb: 2 132 199;");
     expect(globals).not.toContain("--brand-green: #00a82d;");
-    expect(mobileEditor).toContain("color: #16a06e;");
+    expect(mobileEditor).toContain("color: #0284c7;");
     expect(button).toContain('solid: "bg-emerald-500 text-white hover:bg-emerald-600 border-emerald-500"');
-    expect(contrastRatio("#11694a", "#f0f8f4")).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio("#075985", "#f0f9ff")).toBeGreaterThanOrEqual(4.5);
   });
 
   test("keeps the light workspace on a cool gray palette while preserving text hierarchy", () => {

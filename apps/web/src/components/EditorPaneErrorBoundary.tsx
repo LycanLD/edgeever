@@ -89,8 +89,8 @@ export const EditorRecoveryPane = () => {
         <h1 className="text-lg font-semibold">{zh ? "已进入安全启动模式" : "Safe startup mode is active"}</h1>
         <p className="mt-2 text-sm leading-6 text-slate-600">
           {zh
-            ? "EdgeEver 没有重新打开上次出错的笔记。请从左侧列表选择其他笔记继续使用；选择后会自动退出安全模式。"
-            : "EdgeEver did not reopen the note that failed last time. Choose another note from the list to continue; safe mode will then turn off automatically."}
+            ? "LumiNotes 没有重新打开上次出错的笔记。请从左侧列表选择其他笔记继续使用；选择后会自动退出安全模式。"
+            : "LumiNotes did not reopen the note that failed last time. Choose another note from the list to continue; safe mode will then turn off automatically."}
         </p>
       </section>
     </main>

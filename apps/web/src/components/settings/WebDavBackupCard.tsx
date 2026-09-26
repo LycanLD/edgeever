@@ -116,7 +116,7 @@ export const WebDavBackupCard = () => {
         <CardDescription className="text-xs leading-5">{t(WEBDAV_AUTO_BACKUP_ENABLED ? "dataExport.webdavDescription" : "dataExport.webdavManualDescription")}</CardDescription>
         <div className="grid gap-3 md:grid-cols-2">
           <label className="grid gap-1.5 text-xs font-medium text-slate-700">{t("dataExport.webdavUrl")}<Input value={config.url} placeholder="https://cloud.example.com/remote.php/dav/files/user" disabled={busy} onChange={(event) => setConfig((current) => ({ ...current, url: event.target.value }))} /></label>
-          <label className="grid gap-1.5 text-xs font-medium text-slate-700">{t("dataExport.webdavPath")}<Input value={config.remotePath} placeholder="/EdgeEver/backups" disabled={busy} onChange={(event) => setConfig((current) => ({ ...current, remotePath: event.target.value }))} /></label>
+          <label className="grid gap-1.5 text-xs font-medium text-slate-700">{t("dataExport.webdavPath")}<Input value={config.remotePath} placeholder="/LumiNotes/backups" disabled={busy} onChange={(event) => setConfig((current) => ({ ...current, remotePath: event.target.value }))} /></label>
           <label className="grid gap-1.5 text-xs font-medium text-slate-700">{t("dataExport.webdavUsername")}<Input value={config.username} autoComplete="username" disabled={busy} onChange={(event) => setConfig((current) => ({ ...current, username: event.target.value }))} /></label>
           <label className="grid gap-1.5 text-xs font-medium text-slate-700">{t("dataExport.webdavPassword")}<Input type="password" value={password} autoComplete="current-password" disabled={busy} onChange={(event) => setPassword(event.target.value)} /></label>
           {WEBDAV_AUTO_BACKUP_ENABLED ? (

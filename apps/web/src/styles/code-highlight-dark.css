@@ -1,7 +1,7 @@
 /*
  * Lowlight always emits the same Highlight.js token classes. The default
  * GitHub import in globals.css covers light mode; scope GitHub Dark's token
- * palette to EdgeEver's explicit app theme so a user override does not depend
+ * palette to LumiNotes's explicit app theme so a user override does not depend
  * on the operating-system color scheme.
  */
 :root.dark .ProseMirror .edgeever-code-block .hljs {

@@ -111,7 +111,7 @@ const buildSource = (payload: NotePrintPayload) => {
 
 const renderPreview = async (payload: NotePrintPayload) => {
   document.documentElement.lang = payload.language;
-  document.title = withEnvironmentTitlePrefix(`${payload.title} · EdgeEver`, {
+  document.title = withEnvironmentTitlePrefix(`${payload.title} · LumiNotes`, {
     development: import.meta.env.DEV,
     profile: __EDGEEVER_DEVELOPMENT_PROFILE__,
   });
@@ -175,5 +175,5 @@ if (window.opener && token) {
     getMessageTargetOrigin(window.location.origin)
   );
 } else {
-  setText(status, "EdgeEver");
+  setText(status, "LumiNotes");
 }

@@ -33,7 +33,7 @@ test("downloads a long note as one non-blank PNG or JPEG from the share dialog",
   const title = `e2e-image-export-${Date.now()}`;
   const contentMarkdown = Array.from(
     { length: 80 },
-    (_, index) => `## Section ${index + 1}\n\nVisible export content ${index + 1}: EdgeEver image regression test.`,
+    (_, index) => `## Section ${index + 1}\n\nVisible export content ${index + 1}: LumiNotes image regression test.`,
   ).join("\n\n");
   const createResponse = await request.post("/api/v1/memos", {
     data: { notebookId: notebook.id, title, contentMarkdown },
@@ -54,7 +54,7 @@ test("downloads a long note as one non-blank PNG or JPEG from the share dialog",
     const dialog = page.getByRole("dialog", { name: /分享为图片|Share as image/ });
     await expect(dialog).toBeVisible();
     await expect(dialog.getByRole("img", { name: /笔记分享图片预览|Note image share preview/ })).toBeVisible({ timeout: 20_000 });
-    await expect(dialog.getByRole("checkbox", { name: /EdgeEver 品牌标识|EdgeEver branding/ })).toBeChecked();
+    await expect(dialog.getByRole("checkbox", { name: /LumiNotes 品牌标识|LumiNotes branding/ })).toBeChecked();
 
     const pngDownloadPromise = page.waitForEvent("download");
     await dialog.getByRole("button", { name: /下载图片|Download image/ }).click();

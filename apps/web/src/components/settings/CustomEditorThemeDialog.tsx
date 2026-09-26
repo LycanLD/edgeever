@@ -275,7 +275,7 @@ export const CustomEditorThemeDialog = ({
                     marginBottom: 0,
                   }}
                 >
-                  <code style={{ background: "transparent", color: "inherit" }}>{'const message = "Hello, EdgeEver!";'}</code>
+                  <code style={{ background: "transparent", color: "inherit" }}>{'const message = "Hello, LumiNotes!";'}</code>
                 </pre>
               </blockquote>
             </div>

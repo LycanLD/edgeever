@@ -11,9 +11,9 @@ import {
 
 const marketplaceEntry = (overrides = {}) => ({
   id: "org.edgeever.plugins.ai-rss",
-  name: "EdgeEver AI RSS",
+  name: "LumiNotes AI RSS",
   description: "Official RSS digest",
-  author: "EdgeEver",
+  author: "LumiNotes",
   publisher: "edgeever",
   category: "News & AI",
   repositoryUrl: "https://github.com/tianma-if/edgeever-ai-rss",
@@ -29,7 +29,7 @@ const extension = (overrides = {}) => {
     manifest: {
       type: "plugin",
       id: "org.edgeever.plugins.ai-rss",
-      name: "EdgeEver AI RSS",
+      name: "LumiNotes AI RSS",
       version: "0.5.3",
       description: "Installed RSS digest",
       ...manifest,
@@ -136,7 +136,7 @@ describe("plugin catalog items", () => {
       id: "org.edgeever.plugins.ai-rss",
       marketplaceEntry: marketplaceEntry({
         locales: {
-          "zh-CN": { name: "EdgeEver AI 订阅", description: "市场中文说明" },
+          "zh-CN": { name: "LumiNotes AI 订阅", description: "市场中文说明" },
           ja: { description: "マーケット説明" },
         },
       }),
@@ -149,7 +149,7 @@ describe("plugin catalog items", () => {
       }),
     };
 
-    expect(getPluginCatalogName(item, "zh-CN")).toBe("EdgeEver AI 订阅");
+    expect(getPluginCatalogName(item, "zh-CN")).toBe("LumiNotes AI 订阅");
     expect(getPluginCatalogDescription(item, "zh-CN")).toBe("插件中文说明");
     expect(getPluginCatalogDescription(item, "ja-JP")).toBe("マーケット説明");
     expect(getPluginCatalogDescription(item, "fr-FR")).toBe("Installed RSS digest");

@@ -24,12 +24,12 @@ const CJK_FALLBACK =
   '-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif';
 
 export const BUNDLED_FONT_STACKS: Record<Exclude<EditorBodyFontChoice, "system" | "custom">, string> = {
-  wenkai: `"EdgeEver Kai", ${CJK_FALLBACK}`,
-  "wenkai-screen": `"EdgeEver Kai Screen", ${CJK_FALLBACK}`,
-  zhuque: `"EdgeEver Fangsong", ${CJK_FALLBACK}`,
-  "source-han-serif": `"Source Serif 4", "EdgeEver Song", ${CJK_FALLBACK}`,
-  "neo-zhi-song": `"EdgeEver Zhi Song", ${CJK_FALLBACK}`,
-  "source-han-sans": `"EdgeEver Hei", ${CJK_FALLBACK}`,
+  wenkai: `"LumiNotes Kai", ${CJK_FALLBACK}`,
+  "wenkai-screen": `"LumiNotes Kai Screen", ${CJK_FALLBACK}`,
+  zhuque: `"LumiNotes Fangsong", ${CJK_FALLBACK}`,
+  "source-han-serif": `"Source Serif 4", "LumiNotes Song", ${CJK_FALLBACK}`,
+  "neo-zhi-song": `"LumiNotes Zhi Song", ${CJK_FALLBACK}`,
+  "source-han-sans": `"LumiNotes Hei", ${CJK_FALLBACK}`,
   "source-serif": `"Source Serif 4", ${CJK_FALLBACK}`,
 };
 

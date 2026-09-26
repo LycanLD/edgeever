@@ -122,7 +122,7 @@ export const buildStandaloneHtmlDocument = ({
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="generator" content="EdgeEver" />
+<meta name="generator" content="LumiNotes" />
 <title>${escapeHtml(title)}</title>
 <style>
 ${styles}

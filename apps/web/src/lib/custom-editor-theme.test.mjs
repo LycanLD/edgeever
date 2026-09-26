@@ -32,7 +32,7 @@ const theme = {
     text: "#f8fafc",
     muted: "#cbd5e1",
     heading: "#ffffff",
-    accent: "#34d399",
+    accent: "#38bdf8",
     soft: "#1f2937",
     codeBackground: "#303b49",
     border: "#475569",

@@ -264,7 +264,7 @@ const patchCreatedMemoResources = async (rewrites: StagedResourceRewrite[]) => {
 
 const request = async <M extends keyof DesktopRpcResponses>(method: M, params: DesktopRpcParams[M]) => {
   const bridge = window.edgeeverDesktop;
-  if (!bridge?.isAvailable) throw new Error("EdgeEver desktop bridge is unavailable");
+  if (!bridge?.isAvailable) throw new Error("LumiNotes desktop bridge is unavailable");
   return bridge.sidecarRequest<DesktopRpcResponses[M]>(method, params);
 };
 

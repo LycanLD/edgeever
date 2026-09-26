@@ -110,7 +110,7 @@ const mergeStagedResources = async <T extends { resources: ResourceListItem[]; s
 
 const request = async <M extends DesktopRpcMethod>(method: M, params: DesktopRpcParams[M]) => {
   const bridge = window.edgeeverDesktop;
-  if (!bridge?.isAvailable) throw new Error("EdgeEver desktop bridge is unavailable");
+  if (!bridge?.isAvailable) throw new Error("LumiNotes desktop bridge is unavailable");
   return bridge.sidecarRequest<DesktopRpcResponses[M]>(method, params);
 };
 

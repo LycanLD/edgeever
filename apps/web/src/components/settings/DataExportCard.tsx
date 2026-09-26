@@ -97,7 +97,7 @@ export const DataExportCard = ({ refreshWorkspaceAfterImport }: DataExportCardPr
         setState("idle");
         return;
       }
-      console.error("Failed to export EdgeEver ZIP", error);
+      console.error("Failed to export LumiNotes ZIP", error);
       setErrorMessage(error instanceof EdgeEverZipMemoryLimitError
         ? t("dataExport.largeBackupRequiresStreaming")
         : t("dataExport.error"));
@@ -119,7 +119,7 @@ export const DataExportCard = ({ refreshWorkspaceAfterImport }: DataExportCardPr
       setPendingImport(parsed);
       setState("idle");
     } catch (error) {
-      console.error("Invalid EdgeEver ZIP", error);
+      console.error("Invalid LumiNotes ZIP", error);
       setErrorMessage(describeImportError(error));
       setState("error");
     } finally {
@@ -151,7 +151,7 @@ export const DataExportCard = ({ refreshWorkspaceAfterImport }: DataExportCardPr
       );
       setState("complete");
     } catch (error) {
-      console.error("Failed to import EdgeEver ZIP", error);
+      console.error("Failed to import LumiNotes ZIP", error);
       setErrorMessage(describeImportError(error));
       setState("error");
     }

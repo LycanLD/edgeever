@@ -123,7 +123,7 @@ export const verifyLogin = async (env: Bindings, username: string, password: str
     if (!isSupportedPasswordHash(existingUser.password_hash)) {
       throw new AppError(
         "password_hash_invalid",
-        "This account has an invalid password hash. Reset it with the EdgeEver password reset command.",
+        "This account has an invalid password hash. Reset it with the LumiNotes password reset command.",
         503,
       );
     }

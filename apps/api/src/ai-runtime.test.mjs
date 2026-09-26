@@ -5,7 +5,7 @@ describe("OpenAI-compatible provider headers", () => {
   test("identifies OpenRouter so rankings and tool routes stay attributed", () => {
     expect(openaiCompatibleHeaders("https://openrouter.ai/api/v1")).toEqual({
       "HTTP-Referer": "https://edgeever.org",
-      "X-Title": "EdgeEver",
+      "X-Title": "LumiNotes",
     });
     expect(openaiCompatibleHeaders("https://api.openai.com/v1")).toBeUndefined();
   });

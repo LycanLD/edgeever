@@ -17,12 +17,12 @@ const fontFace = (family: string, url: string) => `@font-face {
 }`;
 
 const FONT_FACE_CSS = [
-  fontFace("EdgeEver Kai", kaiUrl),
-  fontFace("EdgeEver Kai Screen", kaiScreenUrl),
-  fontFace("EdgeEver Fangsong", fangsongUrl),
-  fontFace("EdgeEver Song", songUrl),
-  fontFace("EdgeEver Zhi Song", zhiSongUrl),
-  fontFace("EdgeEver Hei", heiUrl),
+  fontFace("LumiNotes Kai", kaiUrl),
+  fontFace("LumiNotes Kai Screen", kaiScreenUrl),
+  fontFace("LumiNotes Fangsong", fangsongUrl),
+  fontFace("LumiNotes Song", songUrl),
+  fontFace("LumiNotes Zhi Song", zhiSongUrl),
+  fontFace("LumiNotes Hei", heiUrl),
   fontFace("Source Serif 4", sourceSerifUrl),
 ].join("\n");
 

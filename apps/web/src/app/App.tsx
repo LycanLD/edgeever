@@ -29,7 +29,7 @@ const WorkspaceApp = lazy(() => import("@/components/WorkspaceApp").then((module
 const PublicSharePage = lazy(() => import("@/components/PublicSharePage").then((module) => ({ default: module.PublicSharePage })));
 const PublicTableFormPage = lazy(() => import("@/components/PublicTableFormPage").then((module) => ({ default: module.PublicTableFormPage })));
 
-const AuthLoadingScreen = ({ title = "EdgeEver", detail }: { title?: string; detail?: string }) => (
+const AuthLoadingScreen = ({ title = "LumiNotes", detail }: { title?: string; detail?: string }) => (
   <div className="flex h-[100dvh] items-center justify-center bg-slate-50 px-6 text-center text-slate-700">
     <div role="status" aria-live="polite">
       <div className="text-sm font-semibold">{title}</div>

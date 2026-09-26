@@ -197,7 +197,7 @@ describe("GitHub plugin distribution", () => {
     };
 
     await expect(downloadGithubExtension("https://github.com/example/edgeever-plugin", request, async () => new ArrayBuffer(0)))
-      .rejects.toThrow("Could not read this GitHub plugin from this device or your EdgeEver instance");
+      .rejects.toThrow("Could not read this GitHub plugin from this device or your LumiNotes instance");
   });
 
   test("installs a marketplace GitHub plugin from the pinned release without calling GitHub's REST API", async () => {
