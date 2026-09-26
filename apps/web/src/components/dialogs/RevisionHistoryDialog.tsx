@@ -82,7 +82,7 @@ export const RevisionHistoryDialog = ({
 
   return (
     <Dialog open={true} onOpenChange={(open) => { if (!open && !restoreRevisionConfirmationId) onClose(); }}>
-      <DialogContent className="grid max-h-[88dvh] max-w-[1120px] grid-rows-[auto_minmax(0,1fr)] gap-0 overflow-hidden rounded-lg border border-slate-200 bg-card p-0 shadow-xl">
+      <DialogContent className="grid max-h-[88dvh] max-w-[1120px] grid-rows-[auto_minmax(0,1fr)] gap-0 overflow-hidden rounded-2xl border border-slate-200 bg-card p-0 shadow-elev-3">
         <DialogHeader className="border-b border-slate-200 px-5 py-4 pr-12 text-left">
           <div className="min-w-0">
             <DialogTitle className="flex items-center gap-2 text-lg font-semibold text-slate-950">

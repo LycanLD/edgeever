@@ -54,7 +54,7 @@ export const TemplatesDialog = ({
 
   return (
     <Dialog open={true} onOpenChange={(open) => { if (!open && !isCreating) onClose(); }}>
-      <DialogContent className="max-w-[620px] p-0 overflow-hidden border border-slate-200 bg-card shadow-lg rounded-lg">
+      <DialogContent className="max-w-[620px] p-0 overflow-hidden border border-slate-200 bg-card shadow-elev-3 rounded-2xl">
         <DialogHeader className="flex flex-row items-start justify-between gap-3 border-b border-slate-200 px-5 py-4 text-left">
           <div className="min-w-0">
             <DialogTitle className="flex items-center gap-2 text-base font-semibold text-slate-950">

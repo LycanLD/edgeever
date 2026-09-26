@@ -13,7 +13,9 @@ describe("application color system", () => {
     expect(globals).toContain("--brand-green-500-rgb: 2 132 199;");
     expect(globals).not.toContain("--brand-green: #00a82d;");
     expect(mobileEditor).toContain("color: #0284c7;");
-    expect(button).toContain('solid: "bg-emerald-500 text-white hover:bg-emerald-600 border-emerald-500"');
+    expect(button).toContain('solid: "bg-emerald-500 text-white border-emerald-500"');
+    expect(button).toContain('soft: "bg-emerald-100 text-emerald-700 border border-transparent"');
+    expect(button).toContain("m3-state inline-flex shrink-0 items-center justify-center rounded-full");
     expect(contrastRatio("#075985", "#f0f9ff")).toBeGreaterThanOrEqual(4.5);
   });
 
