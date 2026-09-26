@@ -76,8 +76,9 @@ import { cn } from "@/lib/utils";
 const FREEFORM_VALUE = "custom";
 const PROMPT_VALUE_PREFIX = "prompt:";
 const AI_ASSISTANT_LAYER_SELECTOR = '[data-edgeever-ai-assistant-layer="true"]';
-const AI_ASSISTANT_VIEWPORT_GAP = 12;
-const AI_ASSISTANT_SELECT_TRIGGER_CLASSNAME = "h-10 w-full min-w-0 shadow-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/15 focus:ring-offset-0 data-[state=open]:border-emerald-400 data-[state=open]:ring-2 data-[state=open]:ring-emerald-500/15";
+// Keep the floating panel as far from the viewport edge as regular dialogs sit.
+const AI_ASSISTANT_VIEWPORT_GAP = 24;
+const AI_ASSISTANT_SELECT_TRIGGER_CLASSNAME = "h-10 w-full min-w-0 overflow-hidden shadow-none [&_span]:truncate focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/15 focus:ring-offset-0 data-[state=open]:border-emerald-400 data-[state=open]:ring-2 data-[state=open]:ring-emerald-500/15";
 
 const getViewportSize = () => ({
   height: typeof window === "undefined" ? 768 : window.innerHeight,
@@ -651,7 +652,7 @@ export const AiAssistantDialog = ({
         <section
           ref={assignPanelRef}
           aria-label={t("aiAssistant.title")}
-          className="fixed z-[70] flex max-h-[70dvh] w-[min(36rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-[28px] bg-card p-5 shadow-elev-3"
+          className="fixed z-[70] flex max-h-[70dvh] w-[min(36rem,calc(100vw-3rem))] flex-col overflow-hidden rounded-[28px] bg-card p-5 shadow-elev-3"
           role="dialog"
           style={panelStyle}
           onKeyDown={(event) => {
@@ -793,8 +794,7 @@ export const AiAssistantDialog = ({
                   </button>
                 ) : null}
               </div>
-              <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center">
-                <div className="min-w-0 flex-1">
+                <div className="min-w-0">
                 <Select value={selectValue} onValueChange={handleActionChange}>
                   <SelectTrigger aria-label={t("aiAssistant.actionLabel")} className={AI_ASSISTANT_SELECT_TRIGGER_CLASSNAME}>
                     <SelectValue placeholder={t("aiAssistant.actionLabel")} />
@@ -822,12 +822,12 @@ export const AiAssistantDialog = ({
                   </SelectContent>
                 </Select>
                 </div>
-                <div className="grid min-w-0 grid-cols-2 gap-2 sm:flex sm:shrink-0">
+                <div className="flex min-w-0 flex-wrap gap-2">
                   <Button
                     type="button"
                     variant="outline"
                     className={cn(
-                      "h-10 min-w-0 gap-1.5 whitespace-nowrap px-4 text-sm font-medium",
+                      "h-10 min-w-0 grow basis-36 gap-1.5 whitespace-nowrap px-4 text-sm font-medium",
                       isFreeformCustom && "border-emerald-200 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 hover:text-emerald-900",
                     )}
                     onClick={() => handleActionChange(FREEFORM_VALUE)}
@@ -836,11 +836,11 @@ export const AiAssistantDialog = ({
                     {t("aiAssistant.useCustom")}
                   </Button>
                   {isGenerating ? (
-                    <Button type="button" variant="solid" className="h-10 min-w-0 w-full gap-1.5 whitespace-nowrap px-3 text-sm font-semibold" onClick={() => controllerRef.current?.abort()}>
+                    <Button type="button" variant="solid" className="h-10 min-w-0 grow basis-36 gap-1.5 whitespace-nowrap px-3 text-sm font-semibold" onClick={() => controllerRef.current?.abort()}>
                       <Square className="h-3.5 w-3.5 shrink-0" />{t("aiAssistant.stop")}
                     </Button>
                   ) : (
-                    <Button type="button" variant="solid" className="h-10 min-w-0 w-full gap-1.5 whitespace-nowrap px-3 text-sm font-semibold" disabled={generateDisabled} onClick={() => void generate()}>
+                    <Button type="button" variant="solid" className="h-10 min-w-0 grow basis-36 gap-1.5 whitespace-nowrap px-3 text-sm font-semibold" disabled={generateDisabled} onClick={() => void generate()}>
                       <Sparkles className="h-4 w-4 shrink-0" />
                       {t("aiAssistant.generate")}
                       <kbd aria-hidden="true" className="ml-0.5 rounded bg-card/10 px-1 py-0.5 text-xs font-medium leading-none text-white/65">
@@ -849,7 +849,6 @@ export const AiAssistantDialog = ({
                     </Button>
                   )}
                 </div>
-              </div>
             </div>
             {promptNeedsTargetLanguage(effectiveParameterKind) ? (
               <div className="grid gap-1.5">
@@ -1063,7 +1062,7 @@ export const AiAssistantDialog = ({
       }}>
         <DialogContent className="sm:max-w-md" data-edgeever-ai-assistant-layer="true">
           <form
-            className="grid gap-4"
+            className="flex min-h-0 flex-1 flex-col gap-4"
             onSubmit={(event: FormEvent) => {
               event.preventDefault();
               if (!saveName.trim() || !customInstruction.trim()) return;

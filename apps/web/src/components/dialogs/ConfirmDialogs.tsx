@@ -41,31 +41,29 @@ export const AppConfirmDialog = ({
   const { t } = useTranslation();
   const toneClassName =
     tone === "danger"
-      ? "bg-rose-50 text-rose-700"
+      ? "bg-rose-100 text-rose-700 dark:bg-rose-500/15 dark:text-rose-300"
       : tone === "primary"
-        ? "bg-emerald-50 text-emerald-700"
-        : "bg-slate-100 text-slate-600";
+        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300"
+        : "bg-surface-container text-on-surface-variant";
   const confirmVariant = tone === "danger" ? "danger" : "solid";
   const Icon = tone === "danger" ? AlertTriangle : ShieldCheck;
 
   return (
     <Dialog open={true} onOpenChange={(open) => { if (!open && !isWorking) onCancel(); }}>
-      <DialogContent className="max-w-md p-0 overflow-hidden border border-slate-200 bg-card shadow-elev-3 rounded-2xl">
-        <DialogHeader className="flex flex-row items-start gap-4 border-b border-slate-200 px-5 py-5 text-left">
+      <DialogContent className="max-w-md gap-0 overflow-hidden rounded-[28px] bg-card p-0 shadow-elev-3">
+        <DialogHeader className="flex flex-row items-start gap-4 px-6 pb-4 pt-6 text-left">
           <span className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-full", toneClassName)}>
             <Icon className="h-5 w-5" />
           </span>
           <div className="min-w-0 flex-1">
-            <DialogTitle className="font-semibold text-slate-950">
-              {title}
-            </DialogTitle>
-            <DialogDescription className="mt-1 text-sm leading-5 text-slate-500">
+            <DialogTitle>{title}</DialogTitle>
+            <DialogDescription className="mt-1">
               {description}
             </DialogDescription>
-            {error ? <p className="mt-2 text-sm text-rose-600" role="alert">{error}</p> : null}
+            {error ? <p className="mt-2 text-body-small text-rose-600 dark:text-rose-400" role="alert">{error}</p> : null}
           </div>
         </DialogHeader>
-        <DialogFooter className="flex flex-col-reverse gap-2 px-5 py-4 sm:flex-row sm:justify-end border-t border-slate-50 bg-slate-50/50">
+        <DialogFooter className="px-6 pb-6 pt-2">
           {!hideCancel && (
             <Button className="justify-center" variant="outline" onClick={onCancel} disabled={isWorking}>
               {cancelLabel ?? t("common.cancel")}
@@ -150,8 +148,9 @@ export const NotebookNameDialog = ({
 
   return (
     <Dialog open={true} onOpenChange={(open) => { if (!open && !isSaving) onCancel(); }}>
-      <DialogContent className="max-w-md p-0 overflow-hidden border border-slate-200 bg-card shadow-elev-3 rounded-2xl">
+      <DialogContent className="max-w-md gap-0 overflow-hidden rounded-[28px] bg-card p-0 shadow-elev-3">
         <form
+          className="flex min-h-0 flex-1 flex-col gap-4"
           onSubmit={(event) => {
             event.preventDefault();
             if (!trimmedName || unchanged || isSaving) {
@@ -160,18 +159,14 @@ export const NotebookNameDialog = ({
             onSubmit(trimmedName);
           }}
         >
-          <DialogHeader className="flex flex-row items-start justify-between gap-3 border-b border-slate-200 px-5 py-5 text-left">
-            <div className="min-w-0">
-              <DialogTitle className="font-semibold text-slate-950">
-                {title}
-              </DialogTitle>
-              <DialogDescription className="mt-1 text-sm leading-5 text-slate-500">
-                {dialog.mode === "create" ? t("dialogs.notebookName.createDescription") : t("dialogs.notebookName.renameDescription")}
-              </DialogDescription>
-            </div>
+          <DialogHeader className="px-6 pt-6 text-left">
+            <DialogTitle>{title}</DialogTitle>
+            <DialogDescription>
+              {dialog.mode === "create" ? t("dialogs.notebookName.createDescription") : t("dialogs.notebookName.renameDescription")}
+            </DialogDescription>
           </DialogHeader>
-          <div className="px-5 py-5">
-            <label className="block text-xs font-semibold uppercase text-slate-500" htmlFor="notebook-name-input">
+          <div className="px-6">
+            <label className="block text-label-large font-medium text-on-surface-variant" htmlFor="notebook-name-input">
               {t("dialogs.notebookName.nameLabel")}
             </label>
             <Input
@@ -185,7 +180,7 @@ export const NotebookNameDialog = ({
               onChange={(event) => setName(event.target.value)}
             />
           </div>
-          <DialogFooter className="flex flex-col-reverse gap-2 px-5 py-4 sm:flex-row sm:justify-end border-t border-slate-50 bg-slate-50/50">
+          <DialogFooter className="mt-auto px-6 pb-6 pt-2">
             <Button className="justify-center" type="button" variant="outline" onClick={onCancel} disabled={isSaving}>
               {t("common.cancel")}
             </Button>
