@@ -67,14 +67,14 @@ describe("dark theme contracts", () => {
   test("workspace dark surfaces stay neutral and bundled editor themes blend into the canvas", () => {
     const css = readFileSync(new URL("../styles/globals.css", import.meta.url), "utf8");
 
-    expect(css).toContain("--workspace-canvas: #101311;");
-    expect(css).toContain("--workspace-sidebar: #121612;");
-    expect(css).toContain("--workspace-memo-list: #151a17;");
-    expect(css).toContain("--workspace-editor: #191e1b;");
+    expect(css).toContain("--workspace-canvas: #101215;");
+    expect(css).toContain("--workspace-sidebar: #121418;");
+    expect(css).toContain("--workspace-memo-list: #15181c;");
+    expect(css).toContain("--workspace-editor: #191c21;");
     expect(css).toContain(':not([data-editor-theme="custom"])');
     expect(css).toContain("--editor-theme-bg: var(--workspace-editor);");
-    expect(contrastRatio("#cad4ce", "#191e1b")).toBeGreaterThanOrEqual(4.5);
-    expect(contrastRatio("#9aa9a0", "#191e1b")).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio("#cad4ce", "#191c21")).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio("#9aa9a0", "#191c21")).toBeGreaterThanOrEqual(4.5);
   });
 
   test("dark chrome uses workspace tokens instead of leftover blue-slate", () => {
@@ -98,9 +98,9 @@ describe("dark theme contracts", () => {
       const { tokens } = readDarkThemeTokens(theme);
 
       expect(tokens.bg).toBe("var(--workspace-editor)");
-      expect(contrastRatio(tokens.text, "#191e1b")).toBeGreaterThanOrEqual(4.5);
-      expect(contrastRatio(tokens.heading, "#191e1b")).toBeGreaterThanOrEqual(4.5);
-      expect(contrastRatio(tokens.accent, "#191e1b")).toBeGreaterThanOrEqual(3);
+      expect(contrastRatio(tokens.text, "#191c21")).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(tokens.heading, "#191c21")).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(tokens.accent, "#191c21")).toBeGreaterThanOrEqual(3);
       expect(contrastRatio(tokens.muted, tokens.soft)).toBeGreaterThanOrEqual(4.5);
       expect(contrastRatio(tokens["code-text"], tokens["code-bg"])).toBeGreaterThanOrEqual(4.5);
     }

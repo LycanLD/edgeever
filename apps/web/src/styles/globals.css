@@ -172,18 +172,18 @@
   0% {
     opacity: 0;
     transform: translateY(-0.625rem);
-    background-color: rgb(209 250 229 / 90%);
+    background-color: rgb(224 242 254 / 90%);
     box-shadow: inset 0 0 0 1px rgb(56 189 248 / 55%);
   }
   24% {
     opacity: 1;
     transform: translateY(0);
-    background-color: rgb(209 250 229 / 75%);
+    background-color: rgb(224 242 254 / 75%);
     box-shadow: inset 0 0 0 1px rgb(56 189 248 / 45%);
   }
   68% {
-    background-color: rgb(236 253 245 / 72%);
-    box-shadow: inset 0 0 0 1px rgb(110 231 183 / 30%);
+    background-color: rgb(240 249 255 / 72%);
+    box-shadow: inset 0 0 0 1px rgb(125 211 252 / 30%);
   }
   100% {
     opacity: 1;
@@ -213,9 +213,9 @@ html[data-edgeever-environment="demo"] body::after {
 
 html[data-edgeever-environment="local"] body::after {
   content: "LOCAL DEV";
-  border: 1px solid rgb(16 185 129 / 45%);
-  background: rgb(236 253 245 / 94%);
-  color: rgb(4 120 87);
+  border: 1px solid rgb(2 132 199 / 45%);
+  background: rgb(240 249 255 / 94%);
+  color: rgb(7 89 133);
 }
 
 html[data-edgeever-environment="demo"] body::after {
@@ -408,10 +408,10 @@ html.dark[data-edgeever-environment="demo"] body::after {
   --border: 150 10% 23%;
   --input: 150 10% 23%;
   --ring: 160 76% 36%;
-  --workspace-canvas: #101311;
-  --workspace-sidebar: #121612;
-  --workspace-memo-list: #151a17;
-  --workspace-editor: #191e1b;
+  --workspace-canvas: #101215;
+  --workspace-sidebar: #121418;
+  --workspace-memo-list: #15181c;
+  --workspace-editor: #191c21;
   --workspace-divider: #2a312d;
   --workspace-memo-divider: #3b4540;
   --workspace-selection: #1d3028;
@@ -455,7 +455,7 @@ html.dark[data-edgeever-environment="demo"] body::after {
   --rose-800-rgb: 254 205 211;
   --rose-950-rgb: 255 241 242;
   --blue-600-rgb: 147 197 253;
-  --dark-surface-rgb: 25 30 27;
+  --dark-surface-rgb: 25 28 33;
   --brand-green: #0284c7;
   --brand-green-hover: #38bdf8;
   --brand-green-muted: #14344a;
@@ -1216,9 +1216,9 @@ html[data-edgeever-extension-theme] .edgeever-memo-divider {
 
 .edgeever-public-share .ProseMirror [data-edgeever-theme-block] {
   margin: 1.25rem 0;
-  border: 1px solid #dbeee5;
+  border: 1px solid #d7e8f4;
   border-radius: 6px;
-  background: #fbfefc;
+  background: #fbfdff;
   padding: 0.8rem 1rem;
 }
 
@@ -1774,8 +1774,8 @@ html[data-edgeever-extension-theme] .edgeever-memo-divider {
 .ProseMirror .edgeever-mermaid-tool-button:hover,
 .ProseMirror .edgeever-mermaid-tool-button:focus-visible,
 .ProseMirror .edgeever-mermaid-tool-button[aria-pressed="true"] {
-  background: #eaf5ee;
-  color: #0f766e;
+  background: #eaf3fa;
+  color: #075985;
   outline: none;
 }
 
@@ -2564,7 +2564,7 @@ html[data-edgeever-extension-theme] .edgeever-memo-divider {
   inset: 0;
   content: "";
   pointer-events: none;
-  background: rgb(16 185 129 / 0.14);
+  background: rgb(2 132 199 / 0.14);
 }
 
 :root.dark .ProseMirror th,

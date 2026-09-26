@@ -70,7 +70,7 @@ describe("diagram document", () => {
     expect(markdown).toContain("# 流程图");
     expect(markdown).toContain("```mermaid\nflowchart TD");
     expect(markdown).toContain('n1["处理步骤"]');
-    expect(markdown).toContain("classDef flowProcess fill:#FFFFFF,stroke:#6F9B88");
+    expect(markdown).toContain("classDef flowProcess fill:#FFFFFF,stroke:#6E8FB0");
     expect(markdown).toContain("class n1 flowProcess");
     expect(markdown).toContain("class n0 flowTerminator");
 
@@ -82,7 +82,7 @@ describe("diagram document", () => {
     expect(diagramDocumentToMermaid(mint)).toContain("classDef flowTerminator fill:#D4EEE8,stroke:#1A7A70");
     const naive = createDefaultDiagramDocument("flowchart");
     naive.theme = "naive";
-    expect(diagramDocumentToMermaid(naive)).toContain("classDef flowProcess fill:#FFFFFF,stroke:#6F9B88");
+    expect(diagramDocumentToMermaid(naive)).toContain("classDef flowProcess fill:#FFFFFF,stroke:#6E8FB0");
 
     const doc = markdownToDoc(markdown);
     expect(doc.content?.some((node) => node.type === "codeBlock" && node.attrs?.language === "mermaid")).toBe(true);
@@ -104,14 +104,14 @@ describe("diagram document", () => {
   test("projects native viewers into the same branded X6 palette", () => {
     const document = createDefaultDiagramDocument("mind-map");
     const light = diagramDocumentToX6Cells(document, "light");
-    expect(light.canvas).toBe("#F8FAF9");
-    expect(light.nodes[0].attrs.body.fill).toBe("#16A06E");
+    expect(light.canvas).toBe("#F8FAFC");
+    expect(light.nodes[0].attrs.body.fill).toBe("#0284C7");
     expect(light.nodes[0].attrs.body.rx).toBe(23);
-    expect(light.nodes[1].attrs.body.fill).toBe("#F0F8F4");
+    expect(light.nodes[1].attrs.body.fill).toBe("#F0F9FF");
     const nested = light.nodes.find((node) => node.id === "topic-1-a");
     expect(nested.attrs.body.fill).toBe("transparent");
-    expect(nested.attrs.underline.stroke).toBe("#55B891");
-    expect(light.edges[0].attrs.line.stroke).toBe("#55B891");
+    expect(nested.attrs.underline.stroke).toBe("#38BDF8");
+    expect(light.edges[0].attrs.line.stroke).toBe("#38BDF8");
     expect(light.edges[0].attrs.line.targetMarker).toBeNull();
     expect(light.edges[0].connector.name).toBe("edgeever-mindmap");
     expect(light.edges[0].source.anchor.name).toBe("right");
@@ -132,8 +132,8 @@ describe("diagram document", () => {
       .toBe(classic.edges.find((edge) => edge.target.cell === "topic-1").attrs.line.stroke);
 
     const dark = diagramDocumentToX6Cells(document, "dark");
-    expect(dark.canvas).toBe("#101311");
-    expect(dark.nodes[1].attrs.body.fill).toBe("#18211D");
+    expect(dark.canvas).toBe("#101215");
+    expect(dark.nodes[1].attrs.body.fill).toBe("#161E26");
   });
 
   test("escapes labels and emits the mind-map hierarchy as a portable flowchart", () => {
@@ -274,7 +274,7 @@ test('native flowchart projection shares label sizing and obstacle routing witho
   expect(projection.edges[0].labels[0].attrs.label.fontSize).toBe(10);
   expect(projection.edges[0].labels[0].attrs.label.lineHeight).toBe(14);
   expect(projection.edges[0].attrs.line.fill).toBe('none');
-  expect(projection.nodes[0].attrs.body.fill).not.toBe('#16A06E');
+  expect(projection.nodes[0].attrs.body.fill).not.toBe('#0284C7');
   expect(projection.nodes[0].attrs.label.fontFamily).toContain('Inter');
   expect(document).toEqual(original);
 });

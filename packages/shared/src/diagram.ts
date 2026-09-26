@@ -371,7 +371,7 @@ export const diagramDocumentToMermaid = (document: DiagramDocument) => {
     const root = document.nodes.find((node) => node.shape === "topic" && !node.parentId);
     const rootId = root ? nodeIds.get(root.id) : undefined;
     if (rootId) {
-      lines.push("  classDef mindRoot fill:#16A06E,stroke:#12845B,color:#fff,stroke-width:1.5px");
+      lines.push("  classDef mindRoot fill:#0284C7,stroke:#0369A1,color:#fff,stroke-width:1.5px");
       lines.push(`  class ${rootId} mindRoot`);
     }
   }

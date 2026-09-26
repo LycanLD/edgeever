@@ -113,7 +113,7 @@ export const mindMapTopicMarkup = (structure?: DiagramStructure, role: MindMapRo
 
 export const MIND_MAP_BRANCH_TINTS: Record<MindMapAppearance, MindMapBranchTint[]> = {
   light: [
-    { fill: "#E7F6EF", stroke: "#0F8A5C", text: "#145C40", edge: "#16A06E" },
+    { fill: "#E7F1FA", stroke: "#0369A1", text: "#0C4A6E", edge: "#0284C7" },
     { fill: "#E7F0FE", stroke: "#2563EB", text: "#1E3A8A", edge: "#3B82F6" },
     { fill: "#F3E8FF", stroke: "#7C3AED", text: "#5B21B6", edge: "#8B5CF6" },
     { fill: "#FEF3C7", stroke: "#D97706", text: "#92400E", edge: "#F59E0B" },
@@ -121,7 +121,7 @@ export const MIND_MAP_BRANCH_TINTS: Record<MindMapAppearance, MindMapBranchTint[
     { fill: "#CFFAFE", stroke: "#0E7490", text: "#155E75", edge: "#06B6D4" },
   ],
   dark: [
-    { fill: "#1A2A22", stroke: "#4DB58B", text: "#D7F4E8", edge: "#4DB58B" },
+    { fill: "#161F29", stroke: "#29A8E0", text: "#D8ECFA", edge: "#29A8E0" },
     { fill: "#1A2438", stroke: "#60A5FA", text: "#DBEAFE", edge: "#60A5FA" },
     { fill: "#251B38", stroke: "#A78BFA", text: "#EDE9FE", edge: "#A78BFA" },
     { fill: "#2A2114", stroke: "#FBBF24", text: "#FEF3C7", edge: "#FBBF24" },

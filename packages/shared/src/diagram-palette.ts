@@ -25,10 +25,10 @@ export const DIAGRAM_THEME_DEFINITIONS: Record<
   brand: {
     id: "brand",
     group: "classic",
-    colors: ["#16A06E", "#059669", "#0D9488", "#10B981", "#047857", "#065F46"],
-    lightCanvas: "#F8FAF9",
-    darkCanvas: "#101311",
-    accent: "#16A06E",
+    colors: ["#0284C7", "#0369A1", "#0891B2", "#0EA5E9", "#075985", "#0C4A6E"],
+    lightCanvas: "#F8FAFC",
+    darkCanvas: "#101215",
+    accent: "#0284C7",
   },
   cosmos: {
     id: "cosmos",
@@ -185,27 +185,27 @@ export const buildDiagramPalette = (theme: DiagramTheme | undefined, appearance:
   if (resolved === "brand") {
     if (appearance === "dark") {
       return {
-        topicFill: "#16A06E",
-        topicText: "#F4FFF9",
-        nodeFill: "#18211D",
-        nodeText: "#E8F2ED",
-        nodeStroke: "#3B5248",
-        topicStroke: "#58CDA4",
-        mindMapEdge: "#4DB58B",
-        flowEdge: "#72B99B",
-        canvas: "#101311",
+        topicFill: "#0284C7",
+        topicText: "#F4FAFF",
+        nodeFill: "#161E26",
+        nodeText: "#E8EFF7",
+        nodeStroke: "#384A5E",
+        topicStroke: "#4FC3F7",
+        mindMapEdge: "#29A8E0",
+        flowEdge: "#48AEE5",
+        canvas: "#101215",
       };
     }
     return {
-      topicFill: "#16A06E",
+      topicFill: "#0284C7",
       topicText: "#FFFFFF",
-      nodeFill: "#F0F8F4",
-      nodeText: "#173B2E",
-      nodeStroke: "#B8DFD0",
-      topicStroke: "#12845B",
-      mindMapEdge: "#55B891",
-      flowEdge: "#408A6D",
-      canvas: "#F8FAF9",
+      nodeFill: "#F0F9FF",
+      nodeText: "#0C4A6E",
+      nodeStroke: "#BAE6FD",
+      topicStroke: "#0369A1",
+      mindMapEdge: "#38BDF8",
+      flowEdge: "#0E7490",
+      canvas: "#F8FAFC",
     };
   }
   if (appearance === "dark") {

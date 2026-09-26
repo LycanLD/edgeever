@@ -43,7 +43,7 @@ describe("flowchart semantic paint", () => {
         expect(surface.process.fill).not.toBe(surface.decision.fill);
         expect(surface.process.fill).not.toBe(surface.terminator.fill);
         expect(surface.decision.stroke).not.toBe(surface.process.stroke);
-        expect(surface.terminator.fill).not.toBe("#16A06E");
+        expect(surface.terminator.fill).not.toBe("#0284C7");
       }
     }
   });
@@ -72,7 +72,7 @@ describe("flowchart semantic paint", () => {
     expect(resolveFlowchartTheme("mint")).toBe("mint");
     expect(resolveFlowchartTheme("classic")).toBe("paper");
     expect(resolveFlowchartTheme("naive")).toBe("brand");
-    expect(FLOWCHART_SURFACES.brand.light.terminator.stroke).toBe("#16A06E");
+    expect(FLOWCHART_SURFACES.brand.light.terminator.stroke).toBe("#0284C7");
     expect(new Set(FLOWCHART_SELECTABLE_THEMES.map((theme) => FLOWCHART_SURFACES[theme].light.terminator.stroke)).size).toBe(10);
     expect(resolveFlowchartSurface("light", "ink").terminator.stroke).toBe("#3A4656");
     expect(resolveFlowchartSurface("light", "paper").canvas).toBe("#F6F1E8");

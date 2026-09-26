@@ -20,14 +20,14 @@ export interface CustomEditorTheme {
 }
 
 export const DEFAULT_CUSTOM_LIGHT_COLORS: ThemeColors = {
-  background: "#fffdf7",
+  background: "#f8fbff",
   text: "#292524",
   muted: "#57534e",
   heading: "#1c1917",
-  accent: "#0f766e",
-  soft: "#f0fdfa",
-  codeBackground: "#e0ece9",
-  border: "#99f6e4",
+  accent: "#075985",
+  soft: "#f0f9ff",
+  codeBackground: "#e7f1f9",
+  border: "#bae6fd",
 };
 
 export const DEFAULT_CUSTOM_DARK_COLORS: ThemeColors = {
@@ -35,7 +35,7 @@ export const DEFAULT_CUSTOM_DARK_COLORS: ThemeColors = {
   text: "#fafaf9",
   muted: "#d6d3d1",
   heading: "#fafaf9",
-  accent: "#2dd4bf",
+  accent: "#38bdf8",
   soft: "#292524",
   codeBackground: "#3a3635",
   border: "#44403c",
@@ -50,6 +50,37 @@ export const DEFAULT_CUSTOM_EDITOR_THEME: CustomEditorTheme = {
   dark: DEFAULT_CUSTOM_DARK_COLORS,
   customCss: "",
 };
+
+const LEGACY_CUSTOM_LIGHT_COLORS: ThemeColors = {
+  background: "#fffdf7",
+  text: "#292524",
+  muted: "#57534e",
+  heading: "#1c1917",
+  accent: "#0f766e",
+  soft: "#f0fdfa",
+  codeBackground: "#e0ece9",
+  border: "#99f6e4",
+};
+
+const LEGACY_CUSTOM_DARK_COLORS: ThemeColors = {
+  background: "#1c1917",
+  text: "#fafaf9",
+  muted: "#d6d3d1",
+  heading: "#fafaf9",
+  accent: "#2dd4bf",
+  soft: "#292524",
+  codeBackground: "#3a3635",
+  border: "#44403c",
+};
+
+const colorsMatch = (colors: ThemeColors | undefined, target: ThemeColors): boolean =>
+  COLOR_FIELDS.every((field) => (colors?.[field] ?? "").toLowerCase() === target[field]);
+
+export const migrateLegacyCustomEditorThemeColors = <T extends Pick<CustomEditorTheme, "light" | "dark">>(theme: T): T => ({
+  ...theme,
+  light: colorsMatch(theme.light, LEGACY_CUSTOM_LIGHT_COLORS) ? DEFAULT_CUSTOM_LIGHT_COLORS : theme.light,
+  dark: colorsMatch(theme.dark, LEGACY_CUSTOM_DARK_COLORS) ? DEFAULT_CUSTOM_DARK_COLORS : theme.dark,
+});
 
 const NEW_THEME_NAME_PATTERN = /^New theme (\d+)$/;
 

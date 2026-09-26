@@ -162,8 +162,8 @@ body {
 
 .edgeever-html-content blockquote {
   margin: 1rem 0;
-  border-left: 4px solid #10b981;
-  background: #f0fdf4;
+  border-left: 4px solid #0284c7;
+  background: #f0f9ff;
   padding: 0.75rem 1rem;
   color: #334155;
 }
@@ -184,7 +184,7 @@ body {
 }
 
 .edgeever-html-content a {
-  color: #047857;
+  color: #075985;
   text-decoration: underline;
 }
 
@@ -290,10 +290,10 @@ body {
 
 .edgeever-html-content [data-edgeever-theme-block] {
   margin: 1.25rem 0;
-  border: 1px solid #a7f3d0;
-  border-left: 4px solid #059669;
+  border: 1px solid #bae6fd;
+  border-left: 4px solid #0369a1;
   border-radius: 0.5rem;
-  background: #f0fdf4;
+  background: #f0f9ff;
   padding: 0.85rem 1rem;
 }
 
@@ -336,7 +336,7 @@ body {
 .hljs-string,
 .hljs-title,
 .hljs-section {
-  color: #047857;
+  color: #075985;
 }
 
 .hljs-number,

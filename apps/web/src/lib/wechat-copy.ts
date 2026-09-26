@@ -18,11 +18,11 @@ const WECHAT_STYLES: Record<string, string> = {
   h4: "margin: 0.95em 0 0.45em; font-size: 16px; line-height: 1.5; font-weight: 700; color: #1f2937;",
   h5: "margin: 0.9em 0 0.4em; font-size: 15px; line-height: 1.5; font-weight: 700; color: #1f2937;",
   h6: "margin: 0.85em 0 0.35em; font-size: 14px; line-height: 1.5; font-weight: 700; color: #1f2937;",
-  blockquote: `margin: 1em 0; padding: 0.6em 1em; border-left: 4px solid #10b981; background: #f0fdf4; color: #4b5563; line-height: ${BODY_LINE_HEIGHT};`,
+  blockquote: `margin: 1em 0; padding: 0.6em 1em; border-left: 4px solid #0284c7; background: #f0f9ff; color: #4b5563; line-height: ${BODY_LINE_HEIGHT};`,
   ul: `margin: 0 0 1em; padding-left: 1.6em; line-height: ${BODY_LINE_HEIGHT};`,
   ol: `margin: 0 0 1em; padding-left: 1.6em; line-height: ${BODY_LINE_HEIGHT};`,
   li: `margin: 0.25em 0; line-height: ${BODY_LINE_HEIGHT};`,
-  a: "color: #059669; text-decoration: underline;",
+  a: "color: #0369a1; text-decoration: underline;",
   strong: "font-weight: 700;",
   em: "font-style: italic;",
   del: "text-decoration: line-through;",
@@ -41,8 +41,8 @@ const applyLegacyWeChatStyles = (
 ) => {
   const textColor = customColors ? customColors.text : "#333";
   const bgColors = customColors ? customColors.bg : "#ffffff";
-  const accent = customColors ? customColors.accent : "#059669";
-  const soft = customColors ? customColors.soft : "#f0fdfa";
+  const accent = customColors ? customColors.accent : "#0369a1";
+  const soft = customColors ? customColors.soft : "#f0f9ff";
   const codeBackground = customColors ? customColors.codeBackground : "#f6f8fa";
   const border = customColors ? customColors.border : "#e5e7eb";
 
@@ -462,10 +462,10 @@ export const readEditorCopyContext = (from?: HTMLElement | null) => {
     customColors = {
       bg: colors.getPropertyValue("--editor-theme-bg") || "#ffffff",
       text: colors.getPropertyValue("--editor-theme-text") || "#1f2937",
-      accent: colors.getPropertyValue("--editor-theme-accent") || "#059669",
-      soft: colors.getPropertyValue("--editor-theme-soft") || "#ecfdf5",
-      codeBackground: colors.getPropertyValue("--editor-theme-code-bg") || "#e0ece9",
-      border: colors.getPropertyValue("--editor-theme-border") || "#a7f3d0",
+      accent: colors.getPropertyValue("--editor-theme-accent") || "#0369a1",
+      soft: colors.getPropertyValue("--editor-theme-soft") || "#f0f9ff",
+      codeBackground: colors.getPropertyValue("--editor-theme-code-bg") || "#e7f1f9",
+      border: colors.getPropertyValue("--editor-theme-border") || "#bae6fd",
     };
   }
   const customStyleTag = closestContainer?.querySelector<HTMLStyleElement>("style[data-theme-custom-css]");

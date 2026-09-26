@@ -108,18 +108,18 @@ export const resolveFlowchartTheme = (theme?: DiagramTheme): FlowchartTheme => {
 export const FLOWCHART_SURFACES: Record<FlowchartTheme, Record<FlowchartAppearance, FlowchartSurface>> = {
   brand: {
     light: {
-      canvas: "#F5F8F6",
-      edge: "#5C7166",
-      process: { fill: "#FFFFFF", stroke: "#6F9B88", text: "#1C3D31" },
+      canvas: "#F5F8FB",
+      edge: "#5C6B7F",
+      process: { fill: "#FFFFFF", stroke: "#6E8FB0", text: "#16324A" },
       decision: { fill: "#FFF6E5", stroke: "#D4A24A", text: "#7A4A12" },
-      terminator: { fill: "#E7F6EF", stroke: "#16A06E", text: "#145C40" },
+      terminator: { fill: "#E7F1FA", stroke: "#0284C7", text: "#0C4A6E" },
     },
     dark: {
-      canvas: "#101311",
-      edge: "#8CA397",
-      process: { fill: "#1B2420", stroke: "#5B7569", text: "#E8F2ED" },
+      canvas: "#101215",
+      edge: "#8FA4BA",
+      process: { fill: "#191F28", stroke: "#5A6E85", text: "#E8EFF7" },
       decision: { fill: "#2A2316", stroke: "#E0B35C", text: "#F8E4B8" },
-      terminator: { fill: "#1A3329", stroke: "#4DB58B", text: "#D8F3E6" },
+      terminator: { fill: "#1A3329", stroke: "#29A8E0", text: "#D8F3E6" },
     },
   },
   ink: {

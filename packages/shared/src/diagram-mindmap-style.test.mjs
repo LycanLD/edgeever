@@ -26,14 +26,14 @@ import {
 } from "./diagram-mindmap-style.ts";
 
 const palette = {
-  topicFill: "#16A06E",
+  topicFill: "#0284C7",
   topicText: "#FFFFFF",
-  nodeFill: "#F0F8F4",
-  nodeText: "#173B2E",
-  nodeStroke: "#B8DFD0",
-  topicStroke: "#12845B",
-  mindMapEdge: "#55B891",
-  canvas: "#F8FAF9",
+  nodeFill: "#F0F9FF",
+  nodeText: "#0C4A6E",
+  nodeStroke: "#BAE6FD",
+  topicStroke: "#0369A1",
+  mindMapEdge: "#38BDF8",
+  canvas: "#F8FAFC",
 };
 
 describe("mind map presentation", () => {
@@ -149,8 +149,8 @@ describe("mind map presentation", () => {
     expect(mindMapUsesRibbon("map")).toBe(true);
     expect(mindMapUsesRibbon("org")).toBe(false);
     expect(mindMapUsesRibbon("fishbone")).toBe(false);
-    expect(mindMapEdgeLineAttrs("org", "#16A06E").fill).toBe("none");
-    expect(mindMapEdgeLineAttrs("map", "#16A06E").fill).toBe("#16A06E");
+    expect(mindMapEdgeLineAttrs("org", "#0284C7").fill).toBe("none");
+    expect(mindMapEdgeLineAttrs("map", "#0284C7").fill).toBe("#0284C7");
     expect(mindMapBranchSides(
       { x: 0, y: 0, width: 120, height: 46 },
       { x: 40, y: 80, width: 96, height: 36 },

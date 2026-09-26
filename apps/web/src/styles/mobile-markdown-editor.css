@@ -98,8 +98,8 @@ input {
 }
 
 .mobile-editor-status.active {
-  background: #ecfdf5;
-  color: #047857;
+  background: #f0f9ff;
+  color: #075985;
 }
 
 .mobile-editor-status.error {
@@ -259,7 +259,7 @@ input {
 }
 
 .mobile-editor-notebook-button:active {
-  color: #047857;
+  color: #075985;
 }
 
 .mobile-editor-notebook-button:disabled {
@@ -302,9 +302,9 @@ input {
 
 .mobile-editor-tool-button:active,
 .mobile-editor-tool-button[aria-pressed="true"] {
-  background: #ecfdf5;
+  background: #f0f9ff;
   border-color: #bbf7d0;
-  color: #047857;
+  color: #075985;
 }
 
 .mobile-editor-tool-button:disabled {
@@ -457,8 +457,8 @@ input {
 }
 
 .mobile-editor-notebook-option[aria-current="page"] {
-  background: #ecfdf5;
-  color: #047857;
+  background: #f0f9ff;
+  color: #075985;
 }
 
 .mobile-editor-notebook-option:active {
@@ -730,8 +730,8 @@ html.dark .edgeever-mobile-tiptap-content a:hover {
 .edgeever-mobile-tiptap-content .edgeever-mermaid-tool-button:active,
 .edgeever-mobile-tiptap-content .edgeever-mermaid-tool-button:focus-visible,
 .edgeever-mobile-tiptap-content .edgeever-mermaid-tool-button[aria-pressed="true"] {
-  background: #eaf5ee;
-  color: #0f766e;
+  background: #eaf3fa;
+  color: #075985;
   outline: none;
 }
 
@@ -922,7 +922,7 @@ html.dark .edgeever-mobile-tiptap-content a:hover {
   inset: 0;
   content: "";
   pointer-events: none;
-  background: rgb(16 185 129 / 0.14);
+  background: rgb(2 132 199 / 0.14);
 }
 
 :root.dark .edgeever-mobile-tiptap-content blockquote {

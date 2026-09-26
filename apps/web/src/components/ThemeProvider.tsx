@@ -3,6 +3,7 @@ import {
   DEFAULT_CUSTOM_DARK_COLORS,
   DEFAULT_CUSTOM_EDITOR_THEME,
   DEFAULT_CUSTOM_LIGHT_COLORS,
+  migrateLegacyCustomEditorThemeColors,
   normalizeThemeColors,
   type CustomEditorTheme,
   type ThemeColors,
@@ -157,8 +158,10 @@ const MARKDOWN_THEME_STORAGE_KEY = "edgeever.markdown-theme";
 const EDITOR_THEME_STORAGE_KEY = "edgeever.editor-theme";
 const CUSTOM_EDITOR_THEME_STORAGE_KEY = "edgeever.custom-editor-theme";
 const CUSTOM_EDITOR_THEMES_STORAGE_KEY = "edgeever.custom-editor-themes";
+const BRAND_THEME_MIGRATION_KEY = "edgeever.brand-theme-migrated";
+const GREEN_EDITOR_THEME_PRESETS = new Set(["minimal-emerald", "outline-emerald", "wechat-green", "modern-mint"]);
 const LIGHT_THEME_COLOR = "#eef1f4";
-const DARK_THEME_COLOR = "#101311";
+const DARK_THEME_COLOR = "#101215";
 const AppearanceThemeContext = createContext<AppearanceThemeContextValue | null>(null);
 const MermaidThemeContext = createContext<MermaidThemeContextValue | null>(null);
 const MarkdownThemeContext = createContext<MarkdownThemeContextValue | null>(null);
@@ -217,7 +220,15 @@ export const resolveMarkdownTheme = (
 
 export const getStoredEditorTheme = (): string => {
   const stored = readLocalStorageItem(EDITOR_THEME_STORAGE_KEY) || "default";
-  if (stored !== "marxico") return stored;
+  const migrated = migrateStoredEditorTheme(stored);
+  if (migrated !== stored && typeof window !== "undefined") {
+    try {
+      window.localStorage.setItem(EDITOR_THEME_STORAGE_KEY, migrated);
+    } catch {
+      // Private mode / blocked storage — preference stays session-only.
+    }
+  }
+  if (migrated !== "marxico") return migrated;
   if (typeof window !== "undefined") {
     try {
       window.localStorage.setItem(EDITOR_THEME_STORAGE_KEY, "default");
@@ -228,11 +239,24 @@ export const getStoredEditorTheme = (): string => {
   return "default";
 };
 
-const normalizeCustomEditorTheme = (theme: CustomEditorTheme): CustomEditorTheme => ({
-  ...theme,
-  light: normalizeThemeColors(theme.light, DEFAULT_CUSTOM_LIGHT_COLORS),
-  dark: normalizeThemeColors(theme.dark, DEFAULT_CUSTOM_DARK_COLORS),
-});
+const migrateStoredEditorTheme = (stored: string): string => {
+  if (typeof window === "undefined") return stored;
+  if (readLocalStorageItem(BRAND_THEME_MIGRATION_KEY)) return stored;
+  try {
+    window.localStorage.setItem(BRAND_THEME_MIGRATION_KEY, "1");
+    if (GREEN_EDITOR_THEME_PRESETS.has(stored)) return "default";
+  } catch {
+    // Private mode / blocked storage — skip one-time migration.
+  }
+  return stored;
+};
+
+const normalizeCustomEditorTheme = (theme: CustomEditorTheme): CustomEditorTheme =>
+  migrateLegacyCustomEditorThemeColors({
+    ...theme,
+    light: normalizeThemeColors(theme.light, DEFAULT_CUSTOM_LIGHT_COLORS),
+    dark: normalizeThemeColors(theme.dark, DEFAULT_CUSTOM_DARK_COLORS),
+  });
 
 export const getStoredCustomEditorThemes = (): CustomEditorTheme[] => {
   if (typeof window === "undefined") return [DEFAULT_CUSTOM_EDITOR_THEME];
@@ -271,7 +295,7 @@ export const getStoredCustomEditorThemes = (): CustomEditorTheme[] => {
           customCss: "",
         };
         window.localStorage.setItem(CUSTOM_EDITOR_THEMES_STORAGE_KEY, JSON.stringify([migratedTheme]));
-        return [migratedTheme];
+        return [migrateLegacyCustomEditorThemeColors(migratedTheme)];
       }
     }
   } catch {

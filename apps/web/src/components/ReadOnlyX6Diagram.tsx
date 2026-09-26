@@ -102,7 +102,7 @@ export const ReadOnlyX6Diagram = ({
           overflow: hidden;
           border: 1px solid ${theme === "dark" ? "#26382f" : "#e3ece7"};
           border-radius: 14px;
-          background: ${theme === "dark" ? "#101311" : "#f8faf9"};
+          background: ${theme === "dark" ? "#101215" : "#f8fafc"};
           touch-action: none;
         }
         .edgeever-x6-diagram .x6-graph-svg { overflow: hidden; }

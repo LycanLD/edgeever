@@ -40,14 +40,14 @@ describe("application color system", () => {
   });
 
   test("keeps dark workspace surfaces distinct without blue-black color casts", () => {
-    expect(globals).toContain("--workspace-canvas: #101311;");
-    expect(globals).toContain("--workspace-sidebar: #121612;");
-    expect(globals).toContain("--workspace-memo-list: #151a17;");
-    expect(globals).toContain("--workspace-editor: #191e1b;");
+    expect(globals).toContain("--workspace-canvas: #101215;");
+    expect(globals).toContain("--workspace-sidebar: #121418;");
+    expect(globals).toContain("--workspace-memo-list: #15181c;");
+    expect(globals).toContain("--workspace-editor: #191c21;");
     expect(globals).toContain("--amber-300-rgb: 180 83 9;");
     expect(globals).not.toContain("scrollbar-color: rgba(100, 116, 139, 0.18)");
-    expect(contrastRatio("#cad4ce", "#191e1b")).toBeGreaterThanOrEqual(4.5);
-    expect(contrastRatio("#9aa9a0", "#191e1b")).toBeGreaterThanOrEqual(4.5);
-    expect(contrastRatio("#84948a", "#191e1b")).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio("#cad4ce", "#191c21")).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio("#9aa9a0", "#191c21")).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio("#84948a", "#191c21")).toBeGreaterThanOrEqual(4.5);
   });
 });
