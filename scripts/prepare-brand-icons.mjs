@@ -8,30 +8,34 @@ const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "
 const sourcePath = path.join(projectRoot, "assets/brand/edgeever-icon.svg");
 const adaptiveForegroundSourcePath = path.join(projectRoot, "apps/mobile/assets/adaptive-icon-foreground.svg");
 const adaptiveTransparentSourcePath = path.join(projectRoot, "apps/mobile/assets/adaptive-icon-transparent.svg");
+/** Matches the tile baked into assets/brand/edgeever-icon.svg (see generate-brand-icon.mjs). */
+const BRAND_TILE_COLOR = "#47704c";
+
 const source = await readFile(sourcePath);
 const adaptiveForegroundSource = await readFile(adaptiveForegroundSourcePath);
 const adaptiveTransparentSource = await readFile(adaptiveTransparentSourcePath);
 
-await copyFile(sourcePath, path.join(projectRoot, "apps/web/public/favicon.svg"));
-await copyFile(sourcePath, path.join(projectRoot, "apps/site/public/favicon.svg"));
+const faviconPath = path.join(projectRoot, "assets/brand/edgeever-favicon.svg");
+await copyFile(faviconPath, path.join(projectRoot, "apps/web/public/favicon.svg"));
+await copyFile(faviconPath, path.join(projectRoot, "apps/site/public/favicon.svg"));
 
 const pngTargets = [
   ["apps/web/public/pwa-192x192.png", 192, { preserveAlpha: true }],
   ["apps/web/public/pwa-512x512.png", 512, { preserveAlpha: true }],
-  ["apps/web/public/maskable-icon-512x512.png", 512, { background: "#0284c7" }],
-  ["apps/web/public/apple-touch-icon.png", 180, { background: "#0284c7" }],
+  ["apps/web/public/maskable-icon-512x512.png", 512, { background: BRAND_TILE_COLOR }],
+  ["apps/web/public/apple-touch-icon.png", 180, { background: BRAND_TILE_COLOR }],
   ["apps/site/public/icon-192.png", 192, { preserveAlpha: true }],
   ["apps/site/public/icon-512.png", 512, { preserveAlpha: true }],
-  ["apps/site/public/apple-touch-icon.png", 180, { background: "#0284c7" }],
-  ["apps/mobile/assets/icon.png", 512, { background: "#0284c7" }],
-  ["apps/ios/EdgeEver/Resources/Assets.xcassets/AppIcon.appiconset/icon.png", 1024, { background: "#0284c7" }],
+  ["apps/site/public/apple-touch-icon.png", 180, { background: BRAND_TILE_COLOR }],
+  ["apps/mobile/assets/icon.png", 512, { background: BRAND_TILE_COLOR }],
+  ["apps/ios/EdgeEver/Resources/Assets.xcassets/AppIcon.appiconset/icon.png", 1024, { background: BRAND_TILE_COLOR }],
   ["apps/extension/public/icons/icon-16.png", 16, { preserveAlpha: true }],
   ["apps/extension/public/icons/icon-32.png", 32, { preserveAlpha: true }],
   ["apps/extension/public/icons/icon-48.png", 48, { preserveAlpha: true }],
   ["apps/extension/public/icons/icon-128.png", 128, { preserveAlpha: true }],
 ];
 
-const renderPng = async (input, destination, size, { preserveAlpha = false, background = "#0284c7" } = {}) => {
+const renderPng = async (input, destination, size, { preserveAlpha = false, background = BRAND_TILE_COLOR } = {}) => {
   const outputPath = path.join(projectRoot, destination);
   await mkdir(path.dirname(outputPath), { recursive: true });
   const pipeline = sharp(input, { density: 384 }).resize(size, size, {
