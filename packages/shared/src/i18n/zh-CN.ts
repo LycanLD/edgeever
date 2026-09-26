@@ -1289,6 +1289,7 @@ export const zhCN = {
       builtin_r2: "内置 R2",
       builtin_filesystem: "本地文件系统",
       builtin_s3: "实例内置 S3 兼容存储",
+      builtin_unconfigured: "未配置（仅外部对象存储）",
       external_s3: "第三方 S3 兼容 OSS",
     },
     existingAttachments: "已有附件",
