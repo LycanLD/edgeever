@@ -142,7 +142,7 @@ export const RevisionHistoryDialog = ({
                       className={cn(
                         "m3-state group flex w-full flex-col rounded-xl p-3 text-left transition-colors",
                         selectedRevision?.id === revision.id
-                          ? "bg-emerald-100 text-emerald-950 dark:bg-emerald-500/20 dark:text-emerald-100"
+                          ? "bg-emerald-100 text-emerald-950"
                           : "bg-transparent hover:bg-slate-200/60"
                       )}
                       onClick={() => setSelectedRevisionId(revision.id)}

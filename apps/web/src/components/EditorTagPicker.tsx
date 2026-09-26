@@ -223,7 +223,7 @@ export const EditorTagPicker = ({ contentMarkdown, disabled, loadTags, title, va
                   <button
                     key={tag}
                     type="button"
-                    className="m3-state inline-flex h-8 items-center gap-1.5 rounded-full bg-emerald-100 px-3 text-label-medium font-medium text-emerald-800 outline-none hover:bg-emerald-200 focus-visible:ring-2 focus-visible:ring-emerald-500/50 dark:bg-emerald-500/15 dark:text-emerald-200 dark:hover:bg-emerald-500/25"
+                    className="m3-state inline-flex h-8 items-center gap-1.5 rounded-full bg-emerald-100 px-3 text-label-medium font-medium text-emerald-800 outline-none hover:bg-emerald-200 focus-visible:ring-2 focus-visible:ring-emerald-500/50"
                     onClick={() => toggleTag(tag)}
                     aria-label={t("editor.tagPicker.remove", { name: tag })}
                   >
@@ -263,7 +263,7 @@ export const EditorTagPicker = ({ contentMarkdown, disabled, loadTags, title, va
                       className={cn(
                         "m3-state flex min-h-12 w-full items-center gap-3 rounded-xl px-3 text-left text-body-medium text-on-surface outline-none",
                         selected
-                          ? "bg-emerald-100 font-medium text-emerald-950 dark:bg-emerald-500/20 dark:text-emerald-100"
+                          ? "bg-emerald-100 font-medium text-emerald-950"
                           : "hover:bg-slate-200/70 focus-visible:bg-slate-200/70"
                       )}
                       onClick={() => toggleTag(tag.name)}

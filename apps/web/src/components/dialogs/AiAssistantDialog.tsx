@@ -673,7 +673,7 @@ export const AiAssistantDialog = ({
             <div className="flex min-w-0 flex-1 items-center gap-2.5">
               <Sparkles aria-hidden="true" className="h-6 w-6 shrink-0 text-emerald-600 dark:text-emerald-400" strokeWidth={1.75} />
               <span className="truncate text-headline-small font-normal text-on-surface">{t("aiAssistant.title")}</span>
-              <span className="inline-flex h-6 shrink-0 items-center rounded-full bg-emerald-100 px-2.5 text-label-medium font-medium text-emerald-900 dark:bg-emerald-500/20 dark:text-emerald-100">
+              <span className="inline-flex h-6 shrink-0 items-center rounded-full bg-emerald-100 px-2.5 text-label-medium font-medium text-emerald-900">
                 {t(chatting
                   ? "aiAssistant.workspaceScope"
                   : usesComposerAsSource
@@ -696,7 +696,7 @@ export const AiAssistantDialog = ({
                 className={cn(
                   "m3-state h-9 flex-1 rounded-full px-3 text-label-large font-medium",
                   mode === item
-                    ? "bg-emerald-100 text-emerald-950 dark:bg-emerald-500/20 dark:text-emerald-100"
+                    ? "bg-emerald-100 text-emerald-950"
                     : "text-on-surface-variant hover:text-on-surface",
                 )}
                 onClick={() => selectMode(item)}
@@ -778,7 +778,7 @@ export const AiAssistantDialog = ({
             ) : null}
             <div className="grid gap-2">
               <div className="flex items-center justify-between gap-3">
-                <span className="text-sm font-medium text-slate-700">{t("aiAssistant.actionLabel")}</span>
+                <span className="text-label-large font-medium text-on-surface-variant">{t("aiAssistant.actionLabel")}</span>
                 {onOpenPromptLibrary ? (
                   <button
                     type="button"
@@ -793,7 +793,8 @@ export const AiAssistantDialog = ({
                   </button>
                 ) : null}
               </div>
-              <div className="grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-[minmax(0,1fr)_auto]">
+              <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center">
+                <div className="min-w-0 flex-1">
                 <Select value={selectValue} onValueChange={handleActionChange}>
                   <SelectTrigger aria-label={t("aiAssistant.actionLabel")} className={AI_ASSISTANT_SELECT_TRIGGER_CLASSNAME}>
                     <SelectValue placeholder={t("aiAssistant.actionLabel")} />
@@ -820,12 +821,13 @@ export const AiAssistantDialog = ({
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-                <div className="grid min-w-0 grid-cols-2 gap-2 sm:grid-cols-[8rem_7rem]">
+                </div>
+                <div className="grid min-w-0 grid-cols-2 gap-2 sm:flex sm:shrink-0">
                   <Button
                     type="button"
                     variant="outline"
                     className={cn(
-                      "h-10 min-w-0 w-full gap-1.5 whitespace-nowrap px-3 text-sm font-medium",
+                      "h-10 min-w-0 gap-1.5 whitespace-nowrap px-4 text-sm font-medium",
                       isFreeformCustom && "border-emerald-200 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 hover:text-emerald-900",
                     )}
                     onClick={() => handleActionChange(FREEFORM_VALUE)}
@@ -851,7 +853,7 @@ export const AiAssistantDialog = ({
             </div>
             {promptNeedsTargetLanguage(effectiveParameterKind) ? (
               <div className="grid gap-1.5">
-                <span className="text-sm font-medium text-slate-700">{t("aiAssistant.targetLanguage")}</span>
+                <span className="text-label-large font-medium text-on-surface-variant">{t("aiAssistant.targetLanguage")}</span>
                 <Select value={targetLanguage} onValueChange={(value) => {
                   const nextTargetLanguage = value as TargetLanguage;
                   setTargetLanguage(nextTargetLanguage);
@@ -882,7 +884,7 @@ export const AiAssistantDialog = ({
             ) : null}
             {promptNeedsTone(effectiveParameterKind) ? (
               <div className="grid gap-1.5">
-                <span className="text-sm font-medium text-slate-700">{t("aiAssistant.tone")}</span>
+                <span className="text-label-large font-medium text-on-surface-variant">{t("aiAssistant.tone")}</span>
                 <Select value={tone} onValueChange={(value) => {
                   const nextTone = value as AiTone;
                   setTone(nextTone);
@@ -976,7 +978,7 @@ export const AiAssistantDialog = ({
             </div>
             <div className="grid gap-1.5">
               <div className="flex items-center justify-between gap-3">
-                <span className="text-sm font-medium text-slate-700">{t("aiAssistant.result")}</span>
+                <span className="text-label-large font-medium text-on-surface-variant">{t("aiAssistant.result")}</span>
                 {isGenerating ? (
                   <span className="flex items-center gap-1.5 text-label-medium font-medium text-emerald-700 dark:text-emerald-300">
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />{t("aiAssistant.generating")}
@@ -1004,7 +1006,7 @@ export const AiAssistantDialog = ({
             </div>
             {output && !isGenerating ? (
               <div className="grid gap-1.5 rounded-2xl bg-surface-container p-3">
-                <span className="text-sm font-medium text-slate-700">{t("aiAssistant.refine")}</span>
+                <span className="text-label-large font-medium text-on-surface-variant">{t("aiAssistant.refine")}</span>
                 <div className="flex flex-col gap-2 sm:flex-row">
                   <input
                     className="h-10 min-w-0 flex-1 rounded-xl border border-transparent bg-card px-3 text-body-medium outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/15"
@@ -1020,7 +1022,7 @@ export const AiAssistantDialog = ({
                     placeholder={t("aiAssistant.refinePlaceholder")}
                     maxLength={2_000}
                   />
-                  <Button type="button" variant="outline" disabled={isGenerating || !refinement.trim()} onClick={() => void refine()}>{t("aiAssistant.refineAction")}</Button>
+                  <Button type="button" variant="outline" className="h-10" disabled={isGenerating || !refinement.trim()} onClick={() => void refine()}>{t("aiAssistant.refineAction")}</Button>
                 </div>
               </div>
             ) : null}
@@ -1029,18 +1031,18 @@ export const AiAssistantDialog = ({
           {output ? (
             <div className="mt-4 flex shrink-0 flex-wrap justify-between gap-2" data-ai-assistant-actions>
               <div className="flex flex-wrap gap-2">
-                <Button type="button" variant="outline" disabled={isGenerating} onClick={() => void copy()}>{copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}{t(copied ? "aiAssistant.copied" : "aiAssistant.copy")}</Button>
-                <Button type="button" variant="outline" disabled={isGenerating} onClick={() => { setOutput(""); setError(null); }}><Trash2 className="h-4 w-4" />{t("aiAssistant.discard")}</Button>
-                <Button type="button" variant="outline" disabled={isGenerating} onClick={() => void retry()}><RefreshCw className="h-4 w-4" />{t("aiAssistant.retry")}</Button>
+                <Button type="button" variant="outline" className="h-10" disabled={isGenerating} onClick={() => void copy()}>{copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}{t(copied ? "aiAssistant.copied" : "aiAssistant.copy")}</Button>
+                <Button type="button" variant="outline" className="h-10" disabled={isGenerating} onClick={() => { setOutput(""); setError(null); }}><Trash2 className="h-4 w-4" />{t("aiAssistant.discard")}</Button>
+                <Button type="button" variant="outline" className="h-10" disabled={isGenerating} onClick={() => void retry()}><RefreshCw className="h-4 w-4" />{t("aiAssistant.retry")}</Button>
               </div>
               <div className="flex flex-wrap gap-2">
                 {!usesComposerAsSource && promptAllowsReplace(effectiveResultMode) ? (
-                  <Button type="button" variant={hasSelection ? "solid" : "outline"} disabled={isGenerating} onClick={() => applyOutput("replace")}>
+                  <Button type="button" variant={hasSelection ? "solid" : "outline"} className="h-10" disabled={isGenerating} onClick={() => applyOutput("replace")}>
                     {t(hasSelection ? "aiAssistant.replaceSelection" : "aiAssistant.replace")}
                   </Button>
                 ) : null}
                 {promptAllowsAppend(effectiveResultMode) ? (
-                  <Button type="button" variant={hasSelection && !usesComposerAsSource && promptAllowsReplace(effectiveResultMode) ? "outline" : "solid"} disabled={isGenerating} onClick={() => applyOutput("append")}>{t("aiAssistant.append")}</Button>
+                  <Button type="button" variant={hasSelection && !usesComposerAsSource && promptAllowsReplace(effectiveResultMode) ? "outline" : "solid"} className="h-10" disabled={isGenerating} onClick={() => applyOutput("append")}>{t("aiAssistant.append")}</Button>
                 ) : null}
               </div>
             </div>

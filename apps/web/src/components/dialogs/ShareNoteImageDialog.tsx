@@ -1,4 +1,4 @@
-import { Check, Copy, Download, LoaderCircle, Palette, Share2, Type } from "lucide-react";
+import { Check, Copy, Download, LoaderCircle, Share2 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -237,11 +237,10 @@ export const ShareNoteImageDialog = ({
             )}
           </div>
 
-          <div className="space-y-5 overflow-y-auto pr-1 md:max-h-[68vh]">
+          <div className="space-y-6 overflow-y-auto md:max-h-[68vh]">
             {/* Theme Selector */}
             <fieldset className="space-y-2.5">
-              <legend className="flex items-center gap-1.5 text-label-large font-medium text-on-surface-variant">
-                <Palette className="h-3.5 w-3.5" />
+              <legend className="text-label-large font-medium text-on-surface-variant">
                 {t("editor.imageShare.theme")}
               </legend>
               <div className="grid grid-cols-2 gap-2">
@@ -255,7 +254,7 @@ export const ShareNoteImageDialog = ({
                       className={cn(
                         "m3-state group relative flex items-center gap-2.5 rounded-2xl p-2.5 text-left text-body-medium outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/70",
                         isSelected
-                          ? "bg-emerald-100 font-medium text-emerald-950 ring-1 ring-emerald-300 dark:bg-emerald-500/20 dark:text-emerald-100 dark:ring-emerald-500/40"
+                          ? "bg-emerald-100 font-medium text-emerald-950 ring-1 ring-emerald-400"
                           : "bg-surface-container text-on-surface",
                       )}
                       type="button"
@@ -274,8 +273,7 @@ export const ShareNoteImageDialog = ({
 
             {/* Typography and Layout */}
             <fieldset className="space-y-3">
-              <legend className="flex items-center gap-1.5 text-label-large font-medium text-on-surface-variant">
-                <Type className="h-3.5 w-3.5" />
+              <legend className="text-label-large font-medium text-on-surface-variant">
                 {t("editor.imageShare.fontStyle")}
               </legend>
               <div className="flex rounded-full border border-outline-variant p-0.5">
@@ -286,7 +284,7 @@ export const ShareNoteImageDialog = ({
                     className={cn(
                       "m3-state h-9 flex-1 rounded-full px-2 text-label-large font-medium outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/70",
                       fontStyle === item.id
-                        ? "bg-emerald-100 text-emerald-950 dark:bg-emerald-500/20 dark:text-emerald-100"
+                        ? "bg-emerald-100 text-emerald-950"
                         : "text-on-surface-variant hover:text-on-surface",
                     )}
                     type="button"
@@ -308,7 +306,7 @@ export const ShareNoteImageDialog = ({
                       className={cn(
                         "m3-state h-9 flex-1 rounded-full px-2 text-label-large font-medium outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/70",
                         fontSize === item.id
-                          ? "bg-emerald-100 text-emerald-950 dark:bg-emerald-500/20 dark:text-emerald-100"
+                          ? "bg-emerald-100 text-emerald-950"
                           : "text-on-surface-variant hover:text-on-surface",
                       )}
                       type="button"
@@ -331,7 +329,7 @@ export const ShareNoteImageDialog = ({
                       className={cn(
                         "m3-state h-9 flex-1 rounded-full px-2 text-label-large font-medium outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/70",
                         cardWidth === item.id
-                          ? "bg-emerald-100 text-emerald-950 dark:bg-emerald-500/20 dark:text-emerald-100"
+                          ? "bg-emerald-100 text-emerald-950"
                           : "text-on-surface-variant hover:text-on-surface",
                       )}
                       type="button"
@@ -400,7 +398,7 @@ export const ShareNoteImageDialog = ({
         </div>
 
         {copyState === "failed" ? (
-          <p className="border-t border-rose-100 bg-rose-50 px-6 py-2.5 text-body-small text-rose-700 dark:border-rose-500/25 dark:bg-rose-500/10 dark:text-rose-200" role="alert">
+          <p className="rounded-xl bg-rose-50 px-4 py-2 text-body-small text-rose-700 dark:bg-rose-500/10 dark:text-rose-200" role="alert">
             {t("editor.imageShare.copyFailed")}
           </p>
         ) : null}
@@ -427,7 +425,7 @@ export const ShareNoteImageDialog = ({
             )}
           </Button>
           <Button
-            variant={canUseSystemShare ? "soft" : "solid"}
+            variant={canUseSystemShare ? "outline" : "solid"}
             size="lg"
             disabled={!prepared}
             onClick={download}
