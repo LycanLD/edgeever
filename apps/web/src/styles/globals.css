@@ -16,10 +16,21 @@
   /* Tailwind 4 shifted shadow-sm and blur-sm up one step. Keep the weights this UI shipped with. */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --blur-sm: 4px;
+  /* M3 shape scale: base 16px → sm 8 / md 12 / lg 16 / xl 20 / 2xl 28 (extra-large). */
   --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 12px);
+  --radius-3xl: calc(var(--radius) + 20px);
   --radius-mobile-sheet: 10px;
+  /* M3 motion curves + elevation (plain vars live in :root; these expose utilities). */
+  --ease-standard: var(--motion-ease-standard);
+  --ease-decelerate: var(--motion-ease-decelerate);
+  --ease-accelerate: var(--motion-ease-accelerate);
+  --shadow-elev-1: var(--elev-1);
+  --shadow-elev-2: var(--elev-2);
+  --shadow-elev-3: var(--elev-3);
   --spacing-mobile-bottom-nav: 52px;
   --spacing-mobile-control: 36px;
   --spacing-mobile-fab: 52px;
@@ -43,6 +54,20 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
+  --color-primary-container: hsl(var(--primary-container));
+  --color-on-primary-container: hsl(var(--on-primary-container));
+  --color-secondary-container: hsl(var(--secondary-container));
+  --color-on-secondary-container: hsl(var(--on-secondary-container));
+  --color-surface: hsl(var(--surface));
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-on-surface: hsl(var(--on-surface));
+  --color-on-surface-variant: hsl(var(--on-surface-variant));
+  --color-outline: hsl(var(--outline));
+  --color-outline-variant: hsl(var(--outline-variant));
   --color-slate-50: rgb(var(--slate-50-rgb) / 1);
   --color-slate-100: rgb(var(--slate-100-rgb) / 1);
   --color-slate-200: rgb(var(--slate-200-rgb) / 1);
@@ -359,9 +384,13 @@ html.dark[data-edgeever-environment="demo"] body::after {
 
     --primary: 199 96% 40%;
     --primary-foreground: 0 0% 100%;
+    --primary-container: 199 95% 90%;
+    --on-primary-container: 199 95% 15%;
 
     --secondary: 199 60% 94%;
     --secondary-foreground: 199 70% 25%;
+    --secondary-container: 200 60% 91%;
+    --on-secondary-container: 200 70% 25%;
 
     --muted: 0 0% 95%;
     --muted-foreground: 0 0% 40%;
@@ -376,7 +405,24 @@ html.dark[data-edgeever-environment="demo"] body::after {
     --input: 0 0% 88%;
     --ring: 199 96% 40%;
 
-    --radius: 0.5rem;
+    /* M3 surface-container ladder (aligned with existing workspace tones). */
+    --surface: 0 0% 100%;
+    --surface-container-lowest: #ffffff;
+    --surface-container-low: #f4f6f8;
+    --surface-container: #eef1f4;
+    --surface-container-high: #e7ebef;
+    --surface-container-highest: #e1e5ea;
+    --on-surface: 0 0% 13%;
+    --on-surface-variant: 0 0% 40%;
+    --outline: 210 15% 45%;
+    --outline-variant: 0 0% 85%;
+
+    /* M3 elevation (blue-tinted ambient shadow, light scheme). */
+    --elev-1: 0 1px 2px rgb(2 132 199 / 0.08), 0 1px 3px rgb(0 0 0 / 0.06);
+    --elev-2: 0 2px 6px rgb(2 132 199 / 0.10), 0 1px 3px rgb(0 0 0 / 0.06);
+    --elev-3: 0 8px 24px rgb(2 132 199 / 0.12), 0 2px 8px rgb(0 0 0 / 0.08);
+
+    --radius: 1rem;
   }
 }
 
@@ -386,6 +432,16 @@ html.dark[data-edgeever-environment="demo"] body::after {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* M3 motion tokens (plain vars so raw CSS can use them too). */
+  --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --motion-ease-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --motion-ease-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --motion-duration-short1: 50ms;
+  --motion-duration-short2: 100ms;
+  --motion-duration-medium1: 200ms;
+  --motion-duration-medium2: 300ms;
+  --motion-duration-long: 500ms;
 }
 
 :root.dark {
@@ -398,8 +454,12 @@ html.dark[data-edgeever-environment="demo"] body::after {
   --popover-foreground: 210 9% 88%;
   --primary: 199 96% 40%;
   --primary-foreground: 0 0% 100%;
+  --primary-container: 199 70% 20%;
+  --on-primary-container: 199 90% 90%;
   --secondary: 210 11% 18%;
   --secondary-foreground: 199 65% 72%;
+  --secondary-container: 200 45% 24%;
+  --on-secondary-container: 200 55% 86%;
   --muted: 210 9% 18%;
   --muted-foreground: 210 8% 62%;
   --accent: 210 11% 20%;
@@ -409,6 +469,21 @@ html.dark[data-edgeever-environment="demo"] body::after {
   --border: 210 10% 23%;
   --input: 210 10% 23%;
   --ring: 199 96% 40%;
+  /* M3 surface-container ladder (dark). */
+  --surface: 210 10% 8%;
+  --surface-container-lowest: #0d0f12;
+  --surface-container-low: #101215;
+  --surface-container: #121418;
+  --surface-container-high: #15181c;
+  --surface-container-highest: #191c21;
+  --on-surface: 210 9% 88%;
+  --on-surface-variant: 210 8% 62%;
+  --outline: 210 10% 58%;
+  --outline-variant: 210 10% 30%;
+  /* M3 elevation (dark scheme: pure black ambient). */
+  --elev-1: 0 1px 2px rgb(0 0 0 / 0.40), 0 1px 3px rgb(0 0 0 / 0.24);
+  --elev-2: 0 2px 6px rgb(0 0 0 / 0.48), 0 1px 3px rgb(0 0 0 / 0.28);
+  --elev-3: 0 8px 24px rgb(0 0 0 / 0.56), 0 2px 8px rgb(0 0 0 / 0.32);
   --workspace-canvas: #101215;
   --workspace-sidebar: #121418;
   --workspace-memo-list: #15181c;
@@ -523,7 +598,7 @@ body {
  * the selectors here lets themes survive component refactors without gaining
  * arbitrary DOM or JavaScript access. */
 html[data-edgeever-extension-theme] {
-  --radius: var(--edgeever-theme-radius, 0.5rem);
+  --radius: var(--edgeever-theme-radius, 1rem);
   font-family: var(--edgeever-theme-font-body, inherit);
   font-size: var(--edgeever-theme-font-size, 100%);
 }
@@ -607,6 +682,38 @@ html[data-edgeever-extension-theme] kbd {
 
 .edgeever-workspace-grid--sidebar-collapsed {
   --notebook-sidebar-width: 3.5rem;
+}
+
+/* M3 state layer: 8% hover / 12% press overlay using currentColor so it works
+ * on filled, tonal, and text surfaces without per-component colors. */
+.m3-state {
+  position: relative;
+}
+
+.m3-state::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--motion-duration-short2, 100ms) var(--motion-ease-standard, cubic-bezier(0.2, 0, 0, 1));
+}
+
+.m3-state:hover::after,
+.m3-state:focus-visible::after {
+  opacity: 0.08;
+}
+
+.m3-state:active::after {
+  opacity: 0.12;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .m3-state::after {
+    transition-duration: 0.01ms;
+  }
 }
 
 .edgeever-workspace-shell {
