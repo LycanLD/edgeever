@@ -27,11 +27,11 @@ const getDefaultLoginCredentials = () => {
 };
 
 /**
- * The mascot artwork is white line art on an opaque white field, so it is
- * multiplied over a light wash: the white body picks up the wash colour and the
- * outline stays crisp, which lets the artwork sit behind the card without ever
- * showing a visible box edge. Dark mode keeps a dimmer wash so the same trick
- * still has something light to multiply against.
+ * The mascot video is dark line art on an opaque white field. Inverting it turns
+ * the lines white and the field black, then screen-blending drops the black
+ * field so only the white mascot remains over a brand-glow anchored in the
+ * bottom-right corner. The glow gives the white lines something to read against
+ * in both colour schemes.
  */
 const LoginMascot = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -57,11 +57,11 @@ const LoginMascot = () => {
 
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      <div className="absolute left-1/2 top-1/2 h-[min(820px,168vw)] w-[min(820px,168vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_50%_50%,rgb(var(--brand-green-50-rgb)/0.95),rgb(var(--brand-green-100-rgb)/0.45)_46%,transparent_70%)] dark:bg-[radial-gradient(circle_at_50%_50%,rgb(var(--brand-green-100-rgb)/0.34),rgb(var(--brand-green-200-rgb)/0.14)_46%,transparent_70%)]" />
+      <div className="absolute bottom-[-20%] right-[-12%] h-[min(780px,155vw)] w-[min(780px,155vw)] rounded-full bg-[radial-gradient(circle_at_50%_50%,rgb(var(--brand-green-600-rgb)/0.5),rgb(var(--brand-green-400-rgb)/0.26)_46%,transparent_70%)] dark:bg-[radial-gradient(circle_at_50%_50%,rgb(var(--brand-green-600-rgb)/0.38),rgb(var(--brand-green-500-rgb)/0.18)_46%,transparent_70%)]" />
       <video
         ref={videoRef}
         autoPlay={!prefersReducedMotion}
-        className="absolute left-1/2 top-1/2 h-[min(600px,124vw)] w-[min(600px,124vw)] -translate-x-1/2 -translate-y-1/2 object-contain mix-blend-multiply"
+        className="absolute bottom-0 right-0 h-[min(540px,82vw)] w-[min(540px,82vw)] translate-x-[4%] translate-y-[6%] object-contain invert mix-blend-screen drop-shadow-xl"
         loop
         muted
         playsInline
@@ -82,7 +82,7 @@ const LoginMascot = () => {
 };
 
 const loginFieldClassName =
-  "h-13 rounded-xl border-transparent bg-slate-100/80 px-4 text-[15px] text-slate-950 transition placeholder:text-slate-400 focus-visible:border-emerald-500 focus-visible:bg-card focus-visible:ring-4 focus-visible:ring-emerald-500/15 dark:bg-slate-800/70 dark:text-slate-50 dark:placeholder:text-slate-500";
+  "h-13 rounded-xl border border-outline-variant bg-surface px-4 text-[15px] text-on-surface transition placeholder:text-on-surface-variant/70 focus-visible:border-emerald-500 focus-visible:ring-4 focus-visible:ring-emerald-500/15";
 
 export const LoginScreen = ({ error, instanceUrl: initialInstanceUrl, isSubmitting, onSubmit }: LoginScreenProps) => {
   const { t } = useTranslation();
@@ -105,23 +105,25 @@ export const LoginScreen = ({ error, instanceUrl: initialInstanceUrl, isSubmitti
   };
 
   return (
-    <main className="relative flex h-[100dvh] items-center justify-center overflow-hidden bg-[var(--workspace-canvas)] px-4 py-10 text-slate-950">
+    <main className="relative flex h-[100dvh] items-center justify-center overflow-hidden bg-[var(--workspace-canvas)] px-4 py-10 text-on-surface">
       <LoginMascot />
-      <GitHubRepositoryLink className="m3-state absolute right-4 top-[max(1rem,env(safe-area-inset-top))] z-10 flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-card/85 text-slate-600 backdrop-blur transition hover:border-slate-300 hover:bg-card hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60" iconClassName="h-5 w-5" />
+      <GitHubRepositoryLink className="m3-state absolute right-4 top-[max(1rem,env(safe-area-inset-top))] z-10 flex h-10 w-10 items-center justify-center rounded-full border border-outline-variant bg-surface/85 text-on-surface-variant backdrop-blur transition hover:bg-surface-container-high hover:text-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/60" iconClassName="h-5 w-5" />
 
-      <section className="relative w-full max-w-[420px] rounded-3xl border border-slate-200/80 bg-card/92 p-7 shadow-elev-3 backdrop-blur-xl sm:p-8 dark:border-slate-700/60 dark:bg-slate-900/92">
+      <section className="relative w-full max-w-[420px] rounded-3xl bg-surface-container p-7 shadow-elev-3 sm:p-8">
         <div className="flex flex-col items-center gap-4 pb-7 text-center">
-          <img
-            alt=""
-            aria-hidden="true"
-            className="h-16 w-16 rounded-2xl shadow-elev-2"
-            src={getAppAssetPath("favicon.svg", import.meta.env.BASE_URL)}
-          />
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-surface-container-high">
+            <img
+              alt=""
+              aria-hidden="true"
+              className="h-11 w-11"
+              src={getAppAssetPath("favicon.svg", import.meta.env.BASE_URL)}
+            />
+          </div>
           <div className="space-y-1.5">
-            <h1 className="text-2xl font-semibold leading-tight tracking-tight text-slate-900 dark:text-slate-50">
+            <h1 className="text-headline-small font-normal leading-tight text-on-surface">
               {t("login.title")}
             </h1>
-            <p className="text-sm leading-6 text-slate-500 dark:text-slate-400">{t("login.subtitle")}</p>
+            <p className="text-body-medium text-on-surface-variant">{t("login.subtitle")}</p>
           </div>
         </div>
 
@@ -145,7 +147,7 @@ export const LoginScreen = ({ error, instanceUrl: initialInstanceUrl, isSubmitti
 
           {initialInstanceUrl !== undefined ? (
             <label className="block">
-              <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+              <span className="mb-1.5 block text-label-large font-medium text-on-surface-variant">
                 {t("login.desktopInstanceUrl")}
               </span>
               <Input
@@ -164,7 +166,7 @@ export const LoginScreen = ({ error, instanceUrl: initialInstanceUrl, isSubmitti
           ) : null}
 
           <label className="block">
-            <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+            <span className="mb-1.5 block text-label-large font-medium text-on-surface-variant">
               {t("login.username")}
             </span>
             <Input
@@ -177,7 +179,7 @@ export const LoginScreen = ({ error, instanceUrl: initialInstanceUrl, isSubmitti
           </label>
 
           <label className="block">
-            <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+            <span className="mb-1.5 block text-label-large font-medium text-on-surface-variant">
               {t("login.password")}
             </span>
             <Input

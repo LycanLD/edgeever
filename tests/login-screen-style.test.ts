@@ -4,9 +4,11 @@ import { readFileSync } from "node:fs";
 const loginScreen = readFileSync(new URL("../apps/web/src/components/LoginScreen.tsx", import.meta.url), "utf8");
 
 describe("login screen chrome", () => {
-  test("keeps the brand wash and the blended mascot backdrop", () => {
+  test("keeps the corner brand wash and the blended mascot backdrop", () => {
     expect(loginScreen).toContain("radial-gradient");
-    expect(loginScreen).toContain("mix-blend-multiply");
+    expect(loginScreen).toContain("mix-blend-screen");
+    expect(loginScreen).toContain("invert");
+    expect(loginScreen).toContain("bottom-0 right-0");
     expect(loginScreen).toContain("login/boykisser-dance.webm");
     expect(loginScreen).toContain("prefers-reduced-motion");
   });
