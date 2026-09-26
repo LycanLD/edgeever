@@ -2,11 +2,11 @@
  * Generate the raster-backed brand icon sources from assets/brand/icon-source.png.
  *
  * Why this exists:
- * The current mark is flat line art on transparency, which is invisible on light
- * surfaces. We therefore compose the artwork onto an opaque brand tile (same
- * rounded-square geometry as before) and embed it as a palette-quantised PNG so
- * every downstream raster target (web favicon/PWA, site, extension, desktop,
- * iOS, Android) keeps a single source of truth and stays crisp at 1024px.
+ * The mascot is already a cut-out PNG with transparency, so the brand icon is
+ * the artwork alone on a transparent canvas (no tile behind it). The raster is
+ * palette-quantised and embedded as a data URI so every downstream target (web
+ * favicon/PWA, site, extension, desktop, iOS, Android) keeps a single source of
+ * truth and stays crisp at 1024px.
  *
  * Usage: bun scripts/generate-brand-icon.mjs
  */
@@ -17,16 +17,14 @@ import sharp from "sharp";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-/** Tile + artwork geometry, expressed in the 1024x1024 icon viewBox. */
+/** Canvas geometry, expressed in the 1024x1024 icon viewBox. */
 const VIEW_BOX = 1024;
-const TILE_RADIUS = 224;
-/** Kept in sync with AGENTS.md and the flatten colour in prepare-brand-icons.mjs. */
-const TILE_COLOR = "#47704c";
 /**
- * Android adaptive icons reuse the flattened tile as the background layer and
- * only reveal the centre 66%, so the artwork stays inside that safe zone.
+ * Standalone icons fill most of the canvas; Android adaptive icons only reveal
+ * the centre 66%, so that layer keeps the artwork inside the safe zone.
  */
-const ARTWORK_HEIGHT_RATIO = 0.58;
+const ARTWORK_HEIGHT_RATIO = 0.8;
+const ADAPTIVE_ARTWORK_HEIGHT_RATIO = 0.58;
 /** Favicons paint at 16-64px, so a 320px raster is already oversampled. */
 const FAVICON_PIXELS = 320;
 
@@ -98,8 +96,7 @@ const { markup: artwork } = await artworkAt(VIEW_BOX, ARTWORK_HEIGHT_RATIO);
 
 const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${VIEW_BOX} ${VIEW_BOX}" role="img" aria-labelledby="title desc">
   <title id="title">LumiNotes</title>
-  <desc id="desc">The Boy Kisser cat mascot on a sage green rounded tile.</desc>
-  <rect x="0" y="0" width="${VIEW_BOX}" height="${VIEW_BOX}" rx="${TILE_RADIUS}" fill="${TILE_COLOR}" />
+  <desc id="desc">The Boy Kisser cat mascot cut out on a transparent background.</desc>
 ${artwork}
 </svg>
 `;
@@ -112,7 +109,6 @@ await writeFile(path.join(projectRoot, "assets/brand/edgeever-icon.svg"), iconSv
  */
 const { markup: faviconArtwork } = await artworkAt(FAVICON_PIXELS, ARTWORK_HEIGHT_RATIO);
 const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${VIEW_BOX} ${VIEW_BOX}" role="img" aria-label="LumiNotes">
-  <rect x="0" y="0" width="${VIEW_BOX}" height="${VIEW_BOX}" rx="${TILE_RADIUS}" fill="${TILE_COLOR}" />
 ${faviconArtwork}
 </svg>
 `;
@@ -123,7 +119,7 @@ await writeFile(path.join(projectRoot, "assets/brand/edgeever-favicon.svg"), fav
  * foreground layer keeps the artwork inside the 66% safe zone with no tile.
  */
 const adaptiveSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${VIEW_BOX} ${VIEW_BOX}" role="img" aria-label="LumiNotes">
-${(await artworkAt(VIEW_BOX, ARTWORK_HEIGHT_RATIO)).markup}
+${(await artworkAt(VIEW_BOX, ADAPTIVE_ARTWORK_HEIGHT_RATIO)).markup}
 </svg>
 `;
 await writeFile(
@@ -132,5 +128,5 @@ await writeFile(
 );
 
 console.log(
-  `[generate-brand-icon] wrote edgeever-icon.svg, edgeever-favicon.svg and adaptive-icon-foreground.svg (tile ${TILE_COLOR}, artwork ${(artworkHeight * scale).toFixed(0)}px)`,
+  `[generate-brand-icon] wrote edgeever-icon.svg, edgeever-favicon.svg and adaptive-icon-foreground.svg (transparent, artwork ${(artworkHeight * scale).toFixed(0)}px)`,
 );

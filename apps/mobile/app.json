@@ -34,7 +34,7 @@
       "package": "org.edgeever.mobile",
       "versionCode": 193,
       "adaptiveIcon": {
-        "backgroundColor": "#47704c",
+        "backgroundColor": "#FFFFFF",
         "backgroundImage": "./assets/icon.png",
         "foregroundImage": "./assets/adaptive-icon-transparent.png"
       }
@@ -53,7 +53,7 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#47704c",
+          "backgroundColor": "#FFFFFF",
           "image": "./assets/icon.png",
           "imageWidth": 180,
           "resizeMode": "contain"
