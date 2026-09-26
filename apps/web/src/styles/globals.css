@@ -790,11 +790,22 @@ html[data-edgeever-extension-theme] .edgeever-memo-divider {
   border-bottom-color: var(--edgeever-theme-border, var(--workspace-memo-divider)) !important;
 }
 
+/* Tablet (768-1023px): M3 navigation rail + memo list + editor. */
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  .edgeever-workspace-grid--editor {
+    grid-template-columns: 3.5rem clamp(240px, 34vw, 340px) minmax(0, 1fr);
+  }
+
+  .edgeever-workspace-grid--single-right {
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+  }
+}
+
 @media (min-width: 1024px) {
   .edgeever-workspace-grid--editor {
     grid-template-columns:
       var(--notebook-sidebar-width)
-      clamp(240px, 23vw, var(--memo-list-width))
+      clamp(240px, var(--memo-list-width), calc(100vw - var(--notebook-sidebar-width) - 400px))
       minmax(0, 1fr);
   }
 

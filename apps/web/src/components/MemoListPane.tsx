@@ -166,7 +166,7 @@ export const MemoSelectionActionBar = ({
 
   return (
     <div
-      className="hidden h-full min-h-0 flex-1 items-start justify-start bg-card px-6 py-6 lg:flex lg:px-8 lg:py-8 xl:px-10"
+      className="hidden h-full min-h-0 flex-1 items-start justify-start bg-card px-6 py-6 md:flex md:px-8 md:py-8 xl:px-10"
       data-memo-selection-action-bar
     >
       <m.div className="w-72 overflow-hidden rounded-md border border-slate-200 bg-card py-1 shadow-lg" {...paneEnterMotion}>
@@ -320,7 +320,7 @@ const MobileSelectionActionBar = ({
 
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-card/95 px-8 pb-[max(0.125rem,env(safe-area-inset-bottom))] pt-1 shadow-[0_-10px_30px_rgba(15,23,42,0.08)] backdrop-blur lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-card/95 px-8 pb-[max(0.125rem,env(safe-area-inset-bottom))] pt-1 shadow-[0_-10px_30px_rgba(15,23,42,0.08)] backdrop-blur md:hidden"
       aria-label={t("mobileSheets.bulkActions")}
     >
       <div className="grid h-14 grid-cols-3 items-center">
@@ -1053,9 +1053,9 @@ export const MemoListPane = ({
           </div>
         </div>
       )}
-      <header className="border-b border-slate-200 bg-slate-50 px-4 pb-2 pt-[max(0.375rem,env(safe-area-inset-bottom))] lg:bg-transparent lg:py-3 lg:pt-3">
+      <header className="border-b border-slate-200 bg-slate-50 px-4 pb-2 pt-2 md:bg-transparent md:py-3 md:pt-3">
         {selectionMode ? (
-          <div className="mb-3 flex h-10 min-w-0 items-center gap-3 lg:hidden">
+          <div className="mb-3 flex h-10 min-w-0 items-center gap-3 md:hidden">
             <button
               className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-slate-500 transition hover:bg-slate-100 hover:text-slate-900"
               type="button"
@@ -1068,7 +1068,7 @@ export const MemoListPane = ({
             <div className="min-w-0 truncate text-lg font-semibold text-slate-900">{selectionCountLabel}</div>
           </div>
         ) : mobileSearchActive ? (
-          <div className="mb-3 flex h-10 min-w-0 items-center gap-2 lg:hidden">
+          <div className="mb-3 flex h-10 min-w-0 items-center gap-2 md:hidden">
             <button
               className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-slate-500 transition hover:bg-slate-100 hover:text-slate-900"
               type="button"
@@ -1140,7 +1140,7 @@ export const MemoListPane = ({
         ) : null}
 
         {!mobileSearchActive && (
-          <div className="mb-3 flex items-center justify-between gap-3 lg:hidden">
+          <div className="mb-3 flex items-center justify-between gap-3 md:hidden">
             <div className="flex min-w-0 items-center gap-2">
               {(view === "trash" || selectedTag) && (
                 <button
@@ -1154,7 +1154,7 @@ export const MemoListPane = ({
                 </button>
               )}
               <button
-                className="flex min-w-0 items-center gap-1 rounded-md px-1 py-1 text-left transition hover:bg-slate-100 lg:hidden"
+                className="flex min-w-0 items-center gap-1 rounded-md px-1 py-1 text-left transition hover:bg-slate-100 md:hidden"
                 type="button"
                 title={t("memoList.switchNotebook")}
                 aria-label={t("memoList.switchNotebook")}
@@ -1183,7 +1183,7 @@ export const MemoListPane = ({
           </div>
         )}
 
-        <div className="mb-3 hidden min-w-0 lg:flex items-start gap-1">
+        <div className="mb-3 hidden min-w-0 md:flex items-start gap-1">
           {(view === "trash" || selectedTag) && (
             <Button
               className="-ml-2 mt-0.5 shrink-0"
@@ -1204,10 +1204,10 @@ export const MemoListPane = ({
           </div>
         </div>
 
-        <div className={cn("items-center gap-2", mobileSearchActive ? "hidden lg:flex" : "flex")}>
+        <div className={cn("items-center gap-2", mobileSearchActive ? "hidden md:flex" : "flex")}>
           <div
             className={cn(
-              "flex h-mobile-control min-w-0 flex-1 items-center gap-2 rounded-full border px-3 text-sm text-slate-500 transition-colors lg:rounded-md",
+              "flex h-mobile-control min-w-0 flex-1 items-center gap-2 rounded-full border px-3 text-sm text-slate-500 transition-colors",
               searchActive
                 ? "bg-[color-mix(in_srgb,var(--workspace-sidebar)_78%,var(--workspace-memo-list))] text-slate-700"
                 : "bg-[color-mix(in_srgb,var(--workspace-sidebar)_62%,var(--workspace-memo-list))] hover:bg-[color-mix(in_srgb,var(--workspace-sidebar)_72%,var(--workspace-memo-list))]",
@@ -1253,7 +1253,7 @@ export const MemoListPane = ({
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
-                className="hidden lg:inline-flex"
+                className="hidden md:inline-flex"
                 size="icon"
                 variant="ghost"
                 title={t("memoList.more")}
@@ -1364,7 +1364,7 @@ export const MemoListPane = ({
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <div className="flex shrink-0 items-center gap-2 lg:hidden">
+          <div className="flex shrink-0 items-center gap-2 md:hidden">
             {mobileFilterOptions.map((option: any) => (
               <button
                 key={option.value}
@@ -1424,7 +1424,7 @@ export const MemoListPane = ({
 
       <div
         ref={setListScrollNode}
-        className="relative min-h-0 flex-1 overflow-y-auto p-3 pb-[calc(7rem+env(safe-area-inset-bottom))] lg:px-2 lg:py-2 lg:pb-3 lg:[scrollbar-gutter:stable_both-edges]"
+        className="relative min-h-0 flex-1 overflow-y-auto p-3 pb-[calc(7rem+env(safe-area-inset-bottom))] md:px-2 md:py-2 md:pb-3 md:[scrollbar-gutter:stable_both-edges]"
       >
         {isLoading || (isRefreshing && memos.length === 0) ? (
           <div className="px-2 py-4 text-sm text-slate-500">{t("memoList.fetchingLatest")}</div>
@@ -1459,7 +1459,7 @@ export const MemoListPane = ({
             )}
           </div>
         ) : (
-          <div className="lg:overflow-hidden">
+          <div className="md:overflow-hidden">
             <div className="relative w-full" style={{ height: `${memoListVirtualizer.getTotalSize()}px` }}>
               {memoListVirtualizer.getVirtualItems().map((virtualRow) => {
                 const memo = memos[virtualRow.index];
@@ -1501,7 +1501,7 @@ export const MemoListPane = ({
               })}
             </div>
             {isLoadingMoreMemos && (
-              <div className="mt-4 border-t border-slate-100 px-4 py-3 text-center text-xs font-medium text-slate-500 lg:mt-0">
+              <div className="mt-4 border-t border-slate-100 px-4 py-3 text-center text-xs font-medium text-slate-500 md:mt-0">
                 {t("memoList.loadingMore")}
               </div>
             )}

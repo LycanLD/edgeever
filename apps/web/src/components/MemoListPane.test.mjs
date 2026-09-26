@@ -24,7 +24,7 @@ describe("desktop memo list spacing", () => {
   test("reserves matching desktop scrollbar gutters on both sides", () => {
     const source = readFileSync(new URL("./MemoListPane.tsx", import.meta.url), "utf8");
 
-    expect(source).toContain("lg:px-2 lg:py-2 lg:pb-3 lg:[scrollbar-gutter:stable_both-edges]");
+    expect(source).toContain("md:px-2 md:py-2 md:pb-3 md:[scrollbar-gutter:stable_both-edges]");
   });
 });
 

@@ -333,20 +333,20 @@ export const MemoCard = ({
       draggable={!isTrashView}
       onDragStart={handleDragStart}
       className={cn(
-        "edgeever-memo-divider group relative overflow-hidden border border-slate-100 bg-card transition lg:my-0.5 lg:rounded-lg lg:border lg:border-transparent lg:bg-transparent lg:shadow-none transition-all duration-200 select-none",
-        isLast && "lg:border-b-transparent",
-        listDensity === "compact" ? "rounded-md shadow-none" : "rounded-lg shadow-[0_4px_16px_rgba(15,23,42,0.045)] lg:shadow-none",
+        "edgeever-memo-divider group relative overflow-hidden border border-slate-100 bg-card transition md:my-0.5 md:rounded-lg md:border md:border-transparent md:bg-transparent md:shadow-none transition-all duration-200 select-none",
+        isLast && "md:border-b-transparent",
+        listDensity === "compact" ? "rounded-md shadow-none" : "rounded-lg shadow-[0_4px_16px_rgba(15,23,42,0.045)] md:shadow-none",
         !selectionMode && selected
-          ? "edgeever-workspace-selection border-[var(--workspace-divider)] bg-workspace-selection lg:border-[var(--workspace-divider)] lg:bg-workspace-selection"
+          ? "edgeever-workspace-selection border-[var(--workspace-divider)] bg-workspace-selection md:border-[var(--workspace-divider)] md:bg-workspace-selection"
           : checked
-            ? "bg-slate-50 ring-1 ring-slate-200 lg:border-[var(--workspace-divider)] lg:bg-[var(--workspace-selection)] lg:ring-0"
-            : "active:bg-slate-50 lg:hover:bg-white/70"
+            ? "bg-slate-50 ring-1 ring-slate-200 md:border-[var(--workspace-divider)] md:bg-[var(--workspace-selection)] md:ring-0"
+            : "active:bg-slate-50 md:hover:bg-white/70"
       )}
     >
-      <div className={cn("flex min-h-[132px] items-center", listDensity === "compact" && "min-h-[84px] lg:min-h-[76px]")}>
+      <div className={cn("flex min-h-[132px] items-center", listDensity === "compact" && "min-h-[84px] md:min-h-[76px]")}>
         {showSelectionControl && (
           <Tooltip><TooltipTrigger asChild><button
-            className="ml-2 flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400/70 focus-visible:ring-offset-2 lg:ml-3 lg:h-6 lg:w-6"
+            className="ml-2 flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400/70 focus-visible:ring-offset-2 md:ml-3 md:h-6 md:w-6"
             type="button"
             aria-label={selectionControlLabel}
             aria-pressed={checked}
@@ -357,23 +357,23 @@ export const MemoCard = ({
           >
             <span
               className={cn(
-                "flex h-6 w-6 items-center justify-center rounded-full border transition-all duration-150 lg:h-4 lg:w-4",
+                "flex h-6 w-6 items-center justify-center rounded-full border transition-all duration-150 md:h-4 md:w-4",
                 checked
                   ? "border-slate-700 bg-slate-700 text-white shadow-[0_4px_10px_rgba(15,23,42,0.16)]"
                   : "border-slate-300 bg-card text-transparent"
               )}
               aria-hidden="true"
             >
-              <Check className="h-3.5 w-3.5 stroke-[3] lg:h-2.5 lg:w-2.5" />
+              <Check className="h-3.5 w-3.5 stroke-[3] md:h-2.5 md:w-2.5" />
             </span>
           </button></TooltipTrigger><TooltipContent>{selectionControlLabel}</TooltipContent></Tooltip>
         )}
         <button
           className={cn(
-            "min-w-0 flex-1 px-4 py-3.5 text-left touch-pan-y focus-visible:bg-slate-50 focus-visible:shadow-[inset_3px_0_0_rgb(148,163,184)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-slate-400/60 [-webkit-touch-callout:none] lg:py-3.5 transition-all duration-200",
+            "min-w-0 flex-1 px-4 py-3.5 text-left touch-pan-y focus-visible:bg-slate-50 focus-visible:shadow-[inset_3px_0_0_rgb(148,163,184)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-slate-400/60 [-webkit-touch-callout:none] md:py-3.5 transition-all duration-200",
             listDensity === "compact" && "py-2.5",
-            showSelectionControl && "pl-3 lg:pl-3",
-            !isTrashView && !multiSelectKeyDown && "lg:cursor-grab lg:active:cursor-grabbing",
+            showSelectionControl && "pl-3 md:pl-3",
+            !isTrashView && !multiSelectKeyDown && "md:cursor-grab md:active:cursor-grabbing",
             multiSelectKeyDown && "cursor-copy"
           )}
           onMouseMove={handleMouseMove}
@@ -448,8 +448,8 @@ export const MemoCard = ({
         {!selectionMode && (
           <div
             className={cn(
-              "mr-2 mt-3 hidden shrink-0 flex-col gap-1 opacity-0 transition-opacity duration-200 focus-within:opacity-100 group-hover:opacity-100 lg:flex",
-              listDensity === "compact" && "lg:mt-2"
+              "mr-2 mt-3 hidden shrink-0 flex-col gap-1 opacity-0 transition-opacity duration-200 focus-within:opacity-100 group-hover:opacity-100 md:flex",
+              listDensity === "compact" && "md:mt-2"
             )}
           >
             <Tooltip><TooltipTrigger asChild><button

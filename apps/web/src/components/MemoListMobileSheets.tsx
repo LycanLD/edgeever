@@ -103,7 +103,7 @@ export const MobileListActionsSheet = ({
 
   return (
     <Drawer open={true} onOpenChange={(open) => { if (!open) onClose(); }}>
-      <DrawerContent className="bottom-[calc(5.25rem+env(safe-area-inset-bottom))] max-h-[calc(100dvh_-_6.75rem_-_env(safe-area-inset-bottom))] overflow-hidden rounded-mobile-sheet lg:hidden">
+      <DrawerContent className="bottom-[calc(5.25rem+env(safe-area-inset-bottom))] max-h-[calc(100dvh_-_6.75rem_-_env(safe-area-inset-bottom))] overflow-hidden rounded-mobile-sheet md:hidden">
         <header className="flex h-12 items-center justify-between border-b border-slate-200 px-4">
           <DrawerHeader className="min-w-0 p-0">
             <DrawerTitle className="truncate">{t("mobileSheets.listOptions")}</DrawerTitle>
@@ -218,7 +218,7 @@ export const MobileMoveSheet = ({
 
   return (
     <Drawer open={true} onOpenChange={(open) => { if (!open) onClose(); }}>
-      <DrawerContent className="bottom-[calc(5.25rem+env(safe-area-inset-bottom))] max-h-[calc(100dvh_-_6.75rem_-_env(safe-area-inset-bottom))] overflow-hidden rounded-mobile-sheet lg:hidden">
+      <DrawerContent className="bottom-[calc(5.25rem+env(safe-area-inset-bottom))] max-h-[calc(100dvh_-_6.75rem_-_env(safe-area-inset-bottom))] overflow-hidden rounded-mobile-sheet md:hidden">
         <header className="flex h-12 items-center justify-between border-b border-slate-200 px-4">
           <DrawerHeader className="min-w-0 p-0">
             <DrawerTitle className="truncate">{t("mobileSheets.moveToNotebook")}</DrawerTitle>
@@ -307,7 +307,7 @@ export const MobileSelectionMoreSheet = ({
 
   return (
     <Drawer open={true} onOpenChange={(open) => { if (!open) onClose(); }}>
-    <DrawerContent className="bottom-[calc(5.25rem+env(safe-area-inset-bottom))] max-h-[calc(100dvh_-_6.75rem_-_env(safe-area-inset-bottom))] overflow-hidden rounded-mobile-sheet lg:hidden">
+    <DrawerContent className="bottom-[calc(5.25rem+env(safe-area-inset-bottom))] max-h-[calc(100dvh_-_6.75rem_-_env(safe-area-inset-bottom))] overflow-hidden rounded-mobile-sheet md:hidden">
       <header className="flex h-12 items-center justify-between border-b border-slate-200 px-4">
         <DrawerHeader className="min-w-0 p-0">
           <DrawerTitle className="truncate">{t("mobileSheets.bulkActions")}</DrawerTitle>

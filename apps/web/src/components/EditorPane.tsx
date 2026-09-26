@@ -3632,7 +3632,7 @@ const RichEditorPane = ({
             className="min-w-0 flex-1"
             mobileBackButton={(
               <Button
-                className="lg:hidden"
+                className="md:hidden"
                 size="icon"
                 variant="ghost"
                 title={hasUnsavedChanges && !readOnly ? t("editor.saveAndBack") : t("editor.backToList")}
@@ -4320,10 +4320,9 @@ const RichEditorPane = ({
 
       {isMobileViewport && !mobileEditingActive && !readOnly && (
         <Button
-          className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-4 z-30 h-12 w-12 rounded-full shadow-lg sm:hidden"
+          className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-4 z-30 h-12 w-12 rounded-lg border-transparent bg-emerald-100 text-emerald-700 shadow-elev-3 transition-colors hover:bg-emerald-200/80 sm:hidden"
           size="icon"
           variant="solid"
-          title={t("editor.editMemo")}
           aria-label={t("editor.editMemo")}
           onClick={() => {
             if (onRequestMobileNativeEdit) {

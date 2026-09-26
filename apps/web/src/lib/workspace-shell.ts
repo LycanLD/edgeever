@@ -1,4 +1,5 @@
 export const isDesktopViewport = () => window.matchMedia("(min-width: 1024px)").matches;
+export const isWideViewport = () => window.matchMedia("(min-width: 768px)").matches;
 export const PULL_TO_REFRESH_TRIGGER_PX = 72;
 export const PULL_TO_REFRESH_MAX_PX = 96;
 

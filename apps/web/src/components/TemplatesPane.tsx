@@ -161,7 +161,7 @@ export const TemplatesPane = ({
     <TooltipProvider>
       <div className="flex h-full min-h-0 min-w-0 flex-col bg-workspace-canvas">
       {/* Header */}
-      <header className="flex h-[calc(3.75rem+env(safe-area-inset-top))] shrink-0 items-end justify-between border-b border-slate-200/80 bg-card px-6 pb-3 pt-[env(safe-area-inset-top)] lg:h-16 lg:items-center lg:pb-0 lg:pt-0 shadow-2xs">
+      <header className="flex h-14 shrink-0 items-center justify-between border-b border-slate-200/80 bg-card px-6 shadow-2xs">
         <div className="flex min-w-0 items-center gap-3">
           <Tooltip>
             <TooltipTrigger asChild>

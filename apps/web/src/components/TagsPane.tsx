@@ -53,7 +53,7 @@ export const TagsPane = ({
 
   return (
     <div className="flex h-full min-h-0 min-w-0 flex-col bg-card">
-      <header className="flex h-[calc(4rem+env(safe-area-inset-top))] shrink-0 items-end justify-between border-b border-slate-200 px-6 pb-3 pt-[env(safe-area-inset-top)] lg:h-16 lg:items-center lg:pb-0 lg:pt-0">
+      <header className="flex h-14 shrink-0 items-center justify-between border-b border-slate-200 px-6">
         <div className="flex min-w-0 items-center gap-3">
           <ButtonTooltip title={t("common.back")}>
             <Button size="icon" variant="ghost" aria-label={t("common.back")} onClick={onClose} className="h-9 w-9 rounded-lg hover:bg-slate-100">

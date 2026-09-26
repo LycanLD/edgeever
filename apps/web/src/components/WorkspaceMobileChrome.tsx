@@ -34,19 +34,25 @@ const MobileBottomNavButton = ({
 }) => (
   <button
     className={cn(
-      "relative mx-auto flex h-12 w-20 flex-col items-center justify-center gap-0.5 rounded-md text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-green)]",
+      "m3-state relative mx-auto flex h-12 w-20 flex-col items-center justify-center gap-0.5 rounded-md text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-green)]",
       active
         ? "font-bold text-slate-950 [&_svg]:text-emerald-700"
-        : "text-slate-500 hover:bg-slate-100 hover:text-slate-950"
+        : "text-slate-500 hover:text-slate-950"
     )}
     type="button"
     aria-current={active ? "page" : undefined}
     aria-label={label}
     onClick={onClick}
   >
-    {active ? <span aria-hidden="true" className="absolute top-0 h-0.5 w-5 rounded-full bg-emerald-700" /> : null}
-    {icon}
-    <span>{label}</span>
+    <span
+      aria-hidden="true"
+      className={cn(
+        "absolute left-1/2 top-0.5 h-7 w-14 -translate-x-1/2 rounded-full bg-emerald-100 transition-opacity",
+        active ? "opacity-100" : "opacity-0"
+      )}
+    />
+    <span className="relative">{icon}</span>
+    <span className="relative">{label}</span>
   </button>
 );
 
@@ -70,7 +76,7 @@ export const MobileBottomNav = ({
 
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-card/95 px-5 pb-[max(0.125rem,env(safe-area-inset-bottom))] pt-0 shadow-[0_-10px_30px_rgba(15,23,42,0.08)] backdrop-blur lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-card/95 px-5 pb-[max(0.125rem,env(safe-area-inset-bottom))] pt-0 shadow-[0_-10px_30px_rgba(15,23,42,0.08)] backdrop-blur md:hidden"
       aria-label={t("nav.mobileMain")}
     >
       <div className="relative grid h-mobile-bottom-nav grid-cols-3 items-center">
@@ -200,7 +206,7 @@ export const MobileNotebookPicker = ({
 
   return (
     <Drawer open={true} onOpenChange={(open) => { if (!open) onClose(); }}>
-      <DrawerContent className="inset-x-0 max-h-[82dvh] overflow-hidden border-x-0 border-b-0 pb-[env(safe-area-inset-bottom)] lg:hidden">
+      <DrawerContent className="inset-x-0 max-h-[82dvh] overflow-hidden border-x-0 border-b-0 pb-[env(safe-area-inset-bottom)] md:hidden">
         <header className="flex h-14 items-center justify-between border-b border-slate-200 px-4">
           <DrawerHeader className="min-w-0 p-0">
             <DrawerTitle className="text-base">{t("mobileNotebookPicker.title")}</DrawerTitle>

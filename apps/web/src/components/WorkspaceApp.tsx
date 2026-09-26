@@ -91,6 +91,7 @@ import {
 import {
   getVerticalScrollContainer,
   isDesktopViewport,
+  isWideViewport,
   isStandaloneApp,
   PULL_TO_REFRESH_MAX_PX,
   PULL_TO_REFRESH_TRIGGER_PX,
@@ -115,6 +116,7 @@ import {
 import { useWorkspaceSyncLifecycle } from "@/hooks/useWorkspaceSyncLifecycle";
 import { paneEnterMotion } from "@/lib/motion";
 import { WorkspaceMotionProvider } from "./WorkspaceMotionProvider";
+import { WorkspaceTopBar } from "./WorkspaceTopBar";
 import { useWorkspaceRoute } from "@/hooks/useWorkspaceRoute";
 import { useWorkspacePreferences } from "@/hooks/useWorkspacePreferences";
 import { useWorkspaceSelection } from "@/hooks/useWorkspaceSelection";
@@ -553,6 +555,7 @@ export const WorkspaceApp = ({
   );
   const [isOnline, setIsOnline] = useState(isBrowserOnline);
   const [isDesktop, setIsDesktop] = useState(isDesktopViewport);
+  const [isWide, setIsWide] = useState(isWideViewport);
   const [isManualMemoSyncing, setIsManualMemoSyncing] = useState(false);
   const [isStandaloneRuntime] = useState(isStandaloneApp);
   const [pullToRefreshDistance, setPullToRefreshDistance] = useState(0);
@@ -708,7 +711,7 @@ export const WorkspaceApp = ({
       (rightView !== "editor" || visibleActivePane === "editor" || visibleActivePane === "notebooks")
   );
   const mobilePullToRefreshActive = Boolean(
-    !isDesktop &&
+    !isWide &&
       visibleActivePane === "memos" &&
       !appNoticeDialog &&
       pendingCatalogTrustPluginIds.length === 0 &&
@@ -937,6 +940,16 @@ export const WorkspaceApp = ({
     mediaQuery.addEventListener("change", updateDesktopState);
 
     return () => mediaQuery.removeEventListener("change", updateDesktopState);
+  }, []);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    const updateWideState = () => setIsWide(mediaQuery.matches);
+
+    updateWideState();
+    mediaQuery.addEventListener("change", updateWideState);
+
+    return () => mediaQuery.removeEventListener("change", updateWideState);
   }, []);
 
   useEffect(() => {
@@ -1260,7 +1273,7 @@ export const WorkspaceApp = ({
     setSelectedMemoId(memo.id);
     setActivePane("editor");
 
-    if (!isDesktopViewport() && !isStructuredNote) {
+    if (!isWide && !isStructuredNote) {
       openStandaloneMobileEditor(memo.id);
     }
   };
@@ -1268,7 +1281,7 @@ export const WorkspaceApp = ({
   const createMemoMutation = useMutation({
     mutationFn: async (input: Parameters<typeof repository.createMemo>[0]) => {
       const requiresRemoteMemo = requiresRemoteMemoForStandaloneMobileEditor({
-        mobileViewport: !isDesktopViewport(),
+        mobileViewport: !isWideViewport(),
         desktopRuntime: Boolean(window.edgeeverDesktop?.isAvailable),
       });
       const data = requiresRemoteMemo ? await api.createMemo(input) : await repository.createMemo(input);
@@ -1308,7 +1321,7 @@ export const WorkspaceApp = ({
   const useTemplateMutation = useMutation({
     mutationFn: async (input: { templateId: string; notebookId: string }) => {
       const requiresRemoteMemo = requiresRemoteMemoForStandaloneMobileEditor({
-        mobileViewport: !isDesktopViewport(),
+        mobileViewport: !isWideViewport(),
         desktopRuntime: Boolean(window.edgeeverDesktop?.isAvailable),
       });
       const data = requiresRemoteMemo
@@ -1336,7 +1349,7 @@ export const WorkspaceApp = ({
       setCreatedMemoEditId(data.memo.id);
       setSelectedMemoId(data.memo.id);
       setActivePane("editor");
-      if (!isDesktopViewport()) openStandaloneMobileEditor(data.memo.id);
+      if (!isWide) openStandaloneMobileEditor(data.memo.id);
     },
   });
 
@@ -1625,6 +1638,7 @@ export const WorkspaceApp = ({
   const selectedTableNote = hasTableDocumentMarker(selectedMemo?.contentMarkdown);
   const selectedInfographicNote = Boolean(parseInfographicDocument(selectedMemo?.contentMarkdown));
   const desktopNotebookSidebarCollapsed = Boolean(isDesktop && notebookSidebarCollapsed);
+  const tabletRailActive = Boolean(isWide && !isDesktop);
   const desktopFocusModeActive = Boolean(
     isDesktop && desktopFocusMode && rightView === "editor" && selectedMemo && !memoSelectionModeActive
   );
@@ -2446,7 +2460,7 @@ export const WorkspaceApp = ({
   };
 
   const clearHiddenMobileSearch = () => {
-    if (!isDesktopViewport()) {
+    if (!isWideViewport()) {
       setSearch("");
     }
   };
@@ -2881,7 +2895,7 @@ export const WorkspaceApp = ({
       }
 
       if (action === "focusReplace") {
-        if (!selectedMemoId || memoView === "trash" || !isDesktopViewport()) {
+        if (!selectedMemoId || memoView === "trash" || !isWideViewport()) {
           return;
         }
 
@@ -2998,7 +3012,7 @@ export const WorkspaceApp = ({
     updateMemoListWidth(nextWidth);
   };
 
-  const shouldRenderRightPane = isDesktop || visibleActivePane === "editor";
+  const shouldRenderRightPane = isWide || visibleActivePane === "editor";
   const rightPaneLoadingLabel =
     rightView === "settings"
       ? t("workspace.loading.settings")
@@ -3034,7 +3048,8 @@ export const WorkspaceApp = ({
 
   return (
     <WorkspaceMotionProvider>
-      <div className="edgeever-workspace-shell flex h-[100dvh] overflow-hidden text-slate-950">
+      <div className="edgeever-workspace-shell flex h-[100dvh] flex-col overflow-hidden text-slate-950">
+      <WorkspaceTopBar onSearch={handleGlobalSearch} onOpenSettings={handleOpenSettings} />
       {wechatImportsInProgress > 0 && (
         <div className="pointer-events-none fixed inset-x-0 top-3 z-50 flex justify-center" role="status" aria-live="polite">
           <div className="rounded-full border border-slate-200 bg-card px-4 py-2 text-sm font-medium text-slate-700 shadow-lg">
@@ -3044,7 +3059,7 @@ export const WorkspaceApp = ({
       )}
       {pullToRefreshVisible && (
         <div
-          className="pointer-events-none fixed inset-x-0 top-[max(0.75rem,env(safe-area-inset-top))] z-50 flex justify-center lg:hidden"
+          className="pointer-events-none fixed inset-x-0 top-[max(0.75rem,env(safe-area-inset-top))] z-50 flex justify-center md:hidden"
           style={{ transform: `translateY(${Math.max(0, pullToRefreshDistance - 24)}px)` }}
           aria-hidden="true"
         >
@@ -3054,16 +3069,16 @@ export const WorkspaceApp = ({
           </div>
         </div>
       )}
-      <div className="min-w-0 flex-1">
+      <div className="min-h-0 min-w-0 flex-1">
         <main
           className={cn(
-            "edgeever-workspace-grid grid h-[100dvh] min-h-0 grid-cols-[minmax(0,1fr)]",
+            "edgeever-workspace-grid grid h-full min-h-0 grid-cols-[minmax(0,1fr)]",
             desktopFocusModeActive
               ? "edgeever-workspace-grid--focus"
               : rightView === "editor"
                 ? "edgeever-workspace-grid--editor"
                 : "edgeever-workspace-grid--single-right",
-            !desktopFocusModeActive && desktopNotebookSidebarCollapsed && "edgeever-workspace-grid--sidebar-collapsed"
+            !desktopFocusModeActive && (desktopNotebookSidebarCollapsed || tabletRailActive) && "edgeever-workspace-grid--sidebar-collapsed"
           )}
           style={{ "--memo-list-width": `${memoListWidth}px` } as CSSProperties}
         >
@@ -3074,11 +3089,11 @@ export const WorkspaceApp = ({
               desktopFocusModeActive
                 ? "hidden"
                 : visibleActivePane === "notebooks"
-                  ? "block lg:block"
-                  : "hidden lg:block"
+                  ? "block md:block"
+                  : "hidden md:block"
             )}
           >
-            {(isDesktop || visibleActivePane === "notebooks") && (
+            {(isWide || visibleActivePane === "notebooks") && (
               <Suspense fallback={<PaneLoadingFallback label={t("workspace.loading.notebooks")} />}>
                 <NotebookPane
                   repository={repository}
@@ -3133,7 +3148,7 @@ export const WorkspaceApp = ({
                   demoMode={demoMode}
                   onResetDemo={() => setDemoResetConfirmationOpen(true)}
                   isResettingDemo={resetDemoMutation.isPending}
-                  collapsed={desktopNotebookSidebarCollapsed}
+                  collapsed={desktopNotebookSidebarCollapsed || tabletRailActive}
                   onToggleCollapsed={() => setNotebookSidebarCollapsed(!notebookSidebarCollapsed)}
                 />
               </Suspense>
@@ -3146,8 +3161,8 @@ export const WorkspaceApp = ({
               desktopFocusModeActive
                 ? "hidden"
                 : rightView === "editor"
-                  ? (visibleActivePane === "memos" ? "block lg:block" : "hidden lg:block")
-                  : (visibleActivePane === "memos" ? "block lg:hidden" : "hidden lg:hidden")
+                  ? (visibleActivePane === "memos" ? "block md:block" : "hidden md:block")
+                  : (visibleActivePane === "memos" ? "block md:hidden" : "hidden md:hidden")
             )}
           >
             <MemoListPane
@@ -3290,7 +3305,7 @@ export const WorkspaceApp = ({
             />
           </section>
 
-          <section className={cn("edgeever-workspace-editor min-h-0 min-w-0 lg:block", visibleActivePane === "editor" ? "block" : "hidden", showMobileSettingsNav && "pb-[calc(4rem+env(safe-area-inset-bottom))] lg:pb-0")}>
+          <section className={cn("edgeever-workspace-editor min-h-0 min-w-0 md:block", visibleActivePane === "editor" ? "block" : "hidden", showMobileSettingsNav && "pb-[calc(4rem+env(safe-area-inset-bottom))] md:pb-0")}>
             {shouldRenderRightPane && (
               <Suspense fallback={<PaneLoadingFallback label={rightPaneLoadingLabel} />}>
                 <m.div key={rightView} className="h-full min-h-0 min-w-0" {...paneEnterMotion}>
