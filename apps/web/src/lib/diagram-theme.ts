@@ -18,8 +18,8 @@ export type DiagramPalette = {
 
 const withGrid = (palette: ReturnType<typeof buildDiagramPalette>, appearance: DiagramAppearance): DiagramPalette => ({
   ...palette,
-  grid: appearance === "dark" ? "#1D2722" : "#E6EEE9",
-  gridStrong: appearance === "dark" ? "#2B3A33" : "#CFDDD5",
+  grid: appearance === "dark" ? "#1C232A" : "#E9EEF3",
+  gridStrong: appearance === "dark" ? "#2A333D" : "#D0D7DE",
 });
 
 export const DIAGRAM_THEME_PALETTES = Object.fromEntries(

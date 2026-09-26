@@ -22,7 +22,7 @@ export const lightMarkdownHighlightStyles = [
   { tag: t.link, color: "#0969da" },
   { tag: t.url, color: "#0969da", textDecoration: "underline" },
   { tag: t.monospace, color: "#be185d" },
-  { tag: t.quote, color: "#15803d" },
+  { tag: t.quote, color: "#0369a1" },
   { tag: t.atom, color: "#075985", fontWeight: "700" },
   { tag: t.contentSeparator, color: "#94a3b8" },
   { tag: t.labelName, color: "#7c3aed" },

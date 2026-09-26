@@ -1,0 +1,9 @@
+/* Light code-block token overrides for the GitHub palette (scoped after github.css import).
+   Tag/name tokens are recolored to brand blues; hljs-addition keeps the conventional
+   semantic green because it is applied on top of github.css. */
+.ProseMirror .edgeever-code-block .hljs-name,
+.ProseMirror .edgeever-code-block .hljs-quote,
+.ProseMirror .edgeever-code-block .hljs-selector-tag,
+.ProseMirror .edgeever-code-block .hljs-selector-pseudo {
+  color: #0550ae;
+}

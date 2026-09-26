@@ -100,7 +100,7 @@ export const ReadOnlyX6Diagram = ({
           height: auto;
           min-height: 240px;
           overflow: hidden;
-          border: 1px solid ${theme === "dark" ? "#26382f" : "#e3ece7"};
+          border: 1px solid ${theme === "dark" ? "#26323d" : "#e3e9ef"};
           border-radius: 14px;
           background: ${theme === "dark" ? "#101215" : "#f8fafc"};
           touch-action: none;

@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "highlight.js/styles/github.css";
+@import "./code-highlight-light.css";
 @import "./editor-themes/index.css";
 @import "./publish-layout.css";
 @import "./code-highlight-dark.css";
@@ -228,7 +229,7 @@ html[data-edgeever-environment="demo"] body::after {
 html.dark[data-edgeever-environment="local"] body::after {
   border-color: rgb(2 132 199 / 42%);
   background: rgb(16 39 53 / 92%);
-  color: #9ee0c8;
+  color: #9fd4ef;
   box-shadow: 0 2px 8px rgb(0 0 0 / 28%);
 }
 
@@ -300,9 +301,9 @@ html.dark[data-edgeever-environment="demo"] body::after {
     --workspace-selection: #dde3e9;
     --workspace-hover: color-mix(in srgb, var(--workspace-sidebar) 40%, white);
     --tooltip-bg: #ffffff;
-    --tooltip-fg: #6b726e;
+    --tooltip-fg: #6b7379;
     --tooltip-border: #e1e5ea;
-    --tooltip-shadow: 0 1px 2px rgb(16 24 20 / 0.04), 0 8px 20px rgb(16 24 20 / 0.08);
+    --tooltip-shadow: 0 1px 2px rgb(16 18 21 / 0.04), 0 8px 20px rgb(16 18 21 / 0.08);
     --scrollbar-thumb: rgb(115 115 115 / 0.28);
     --scrollbar-thumb-hover: rgb(115 115 115 / 0.42);
     --search-match: rgb(254 240 138 / 0.8);
@@ -356,24 +357,24 @@ html.dark[data-edgeever-environment="demo"] body::after {
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 13%;
 
-    --primary: 158 76% 36%;
-    --primary-foreground: 80 11% 96%;
+    --primary: 199 96% 40%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 158 32% 94%;
-    --secondary-foreground: 158 70% 25%;
+    --secondary: 199 60% 94%;
+    --secondary-foreground: 199 70% 25%;
 
     --muted: 0 0% 95%;
     --muted-foreground: 0 0% 40%;
 
-    --accent: 158 32% 94%;
-    --accent-foreground: 158 70% 25%;
+    --accent: 199 60% 94%;
+    --accent-foreground: 199 70% 25%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 0 0% 88%;
     --input: 0 0% 88%;
-    --ring: 158 76% 36%;
+    --ring: 199 96% 40%;
 
     --radius: 0.5rem;
   }
@@ -389,54 +390,54 @@ html.dark[data-edgeever-environment="demo"] body::after {
 
 :root.dark {
   color-scheme: dark;
-  --background: 150 8% 8%;
-  --foreground: 144 9% 88%;
-  --card: 150 10% 13%;
-  --card-foreground: 144 9% 88%;
-  --popover: 150 10% 14%;
-  --popover-foreground: 144 9% 88%;
-  --primary: 160 76% 36%;
-  --primary-foreground: 150 33% 97%;
-  --secondary: 150 10% 18%;
-  --secondary-foreground: 160 35% 72%;
-  --muted: 150 8% 18%;
-  --muted-foreground: 145 8% 62%;
-  --accent: 150 10% 20%;
-  --accent-foreground: 160 40% 75%;
+  --background: 210 10% 8%;
+  --foreground: 210 9% 88%;
+  --card: 210 11% 13%;
+  --card-foreground: 210 9% 88%;
+  --popover: 210 11% 14%;
+  --popover-foreground: 210 9% 88%;
+  --primary: 199 96% 40%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 11% 18%;
+  --secondary-foreground: 199 65% 72%;
+  --muted: 210 9% 18%;
+  --muted-foreground: 210 8% 62%;
+  --accent: 210 11% 20%;
+  --accent-foreground: 199 60% 75%;
   --destructive: 0 72% 51%;
-  --destructive-foreground: 144 12% 96%;
-  --border: 150 10% 23%;
-  --input: 150 10% 23%;
-  --ring: 160 76% 36%;
+  --destructive-foreground: 210 12% 96%;
+  --border: 210 10% 23%;
+  --input: 210 10% 23%;
+  --ring: 199 96% 40%;
   --workspace-canvas: #101215;
   --workspace-sidebar: #121418;
   --workspace-memo-list: #15181c;
   --workspace-editor: #191c21;
-  --workspace-divider: #2a312d;
-  --workspace-memo-divider: #3b4540;
-  --workspace-selection: #1d3028;
+  --workspace-divider: #2a3037;
+  --workspace-memo-divider: #3b4450;
+  --workspace-selection: #1c2b3a;
   --workspace-hover: color-mix(in srgb, var(--workspace-sidebar) 82%, white);
-  --memo-content-divider-color: #e7ebe8;
-  --tooltip-bg: #2c3330;
-  --tooltip-fg: #d7dfda;
-  --tooltip-border: #3e4944;
+  --memo-content-divider-color: #e7eaee;
+  --tooltip-bg: #2c333c;
+  --tooltip-fg: #d7dde5;
+  --tooltip-border: #3e4753;
   --tooltip-shadow: 0 1px 2px rgb(0 0 0 / 0.28), 0 8px 20px rgb(0 0 0 / 0.32);
-  --scrollbar-thumb: rgb(137 150 142 / 0.38);
-  --scrollbar-thumb-hover: rgb(137 150 142 / 0.55);
+  --scrollbar-thumb: rgb(141 150 158 / 0.38);
+  --scrollbar-thumb-hover: rgb(141 150 158 / 0.55);
   --search-match: rgb(2 132 199 / 0.32);
   --search-match-active: rgb(56 189 248 / 0.48);
-  --switch-thumb: #eef2ef;
-  --slate-50-rgb: 15 20 17;
-  --slate-100-rgb: 21 28 24;
-  --slate-200-rgb: 38 49 43;
-  --slate-300-rgb: 110 124 116;
-  --slate-400-rgb: 132 148 138;
-  --slate-500-rgb: 154 169 160;
-  --slate-600-rgb: 182 195 187;
-  --slate-700-rgb: 202 212 206;
-  --slate-800-rgb: 221 229 224;
-  --slate-900-rgb: 233 239 235;
-  --slate-950-rgb: 238 243 240;
+  --switch-thumb: #eef1f4;
+  --slate-50-rgb: 15 17 20;
+  --slate-100-rgb: 21 24 28;
+  --slate-200-rgb: 38 43 49;
+  --slate-300-rgb: 110 117 124;
+  --slate-400-rgb: 132 140 148;
+  --slate-500-rgb: 154 162 169;
+  --slate-600-rgb: 182 188 195;
+  --slate-700-rgb: 202 207 212;
+  --slate-800-rgb: 221 225 229;
+  --slate-900-rgb: 233 236 239;
+  --slate-950-rgb: 238 240 243;
   --amber-50-rgb: 69 26 3;
   --amber-100-rgb: 80 30 5;
   --amber-200-rgb: 146 64 14;
@@ -1054,7 +1055,7 @@ html[data-edgeever-extension-theme] .edgeever-memo-divider {
   padding-top: 16px;
   padding-bottom: 24px;
   border-radius: 24px;
-  background: color-mix(in srgb, var(--workspace-surface, #eef3f0) 76%, white);
+  background: color-mix(in srgb, var(--workspace-surface, #eef2f5) 76%, white);
 }
 
 .edgeever-phone-device {
@@ -1587,7 +1588,7 @@ html[data-edgeever-extension-theme] .edgeever-memo-divider {
 }
 
 :root.dark .ProseMirror ul[data-type="taskList"] li[data-checked] > label input {
-  accent-color: #e7ebe8;
+  accent-color: #e7eaee;
 }
 
 .ProseMirror ul[data-type="taskList"] li[data-checked] > div {
@@ -1744,7 +1745,7 @@ html[data-edgeever-extension-theme] .edgeever-memo-divider {
   display: flex;
   gap: 0.25rem;
   padding: 0.25rem;
-  border: 1px solid #d9e2dc;
+  border: 1px solid #dbe2e9;
   border-radius: 7px;
   background: rgb(255 255 255 / 0.94);
   box-shadow: 0 1px 3px rgb(15 23 42 / 0.08);
@@ -1784,7 +1785,7 @@ html[data-edgeever-extension-theme] .edgeever-memo-divider {
 }
 
 .ProseMirror .edgeever-mermaid-tool-button[data-state="copied"] {
-  color: #15803d;
+  color: #0369a1;
 }
 
 .ProseMirror .edgeever-mermaid-tool-button[data-state="error"] {
@@ -1801,9 +1802,9 @@ html[data-edgeever-extension-theme] .edgeever-memo-divider {
   overscroll-behavior-x: contain;
   overscroll-behavior-y: auto;
   padding: 3.25rem 1rem 1rem;
-  border: 1px solid #d9e2dc;
+  border: 1px solid #dbe2e9;
   border-radius: 8px;
-  background: #fbfdfb;
+  background: #fbfdff;
   scrollbar-color: var(--scrollbar-thumb) transparent;
 }
 
@@ -2358,9 +2359,9 @@ html[data-edgeever-extension-theme] .edgeever-memo-divider {
   font-size: 0.875rem;
 }
 .markdown-content pre {
-  background-color: #f7fbf8;
+  background-color: #f7fafc;
   color: #1e293b;
-  border: 1px solid #d9eadf;
+  border: 1px solid #dbe4ec;
   padding: 1rem;
   border-radius: 6px;
   overflow-x: auto;
@@ -2371,9 +2372,9 @@ html[data-edgeever-extension-theme] .edgeever-memo-divider {
 }
 .markdown-content code {
   font-family: "JetBrains Mono", "Fira Code", monospace;
-  background-color: #f2f9f5;
-  color: #0d5f3a;
-  border: 1px solid #d4ebdc;
+  background-color: #f2f8fc;
+  color: #0c4a6e;
+  border: 1px solid #dbe9f2;
   padding: 0.125rem 0.38rem;
   border-radius: 4px;
   font-size: 0.8rem;
@@ -2702,7 +2703,7 @@ html[data-edgeever-extension-theme] .edgeever-memo-divider {
   padding: 0.25rem;
   border: 1px solid rgb(255 255 255 / 0.18);
   border-radius: 8px;
-  background: rgb(26 31 28 / 0.92);
+  background: rgb(22 27 33 / 0.92);
   box-shadow: 0 4px 16px rgb(0 0 0 / 0.24);
   backdrop-filter: blur(8px);
 }

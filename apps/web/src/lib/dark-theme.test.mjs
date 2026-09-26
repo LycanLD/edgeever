@@ -42,7 +42,7 @@ describe("dark theme contracts", () => {
     const memoCard = readFileSync(new URL("../components/MemoCard.tsx", import.meta.url), "utf8");
     expect(css).toContain(":root.dark .edgeever-public-share .ProseMirror");
     expect(css).toContain("color: hsl(var(--foreground));");
-    expect(css).toContain("--workspace-memo-divider: #3b4540;");
+    expect(css).toContain("--workspace-memo-divider: #3b4450;");
     expect(css).toContain(":root.dark .edgeever-workspace-memo-list .edgeever-memo-divider");
     expect(memoCard).toContain("edgeever-memo-divider");
     expect(memoCard).not.toContain("dark:lg:border-slate-300");
@@ -73,16 +73,16 @@ describe("dark theme contracts", () => {
     expect(css).toContain("--workspace-editor: #191c21;");
     expect(css).toContain(':not([data-editor-theme="custom"])');
     expect(css).toContain("--editor-theme-bg: var(--workspace-editor);");
-    expect(contrastRatio("#cad4ce", "#191c21")).toBeGreaterThanOrEqual(4.5);
-    expect(contrastRatio("#9aa9a0", "#191c21")).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio("#cacfd4", "#191c21")).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio("#9aa2a9", "#191c21")).toBeGreaterThanOrEqual(4.5);
   });
 
   test("dark chrome uses workspace tokens instead of leftover blue-slate", () => {
     const css = readFileSync(new URL("../styles/globals.css", import.meta.url), "utf8");
 
     expect(css).toContain("html.dark[data-edgeever-environment=\"local\"] body::after");
-    expect(css).toContain("--tooltip-bg: #2c3330;");
-    expect(css).toContain("--scrollbar-thumb: rgb(137 150 142 / 0.38);");
+    expect(css).toContain("--tooltip-bg: #2c333c;");
+    expect(css).toContain("--scrollbar-thumb: rgb(141 150 158 / 0.38);");
     expect(css).toContain("--search-match: rgb(2 132 199 / 0.32);");
     expect(css).toContain(":root.dark .ProseMirror .edgeever-mermaid-preview");
     expect(css).toContain("background: var(--workspace-editor);");

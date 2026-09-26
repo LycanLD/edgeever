@@ -105,7 +105,7 @@ describe("notebook identity", () => {
           '等待分类',
           'inbox',
           'notebook',
-          '#0f766e',
+          '#0284c7',
           10
         );
         UPDATE memos SET notebook_id = 'nb_7f802977e3cc4e8eb30ef3665955ed39' WHERE notebook_id = 'nb_inbox';
@@ -185,8 +185,8 @@ describe("notebook identity", () => {
       sqlite.exec(`
         INSERT INTO notebooks (id, workspace_id, parent_id, name, slug, icon, color, sort_order)
         VALUES
-          ('ws_default_inbox', 'ws_default', NULL, '等待分类', 'inbox', 'notebook', '#0f766e', 10),
-          ('nb_under_duplicate', 'ws_default', 'ws_default_inbox', 'Nested', 'nested', 'notebook', '#0f766e', 20);
+          ('ws_default_inbox', 'ws_default', NULL, '等待分类', 'inbox', 'notebook', '#0284c7', 10),
+          ('nb_under_duplicate', 'ws_default', 'ws_default_inbox', 'Nested', 'nested', 'notebook', '#0284c7', 20);
         INSERT INTO memos (id, workspace_id, notebook_id, title, excerpt)
         VALUES
           ('memo_on_original', 'ws_default', 'nb_inbox', 'Keep me', 'keep'),

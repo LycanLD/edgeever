@@ -119,7 +119,7 @@ export const FLOWCHART_SURFACES: Record<FlowchartTheme, Record<FlowchartAppearan
       edge: "#8FA4BA",
       process: { fill: "#191F28", stroke: "#5A6E85", text: "#E8EFF7" },
       decision: { fill: "#2A2316", stroke: "#E0B35C", text: "#F8E4B8" },
-      terminator: { fill: "#1A3329", stroke: "#29A8E0", text: "#D8F3E6" },
+      terminator: { fill: "#13253A", stroke: "#29A8E0", text: "#D8EFF9" },
     },
   },
   ink: {

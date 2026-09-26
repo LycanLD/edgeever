@@ -6,8 +6,8 @@ export const MEMO_CONTENT_STYLE = {
   },
   divider: {
     color: {
-      dark: "#4ade80",
-      light: "#66ca80",
+      dark: "#38bdf8",
+      light: "#5aa9d6",
     },
     marginVertical: 24,
     thickness: 1,

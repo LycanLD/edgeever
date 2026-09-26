@@ -46,8 +46,8 @@ describe("application color system", () => {
     expect(globals).toContain("--workspace-editor: #191c21;");
     expect(globals).toContain("--amber-300-rgb: 180 83 9;");
     expect(globals).not.toContain("scrollbar-color: rgba(100, 116, 139, 0.18)");
-    expect(contrastRatio("#cad4ce", "#191c21")).toBeGreaterThanOrEqual(4.5);
-    expect(contrastRatio("#9aa9a0", "#191c21")).toBeGreaterThanOrEqual(4.5);
-    expect(contrastRatio("#84948a", "#191c21")).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio("#cacfd4", "#191c21")).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio("#9aa2a9", "#191c21")).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio("#848c94", "#191c21")).toBeGreaterThanOrEqual(4.5);
   });
 });

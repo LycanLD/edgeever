@@ -5,7 +5,7 @@ describe("shared memo content style", () => {
   test("matches the established mobile PWA reading scale", () => {
     expect(MEMO_CONTENT_STYLE.body).toEqual({ fontSize: 16, lineHeight: 26, paragraphSpacing: 8 });
     expect(MEMO_CONTENT_STYLE.divider).toEqual({
-      color: { dark: "#4ade80", light: "#66ca80" },
+      color: { dark: "#38bdf8", light: "#5aa9d6" },
       marginVertical: 24,
       thickness: 1,
     });

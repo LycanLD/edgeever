@@ -303,7 +303,7 @@ input {
 .mobile-editor-tool-button:active,
 .mobile-editor-tool-button[aria-pressed="true"] {
   background: #f0f9ff;
-  border-color: #bbf7d0;
+  border-color: #bae6fd;
   color: #075985;
 }
 
@@ -371,9 +371,9 @@ input {
 :root.dark .mobile-editor-status.active,
 :root.dark .mobile-editor-tool-button:active,
 :root.dark .mobile-editor-tool-button[aria-pressed="true"] {
-  background: #14532d;
-  border-color: #166534;
-  color: #86efac;
+  background: #0c4a6e;
+  border-color: #075985;
+  color: #7dd3fc;
 }
 
 :root.dark .mobile-editor-status.error,
@@ -502,10 +502,10 @@ input {
 
 /* External hyperlinks — match desktop default ProseMirror link styling. */
 .edgeever-mobile-tiptap-content a {
-  color: #00751f;
+  color: #0369a1;
   font-weight: 500;
   text-decoration: underline;
-  text-decoration-color: rgb(0 117 31 / 0.45);
+  text-decoration-color: rgb(3 105 161 / 0.45);
   text-underline-offset: 2px;
   cursor: pointer;
 }
@@ -523,16 +523,16 @@ input {
 
 :root.dark .edgeever-mobile-tiptap-content a,
 html.dark .edgeever-mobile-tiptap-content a {
-  color: #86efac;
-  text-decoration-color: rgb(134 239 172 / 0.45);
+  color: #7dd3fc;
+  text-decoration-color: rgb(125 211 252 / 0.45);
 }
 
 :root.dark .edgeever-mobile-tiptap-content a:active,
 :root.dark .edgeever-mobile-tiptap-content a:hover,
 html.dark .edgeever-mobile-tiptap-content a:active,
 html.dark .edgeever-mobile-tiptap-content a:hover {
-  color: #4ade80;
-  text-decoration-color: #4ade80;
+  color: #38bdf8;
+  text-decoration-color: #38bdf8;
 }
 
 .edgeever-mobile-tiptap-content p {
@@ -701,7 +701,7 @@ html.dark .edgeever-mobile-tiptap-content a:hover {
   display: flex;
   gap: 0.25rem;
   padding: 0.25rem;
-  border: 1px solid #d9e2dc;
+  border: 1px solid #dbe2e9;
   border-radius: 7px;
   background: rgb(255 255 255 / 0.94);
   box-shadow: 0 1px 3px rgb(15 23 42 / 0.08);
@@ -736,7 +736,7 @@ html.dark .edgeever-mobile-tiptap-content a:hover {
 }
 
 .edgeever-mobile-tiptap-content .edgeever-mermaid-tool-button[data-state="copied"] {
-  color: #15803d;
+  color: #0369a1;
 }
 
 .edgeever-mobile-tiptap-content .edgeever-mermaid-tool-button[data-state="error"] {
@@ -753,9 +753,9 @@ html.dark .edgeever-mobile-tiptap-content a:hover {
   overscroll-behavior-x: contain;
   overscroll-behavior-y: auto;
   padding: 4rem 0.75rem 0.75rem;
-  border: 1px solid #d9e2dc;
+  border: 1px solid #dbe2e9;
   border-radius: 8px;
-  background: #fbfdfb;
+  background: #fbfdff;
   scrollbar-color: rgb(100 116 139 / 0.35) transparent;
 }
 
