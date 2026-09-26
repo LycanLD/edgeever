@@ -93,12 +93,12 @@ describe("master bar web search", () => {
 });
 
 describe("master bar shortcut wiring", () => {
-  test("defaults to Ctrl+Alt+Space", () => {
+  test("defaults to Ctrl+K", () => {
     expect(DEFAULT_SHORTCUT_SETTINGS.openMasterBar).toEqual({
-      key: "space",
+      key: "k",
       ctrlOrMeta: true,
       shift: false,
-      alt: true,
+      alt: false,
     });
   });
 

@@ -463,6 +463,26 @@ describe("workspace shortcut preferences", () => {
     });
   });
 
+  test("migrates the abandoned Ctrl+Alt+Space master bar binding without replacing custom bindings", () => {
+    const values = installLocalStorage();
+    values.set(SHORTCUT_SETTINGS_STORAGE_KEY, JSON.stringify({
+      openMasterBar: { key: "space", ctrlOrMeta: true, shift: false, alt: true },
+    }));
+    expect(readShortcutSettingsPreference().openMasterBar).toEqual(
+      DEFAULT_SHORTCUT_SETTINGS.openMasterBar,
+    );
+
+    values.set(SHORTCUT_SETTINGS_STORAGE_KEY, JSON.stringify({
+      openMasterBar: { key: "j", ctrlOrMeta: true, shift: true, alt: false },
+    }));
+    expect(readShortcutSettingsPreference().openMasterBar).toEqual({
+      key: "j",
+      ctrlOrMeta: true,
+      shift: true,
+      alt: false,
+    });
+  });
+
   test("fills new shortcut actions into legacy stored settings", () => {
     const values = installLocalStorage();
     values.set(SHORTCUT_SETTINGS_STORAGE_KEY, JSON.stringify({

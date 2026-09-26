@@ -255,7 +255,7 @@ export const DEFAULT_SHORTCUT_SETTINGS: ShortcutSettings = {
   focusGlobalSearch: { key: "f", ctrlOrMeta: true, shift: true, alt: false },
   focusReplace: { key: "h", ctrlOrMeta: true, shift: false, alt: false },
   openQuickSwitcher: { key: "o", ctrlOrMeta: true, shift: false, alt: false },
-  openMasterBar: { key: "space", ctrlOrMeta: true, shift: false, alt: true },
+  openMasterBar: { key: "k", ctrlOrMeta: true, shift: false, alt: false },
   openPreviousMemo: { key: "[", ctrlOrMeta: true, shift: false, alt: false },
   openNextMemo: { key: "]", ctrlOrMeta: true, shift: false, alt: false },
   openAiAssistant: { key: "j", ctrlOrMeta: true, shift: false, alt: false },
@@ -270,6 +270,13 @@ const LEGACY_READING_PROTECTION_SHORTCUT: ShortcutBinding = {
   ctrlOrMeta: true,
   shift: true,
   alt: false,
+};
+
+const LEGACY_MASTER_BAR_SHORTCUT: ShortcutBinding = {
+  key: "space",
+  ctrlOrMeta: true,
+  shift: false,
+  alt: true,
 };
 
 const SHORTCUT_ALIASES: Partial<Record<ShortcutAction, ShortcutBinding[]>> = {
@@ -580,9 +587,14 @@ export const readShortcutSettingsPreference = (): ShortcutSettings => {
       const normalizedBinding = isShortcutBinding(storedBinding)
         ? { ...storedBinding, key: normalizeShortcutKey(storedBinding.key) }
         : DEFAULT_SHORTCUT_SETTINGS[action];
-      const binding = action === "toggleReadingProtection"
-        && shortcutBindingsEqual(normalizedBinding, LEGACY_READING_PROTECTION_SHORTCUT)
-          ? DEFAULT_SHORTCUT_SETTINGS.toggleReadingProtection
+      const isLegacyReadingProtection = action === "toggleReadingProtection"
+        && shortcutBindingsEqual(normalizedBinding, LEGACY_READING_PROTECTION_SHORTCUT);
+      const isLegacyMasterBar = action === "openMasterBar"
+        && shortcutBindingsEqual(normalizedBinding, LEGACY_MASTER_BAR_SHORTCUT);
+      const binding = isLegacyReadingProtection
+        ? DEFAULT_SHORTCUT_SETTINGS.toggleReadingProtection
+        : isLegacyMasterBar
+          ? DEFAULT_SHORTCUT_SETTINGS.openMasterBar
           : normalizedBinding;
 
       return { ...settings, [action]: binding };
