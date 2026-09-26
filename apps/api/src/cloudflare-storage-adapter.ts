@@ -1,4 +1,3 @@
-import { createUnconfiguredBlobStore } from "./unconfigured-blob-store";
 import type {
   BlobStoreAdapter,
   DatabaseAdapter,
@@ -9,7 +8,6 @@ import type {
 export type CloudflareStorageBindings = {
   DB: DatabaseAdapter;
   RESOURCES: BlobStoreAdapter;
-  EDGE_EVER_OBJECT_STORAGE_OPTIONAL?: string;
 };
 
 /**
@@ -18,20 +16,12 @@ export type CloudflareStorageBindings = {
  */
 export const createCloudflareStorageAdapter = (
   bindings: CloudflareStorageBindings,
-): StorageAdapter => {
-  const boundResources = bindings.RESOURCES as BlobStoreAdapter | undefined;
-  const externalStorageOnly = bindings.EDGE_EVER_OBJECT_STORAGE_OPTIONAL === "true";
-
-  return {
-    db: bindings.DB,
-    resources: boundResources
-      ?? (externalStorageOnly
-        ? createUnconfiguredBlobStore()
-        : (undefined as unknown as BlobStoreAdapter)),
-    diagnostics: {
-      database: "d1",
-      resources: boundResources ? "r2" : "unconfigured",
-      migrationTable: "d1_migrations",
-    },
-  };
-};
+): StorageAdapter => ({
+  db: bindings.DB,
+  resources: bindings.RESOURCES,
+  diagnostics: {
+    database: "d1",
+    resources: "r2",
+    migrationTable: "d1_migrations",
+  },
+});

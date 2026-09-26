@@ -176,7 +176,7 @@ const PluginDetailView = ({
             <h2 className="text-sm font-semibold text-slate-950">{name}</h2>
             <span className="rounded bg-slate-100 px-1.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-slate-500">{manifest.type}</span>
             {update ? (
-              <span className="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-800">
+              <span className="rounded-full bg-slate-950 px-2 py-0.5 text-xs font-medium text-slate-50">
                 {t("plugins.updates.available", { version: update.latestVersion })}
               </span>
             ) : null}
@@ -242,7 +242,7 @@ const PluginDetailView = ({
             </section>
           ) : null}
 
-          {extension.error ? <div className="text-xs leading-5 text-rose-600">{extension.error}</div> : null}
+          {extension.error ? <div className="text-sm text-rose-600">{extension.error}</div> : null}
 
           <div className="flex flex-wrap items-center gap-2 border-t border-slate-100 pt-4">
             {update ? (
@@ -400,7 +400,7 @@ export const PluginManagerCard = ({
           <CardTitle className="flex min-w-0 items-center gap-2 text-sm">
             <Puzzle className="h-4 w-4 shrink-0 text-slate-900" />
             {selectedPluginId ? t("plugins.details.title") : t("plugins.title")}
-            <span className="inline-flex items-center rounded-full border border-slate-200 bg-slate-100 px-1.5 text-xs font-normal leading-5 text-slate-600">
+            <span className="inline-flex items-center rounded-full border border-emerald-200/80 bg-emerald-50 px-1.5 text-xs font-normal leading-5 text-emerald-700">
               Beta
             </span>
           </CardTitle>
@@ -423,7 +423,7 @@ export const PluginManagerCard = ({
                       : t("plugins.updates.found", { count: lastManualCheckCount })}
                 </span>
                 {lastManualCheckCount === null && (updateQuery.data?.updates.length ?? 0) > 0 ? (
-                  <span className="rounded-full bg-slate-200 px-1.5 py-0.5 text-xs font-semibold text-slate-800">
+                  <span className="rounded-full bg-slate-950 px-1.5 py-0.5 text-xs font-semibold text-slate-50">
                     {updateQuery.data?.updates.length}
                   </span>
                 ) : null}
@@ -483,7 +483,7 @@ export const PluginManagerCard = ({
               })}
             />
           ) : (
-            <div className="rounded-lg border border-dashed border-slate-200 p-8 text-center text-xs leading-5 text-slate-500">
+            <div className="rounded-lg border border-dashed border-slate-200 p-8 text-center text-sm text-slate-500">
               {t("plugins.details.notFound")}
             </div>
           )

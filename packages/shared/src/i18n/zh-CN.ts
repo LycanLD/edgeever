@@ -1289,7 +1289,6 @@ export const zhCN = {
       builtin_r2: "内置 R2",
       builtin_filesystem: "本地文件系统",
       builtin_s3: "实例内置 S3 兼容存储",
-      builtin_unconfigured: "未配置（仅外部对象存储）",
       external_s3: "第三方 S3 兼容 OSS",
     },
     existingAttachments: "已有附件",
@@ -2389,6 +2388,7 @@ export const zhCN = {
   },
   templates: {
     title: "模板中心",
+    description: "创建、修改和复用你的笔记模板。",
     create: "新建模板",
     useTemplate: "从模板新建笔记",
     useThisTemplate: "使用此模板新建",
@@ -2396,6 +2396,7 @@ export const zhCN = {
     previewTitle: "模板结构预览",
     createDescription: "从零开始创建一个可重复使用的模板。",
     myTemplates: "模板",
+    myTemplatesSubtitle: "所有模板都属于当前工作区，可以自由修改或删除",
     savedDescription: "可重复使用的笔记模板。",
     emptyMyTemplates: "暂无模板",
     emptyMyTemplatesHint: "你可以点击上方「新建模板」，或在笔记编辑器中将常用笔记另存为模板。",

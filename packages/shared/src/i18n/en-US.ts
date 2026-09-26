@@ -1289,7 +1289,6 @@ export const enUS = {
       builtin_r2: "Built-in R2",
       builtin_filesystem: "Local filesystem",
       builtin_s3: "Instance-provided S3-compatible storage",
-      builtin_unconfigured: "Not configured (external object storage only)",
       external_s3: "Third-party S3-compatible OSS",
     },
     existingAttachments: "Existing attachments",
@@ -2391,6 +2390,7 @@ export const enUS = {
   },
   templates: {
     title: "Template Center",
+    description: "Create, edit, and reuse your note templates.",
     create: "New Template",
     useTemplate: "New note from template",
     useThisTemplate: "Use Template",
@@ -2398,6 +2398,7 @@ export const enUS = {
     previewTitle: "Template Preview",
     createDescription: "Create a reusable template from scratch.",
     myTemplates: "Templates",
+    myTemplatesSubtitle: "Every template belongs to this workspace and can be edited or deleted",
     savedDescription: "A reusable note template.",
     emptyMyTemplates: "No templates yet",
     emptyMyTemplatesHint: "Click \"New Template\" above or save any note as a template directly in the editor.",
