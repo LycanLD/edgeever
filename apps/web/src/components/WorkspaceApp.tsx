@@ -118,6 +118,9 @@ import { useWorkspaceSyncLifecycle } from "@/hooks/useWorkspaceSyncLifecycle";
 import { paneEnterMotion } from "@/lib/motion";
 import { WorkspaceMotionProvider } from "./WorkspaceMotionProvider";
 import { WorkspaceTopBar } from "./WorkspaceTopBar";
+import { MasterBar } from "./MasterBar";
+import { useAppearanceTheme } from "./ThemeProvider";
+import type { MasterBarCommandId } from "@/lib/master-bar";
 import { useWorkspaceRoute } from "@/hooks/useWorkspaceRoute";
 import { useWorkspacePreferences } from "@/hooks/useWorkspacePreferences";
 import { useWorkspaceSelection } from "@/hooks/useWorkspaceSelection";
@@ -516,6 +519,7 @@ export const WorkspaceApp = ({
     setShortcutSettings,
     shortcutSettings,
   } = useWorkspacePreferences();
+  const { resolvedTheme, setPreference: setAppearancePreference } = useAppearanceTheme();
   const [rightView, setRightView] = useState<"editor" | "settings" | "plugins" | "assets" | "tags" | "templates" | "ai-prompts" | "execution-center" | "evernote-migration">(() =>
     isInitialSettingsRoute
       ? "settings"
@@ -541,6 +545,8 @@ export const WorkspaceApp = ({
   const [mobileSearchFocusToken, setMobileSearchFocusToken] = useState(0);
   const [quickSwitcherOpen, setQuickSwitcherOpen] = useState(false);
   const [quickSwitcherQuery, setQuickSwitcherQuery] = useState("");
+  const [masterBarOpen, setMasterBarOpen] = useState(false);
+  const [masterBarQuery, setMasterBarQuery] = useState("");
   const [noteSearchFocusToken, setNoteSearchFocusToken] = useState(0);
   const [noteReplaceFocusToken, setNoteReplaceFocusToken] = useState(0);
   const [noteAiAssistantOpenToken, setNoteAiAssistantOpenToken] = useState(0);
@@ -2815,6 +2821,16 @@ export const WorkspaceApp = ({
         return;
       }
 
+      if (action === "openMasterBar") {
+        event.preventDefault();
+        if (event.repeat || event.isComposing) {
+          return;
+        }
+        setMasterBarQuery("");
+        setMasterBarOpen((open) => !open);
+        return;
+      }
+
       const targetElement = event.target instanceof Element ? event.target : null;
       const isEditorTextTarget = Boolean(targetElement?.closest(".ProseMirror"));
 
@@ -2828,7 +2844,8 @@ export const WorkspaceApp = ({
           notebookDeleteConfirmation ||
           notebookNameDialog ||
           templatesOpen ||
-          quickSwitcherOpen
+          quickSwitcherOpen ||
+          masterBarOpen
       );
 
       if (
@@ -2944,6 +2961,7 @@ export const WorkspaceApp = ({
     nextMemoId,
     previousMemoId,
     quickSwitcherOpen,
+    masterBarOpen,
     selectedMemoId,
     setSelectedMemoId,
     templatesOpen,
@@ -3047,10 +3065,47 @@ export const WorkspaceApp = ({
         : t("workspace.pullToRefresh.pullPage");
   const showMobileSettingsNav = visibleActivePane === "editor" && rightView === "settings";
 
+  const masterBarCommandRunners: Partial<Record<MasterBarCommandId, () => void>> = {
+    openHome: () => handleMobileHome(),
+    createMemo: () => handleCreateMemo(),
+    createNotebook: () => handleCreateNotebook(),
+    globalSearch: () => handleGlobalSearch(),
+    quickSwitcher: () => {
+      setQuickSwitcherQuery("");
+      setQuickSwitcherOpen(true);
+    },
+    openSettings: () => handleOpenSettings(),
+    openTemplates: () => handleOpenTemplates(),
+    openAiPrompts: () => handleOpenAiPrompts(),
+    openAssets: () => handleOpenAssets(),
+    openPlugins: () => handleOpenPluginManager(),
+    openExecutionCenter: () => handleOpenExecutionCenter(),
+    openTags: () => handleOpenTags(),
+    openTrash: () => {
+      navigateWorkspaceTrash();
+      setMemoView("trash");
+      setSelectedTag(null);
+      setSelectedNotebookId(null);
+      setMobileBottomNavActive("home");
+      clearMemoSelection();
+      setSelectedMemoId(null);
+      setActivePane("memos");
+    },
+    toggleTheme: () => setAppearancePreference(resolvedTheme === "dark" ? "light" : "dark"),
+    toggleFocusMode: () => updateDesktopFocusMode(!desktopFocusMode),
+    saveAndSync: () => setNoteSaveAndSyncToken((value) => value + 1),
+  };
+
   return (
     <WorkspaceMotionProvider>
       <div className="edgeever-workspace-shell flex h-[100dvh] flex-col overflow-hidden text-slate-950">
-      <WorkspaceTopBar onSearch={handleGlobalSearch} onOpenSettings={handleOpenSettings} />
+      <WorkspaceTopBar
+        onSearch={() => {
+          setMasterBarQuery("");
+          setMasterBarOpen(true);
+        }}
+        onOpenSettings={handleOpenSettings}
+      />
       {wechatImportsInProgress > 0 && (
         <div className="pointer-events-none fixed inset-x-0 top-3 z-50 flex justify-center" role="status" aria-live="polite">
           <div className="rounded-full border border-slate-200 bg-card px-4 py-2 text-sm font-medium text-slate-700 shadow-lg">
@@ -3564,6 +3619,23 @@ export const WorkspaceApp = ({
         }}
         onQueryChange={setQuickSwitcherQuery}
         onOpenMemo={handleOpenQuickSwitcherMemo}
+      />
+
+      <MasterBar
+        open={masterBarOpen}
+        query={masterBarQuery}
+        repository={repository}
+        notebooks={notebooks}
+        commandRunners={masterBarCommandRunners}
+        onOpenChange={(open) => {
+          setMasterBarOpen(open);
+          if (!open) {
+            setMasterBarQuery("");
+          }
+        }}
+        onQueryChange={setMasterBarQuery}
+        onOpenMemo={handleOpenQuickSwitcherMemo}
+        onSelectNotebook={handleSelectNotebook}
       />
 
       {memoDeleteConfirmation && (

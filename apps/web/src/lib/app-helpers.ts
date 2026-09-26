@@ -20,6 +20,7 @@ export type ShortcutAction =
   | "focusGlobalSearch"
   | "focusReplace"
   | "openQuickSwitcher"
+  | "openMasterBar"
   | "openPreviousMemo"
   | "openNextMemo"
   | "openAiAssistant"
@@ -206,6 +207,11 @@ export const getShortcutActionOptions = (
     description: t("shortcuts.actions.openQuickSwitcher.description"),
   },
   {
+    value: "openMasterBar",
+    label: t("shortcuts.actions.openMasterBar.label"),
+    description: t("shortcuts.actions.openMasterBar.description"),
+  },
+  {
     value: "openPreviousMemo",
     label: t("shortcuts.actions.openPreviousMemo.label"),
     description: t("shortcuts.actions.openPreviousMemo.description"),
@@ -249,6 +255,7 @@ export const DEFAULT_SHORTCUT_SETTINGS: ShortcutSettings = {
   focusGlobalSearch: { key: "f", ctrlOrMeta: true, shift: true, alt: false },
   focusReplace: { key: "h", ctrlOrMeta: true, shift: false, alt: false },
   openQuickSwitcher: { key: "o", ctrlOrMeta: true, shift: false, alt: false },
+  openMasterBar: { key: "space", ctrlOrMeta: true, shift: false, alt: true },
   openPreviousMemo: { key: "[", ctrlOrMeta: true, shift: false, alt: false },
   openNextMemo: { key: "]", ctrlOrMeta: true, shift: false, alt: false },
   openAiAssistant: { key: "j", ctrlOrMeta: true, shift: false, alt: false },
@@ -276,6 +283,7 @@ const SHORTCUT_ACTION_VALUES: ShortcutAction[] = [
   "focusGlobalSearch",
   "focusReplace",
   "openQuickSwitcher",
+  "openMasterBar",
   "openPreviousMemo",
   "openNextMemo",
   "openAiAssistant",
